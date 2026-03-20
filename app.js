@@ -113,7 +113,7 @@ Bem-vindo! Escreve **Markdown** à esquerda e vê o resultado à direita.
 ## Funcionalidades
 
 - ✅ Live preview em tempo real
-- ✅ Copiar formatado para colar no **Teams**
+- ✅ **Copiar formatado** — preserva negrito, tabelas e código (Teams, Outlook, Word, Notion…)
 - ✅ Imprimir / Exportar para **PDF**
 - ✅ Syntax highlighting em blocos de código
 - ✅ Suporte a tabelas, listas, blockquotes, etc.
@@ -177,7 +177,7 @@ console.log(greet("World"));
     }, 120);
   });
 
-  // ── Copy formatted HTML to clipboard (for Teams) ──
+  // ── Copy formatted HTML to clipboard (rich text — preserves bold, tables, code; works in Teams, Outlook, Word, Notion, Gmail, etc.) ──
   btnCopy.addEventListener('click', async () => {
     const body = preview.querySelector('.markdown-body');
     const html = body.innerHTML;
@@ -192,7 +192,7 @@ console.log(greet("World"));
           'text/plain': textBlob,
         }),
       ]);
-      showToast('Copiado! Cola no Teams com Ctrl+V');
+      showToast('Copiado com formatação! Cola com Ctrl+V');
     } catch {
       // Fallback: copy plain text
       try {
