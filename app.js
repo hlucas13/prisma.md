@@ -106,7 +106,7 @@
   });
 
   // ── Sample markdown ──
-  const sampleMarkdown = `# Markdown Preview 📝
+  const sampleMarkdown = `# Prisma.md ✨
 
 Bem-vindo! Escreve **Markdown** à esquerda e vê o resultado à direita.
 
@@ -151,7 +151,7 @@ console.log(greet("World"));
 `;
 
   // ── Persistence ──
-  const STORAGE_KEY = 'markdown-preview-content';
+  const STORAGE_KEY = 'prisma-md-content';
 
   function loadContent() {
     const saved = localStorage.getItem(STORAGE_KEY);
