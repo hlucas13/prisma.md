@@ -12,7 +12,7 @@ Write Markdown on the left, see the rendered result on the right. Your content i
 
 - **Live preview** — renders as you type, with 120 ms debounce
 - **Syntax highlighting** — 25+ languages via CodeMirror + highlight.js
-- **Copy for Teams** — copies rich HTML to clipboard (paste directly into Microsoft Teams)
+- **Copy formatted** — copies rich HTML to clipboard; preserves bold, tables, and code blocks when pasting into Teams, Outlook, Word, Notion, Gmail, and more
 - **Print / Export PDF** — clean print stylesheet included
 - **Dark mode** — full light/dark theme toggle
 - **Draggable divider** — resize editor and preview panes freely
