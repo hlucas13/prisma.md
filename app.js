@@ -131,9 +131,9 @@ console.log(greet("World"));
 
 | Feature       | Status |
 |---------------|--------|
-| Live Preview  | ✅     |
-| Copy to Teams | ✅     |
-| Print / PDF   | ✅     |
+| Live Preview    | ✅     |
+| Copy Formatted  | ✅     |
+| Print / PDF     | ✅     |
 
 ## Blockquote
 
