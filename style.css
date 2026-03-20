@@ -717,25 +717,36 @@ main {
     display: none !important;
   }
 
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff;
+  }
+
   main {
     display: block;
+    overflow: visible !important;
+    height: auto !important;
   }
 
   .preview-pane {
+    display: block;
     flex: none;
     width: 100%;
+    height: auto !important;
+    overflow: visible !important;
   }
 
   #preview {
     padding: 0;
-    overflow: visible;
+    overflow: visible !important;
+    height: auto !important;
   }
 
   .markdown-body {
     max-width: none;
-  }
-
-  body {
-    background: #fff;
+    height: auto !important;
+    overflow: visible !important;
   }
 }
