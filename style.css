@@ -226,8 +226,10 @@ body {
 header {
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    height: 48px;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 16px 0 20px;
+    height: 60px;
     background: var(--bg-header);
     backdrop-filter: blur(20px) saturate(1.8);
     -webkit-backdrop-filter: blur(20px) saturate(1.8);
@@ -240,16 +242,16 @@ header {
 .brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
 }
 
 .brand-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 26px;
-    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     background: var(--accent);
     color: #fff;
     font-size: 10px;
@@ -260,10 +262,142 @@ header {
 }
 
 .brand-name {
-    font-size: 0.875rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: -0.01em;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-bmac {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition:
+        transform 0.15s,
+        filter 0.15s;
+}
+
+.header-bmac__full {
+    height: 40px;
+    width: auto;
+    display: block;
+    border-radius: 14px;
+}
+
+.header-bmac__icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffdd00;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    transition: box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-bmac:hover .header-bmac__icon {
+    box-shadow:
+        /* Specular convexo top-left — arco brilhante */
+        inset 1.5px 2.5px 0 0 rgba(255, 255, 255, 0.72),
+        /* Rim highlight */ inset 0 0 0 0.8px rgba(255, 255, 255, 0.38),
+        /* Counter-specular bottom-right */ inset -1px -1.5px 0 0
+            rgba(255, 255, 255, 0.18),
+        /* Profundidade interna */ inset 0 -5px 6px -4px rgba(0, 0, 0, 0.18),
+        /* Elevação */ 0 4px 10px -2px rgba(0, 0, 0, 0.22),
+        0 1px 3px 0 rgba(0, 0, 0, 0.14);
+}
+
+@media (max-width: 540px) {
+    .header-bmac__full {
+        display: none;
+    }
+    .header-bmac__icon {
+        display: inline-flex;
+    }
+}
+
+.header-bmac:hover {
+    transform: translateY(-2px) scale(1.06);
+    filter: brightness(1.06) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.18));
+}
+
+.header-bmac:active {
+    transform: scale(0.9);
+    transition-duration: 0.1s;
+    filter: brightness(0.96);
+}
+
+.header-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text-secondary);
+    border-radius: 50%;
+    transition:
+        background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.18s,
+        box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    text-decoration: none;
+}
+
+.header-action-btn:hover {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--glass-c-light) 15%, transparent);
+    box-shadow:
+        inset 1.5px 2.5px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 92%),
+                transparent
+            ),
+        inset 0 0 0 0.8px
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 32%),
+                transparent
+            ),
+        inset -1px -1.5px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 20%),
+                transparent
+            ),
+        inset 0 -5px 6px -4px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 24%),
+                transparent
+            ),
+        0 4px 10px -2px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 16%),
+                transparent
+            ),
+        0 1px 3px 0
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 10%),
+                transparent
+            );
+    transform: translateY(-2px) scale(1.06);
+}
+
+.header-action-btn:active {
+    transform: scale(0.9);
+    transition-duration: 0.1s;
 }
 
 /* ===== Floating Glass Dock ===== */
@@ -1520,7 +1654,7 @@ main {
     list-style: none;
     margin: 0;
     padding: 4px 0;
-    background: var(--bg-surface);
+    background: var(--glass-surface-bg);
     border: 1px solid var(--accent);
     border-bottom: none;
     border-radius: 8px 8px 0 0;
@@ -1531,6 +1665,16 @@ main {
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
     scrollbar-width: thin;
     scrollbar-color: var(--accent) transparent;
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+    -webkit-backdrop-filter: blur(var(--glass-blur))
+        saturate(var(--glass-saturation));
+}
+
+@supports (backdrop-filter: url(#x)) {
+    .lang-dropdown {
+        backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
+            saturate(var(--glass-saturation));
+    }
 }
 
 .lang-selector.open .lang-dropdown {
@@ -1778,10 +1922,14 @@ main {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.68);
+    border: 1.5px solid rgba(0, 0, 0, 0.38);
     background: transparent;
     opacity: 1;
     transition: opacity 0.2s ease-out;
+}
+
+[data-theme='dark'] .liquid-toggle::before {
+    border-color: rgba(255, 255, 255, 0.68);
 }
 
 .liquid-toggle[aria-checked='true']::before {
@@ -1823,9 +1971,13 @@ main {
     width: 2px;
     height: 10px;
     border-radius: 2px;
-    background: rgba(255, 255, 255, 0.68);
+    background: rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.2s ease-out;
+}
+
+[data-theme='dark'] .liquid-toggle::after {
+    background: rgba(0, 0, 0, 0.42);
 }
 
 .liquid-toggle[aria-checked='true']::after {

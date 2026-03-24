@@ -6,6 +6,8 @@ Write Markdown on the left, see the rendered result on the right. Your content i
 
 **[→ Open Prisma.md](https://hlucas13.github.io/prisma.md/)**
 
+<a href="https://www.buymeacoffee.com/hlucas13"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=hlucas13&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+
 ---
 
 ## Features
@@ -153,6 +155,18 @@ prisma.md/
 ```
 
 > **Note:** `app.bundle.js` is the file actually loaded by `index.html`. It is produced by `build.js`, which strips ES module syntax (`import`/`export`) and wraps all modules in a single IIFE. The individual files under `js/` are the authoritative source — edit those, then rebuild.
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to open an **Issue** to report bugs, suggest features, or ask questions — and a **Pull Request** to propose changes.
+
+- **Bug reports:** Include steps to reproduce, browser/OS, and a screenshot if relevant.
+- **Feature requests:** Describe the use-case and why it would be a good fit for Prisma.md.
+- **Pull Requests:** Keep changes focused and explain the motivation in the PR description. For larger changes, open an Issue first to discuss the approach.
+
+**[→ Open an Issue](https://github.com/hlucas13/prisma.md/issues/new)** · **[→ View open PRs](https://github.com/hlucas13/prisma.md/pulls)**
 
 ---
 
