@@ -25,8 +25,7 @@ export const LOCALES = {
         'lint.close': 'Close warnings',
         'lint.closeAria': 'Close warnings panel',
         'export.label': 'Copy as\u2026',
-        'export.universalDesc':
-            'Rich HTML \u00b7 Word, Notion and other apps',
+        'export.universalDesc': 'Rich HTML \u00b7 Word, Notion and other apps',
         'export.teamsDesc':
             'Inline HTML with Segoe UI styles \u00b7 code preserved',
         'export.emailDesc':
@@ -45,13 +44,11 @@ export const LOCALES = {
         'table.cancel': 'Cancel',
         'table.insert': 'Insert Table',
         'themes.label': 'Preview theme',
-        'themes.githubDesc':
-            'Classic \u00b7 blue/green \u00b7 light & dark',
+        'themes.githubDesc': 'Classic \u00b7 blue/green \u00b7 light & dark',
         'themes.modern': 'Modern',
         'themes.modernDesc': 'Indigo \u00b7 Helvetica \u00b7 light & dark',
         'themes.academic': 'Academic',
-        'themes.academicDesc':
-            'Serif Georgia \u00b7 sepia \u00b7 light & dark',
+        'themes.academicDesc': 'Serif Georgia \u00b7 sepia \u00b7 light & dark',
         'themes.minimal': 'Minimal',
         'themes.minimalDesc':
             'Neutral \u00b7 distraction-free \u00b7 light & dark',
@@ -152,8 +149,7 @@ export const LOCALES = {
         'lint.close': 'Fechar avisos',
         'lint.closeAria': 'Fechar painel de avisos',
         'export.label': 'Copiar como\u2026',
-        'export.universalDesc':
-            'HTML rico \u00b7 Word, Notion e outras apps',
+        'export.universalDesc': 'HTML rico \u00b7 Word, Notion e outras apps',
         'export.teamsDesc':
             'HTML inline com estilos Segoe UI \u00b7 c\u00f3digo preservado',
         'export.emailDesc':
@@ -176,8 +172,7 @@ export const LOCALES = {
         'themes.githubDesc':
             'Cl\u00e1ssico \u00b7 azul/verde \u00b7 light & dark',
         'themes.modern': 'Moderno',
-        'themes.modernDesc':
-            '\u00cdndigo \u00b7 Helvetica \u00b7 light & dark',
+        'themes.modernDesc': '\u00cdndigo \u00b7 Helvetica \u00b7 light & dark',
         'themes.academic': 'Acad\u00eamico',
         'themes.academicDesc':
             'Serifado Georgia \u00b7 s\u00e9pia \u00b7 light & dark',
@@ -262,8 +257,7 @@ export const LOCALES = {
     es: {
         'settings.label': 'Ajustes',
         'settings.syncName': 'Scroll sincronizado',
-        'settings.syncDesc':
-            'Sincroniza el scroll entre editor y vista previa',
+        'settings.syncDesc': 'Sincroniza el scroll entre editor y vista previa',
         'settings.themeName': 'Modo oscuro',
         'settings.themeDesc': 'Alterna entre modo claro y oscuro',
         'settings.glassName': 'Cristal esmerilado',
@@ -322,8 +316,7 @@ export const LOCALES = {
         'stats.readTime': (m) => `~${m} min`,
         'lint.heading': (prev, cur) =>
             `Jerarqu\u00eda de encabezados: H${prev} seguido de H${cur} \u2014 nivel intermedio faltante`,
-        'lint.unclosedLink':
-            'Enlace no cerrado \u2014 falta el \`)\ de cierre',
+        'lint.unclosedLink': 'Enlace no cerrado \u2014 falta el \`)\ de cierre',
         'lint.imageAlt': 'Imagen sin texto alternativo (alt text)',
         'lint.multipleH1': (n) =>
             `${n} encabezados H1 encontrados \u2014 se recomienda solo uno por documento`,
@@ -341,8 +334,7 @@ export const LOCALES = {
         'toast.copiedSlack': '\u00a1Copiado para Slack! Pega con Ctrl+V',
         'toast.fileLoaded': (name) => `"${name}" cargado`,
         'toast.imageInserted': (name) => `Imagen "${name}" insertada`,
-        'toast.fileUnsupported':
-            'Archivo no soportado \u2014 usa .md o imagen',
+        'toast.fileUnsupported': 'Archivo no soportado \u2014 usa .md o imagen',
         'toast.tablePasted': '\u00a1Tabla pegada!',
         'toast.htmlConverted': '\u00a1HTML convertido a Markdown!',
         'toast.tableInserted': '\u00a1Tabla insertada!',
@@ -439,11 +431,9 @@ export const LOCALES = {
         'table.cancel': 'Annuler',
         'table.insert': 'Ins\u00e9rer le tableau',
         'themes.label': 'Th\u00e8me de l\u2019aper\u00e7u',
-        'themes.githubDesc':
-            'Classique \u00b7 bleu/vert \u00b7 clair & sombre',
+        'themes.githubDesc': 'Classique \u00b7 bleu/vert \u00b7 clair & sombre',
         'themes.modern': 'Moderne',
-        'themes.modernDesc':
-            'Indigo \u00b7 Helvetica \u00b7 clair & sombre',
+        'themes.modernDesc': 'Indigo \u00b7 Helvetica \u00b7 clair & sombre',
         'themes.academic': 'Acad\u00e9mique',
         'themes.academicDesc':
             'Georgia serif \u00b7 s\u00e9pia \u00b7 clair & sombre',
@@ -470,12 +460,9 @@ export const LOCALES = {
         'toast.copied': 'Copi\u00e9\u00a0! Collez avec Ctrl+V',
         'toast.copiedPlain': 'Copi\u00e9 en texte brut',
         'toast.copyError': 'Erreur de copie \u2014 essayez manuellement',
-        'toast.copiedTeams':
-            'Copi\u00e9 pour Teams\u00a0! Collez avec Ctrl+V',
-        'toast.copiedEmail':
-            'Copi\u00e9 pour e-mail\u00a0! Collez avec Ctrl+V',
-        'toast.copiedSlack':
-            'Copi\u00e9 pour Slack\u00a0! Collez avec Ctrl+V',
+        'toast.copiedTeams': 'Copi\u00e9 pour Teams\u00a0! Collez avec Ctrl+V',
+        'toast.copiedEmail': 'Copi\u00e9 pour e-mail\u00a0! Collez avec Ctrl+V',
+        'toast.copiedSlack': 'Copi\u00e9 pour Slack\u00a0! Collez avec Ctrl+V',
         'toast.fileLoaded': (name) =>
             `\u00ab\u00a0${name}\u00a0\u00bb charg\u00e9`,
         'toast.imageInserted': (name) =>
@@ -499,8 +486,7 @@ export const LOCALES = {
         'pane.markdown': 'Markdown',
         'pane.preview': 'Aper\u00e7u',
         'help.btnName': 'Aide & Wiki',
-        'help.btnDesc':
-            'Fonctionnalit\u00e9s, guide Markdown et raccourcis',
+        'help.btnDesc': 'Fonctionnalit\u00e9s, guide Markdown et raccourcis',
         'help.title': 'Aide & Wiki',
         'help.s1': '\u00c9diteur & Aper\u00e7u',
         'help.s1d1':
@@ -581,8 +567,7 @@ export const LOCALES = {
         'themes.githubDesc':
             'Cl\u00e1ssico \u00b7 azul/verde \u00b7 light & dark',
         'themes.modern': 'Moderno',
-        'themes.modernDesc':
-            '\u00cdndigo \u00b7 Helvetica \u00b7 light & dark',
+        'themes.modernDesc': '\u00cdndigo \u00b7 Helvetica \u00b7 light & dark',
         'themes.academic': 'Acad\u00e9mico',
         'themes.academicDesc':
             'Georgia serif \u00b7 s\u00e9pia \u00b7 light & dark',
@@ -600,8 +585,7 @@ export const LOCALES = {
         'lint.imageAlt': 'Imagem sem texto alternativo (alt text)',
         'lint.multipleH1': (n) =>
             `${n} t\u00edtulos H1 encontrados \u2014 recomenda-se apenas um por documento`,
-        'grammar.repeated': (word) =>
-            `Palavra repetida: \u201c${word}\u201d`,
+        'grammar.repeated': (word) => `Palavra repetida: \u201c${word}\u201d`,
         'grammar.doubleSpace': 'Espa\u00e7o duplo no meio do texto',
         'issues.one': '1 aviso',
         'issues.many': (n) => `${n} avisos`,
@@ -614,8 +598,7 @@ export const LOCALES = {
         'toast.copiedEmail': 'Copiado para e-mail! Cole com Ctrl+V',
         'toast.copiedSlack': 'Copiado para o Slack! Cole com Ctrl+V',
         'toast.fileLoaded': (name) => `\u201c${name}\u201d carregado`,
-        'toast.imageInserted': (name) =>
-            `Imagem \u201c${name}\u201d inserida`,
+        'toast.imageInserted': (name) => `Imagem \u201c${name}\u201d inserida`,
         'toast.fileUnsupported':
             'Ficheiro n\u00e3o suportado \u2014 utilize .md ou imagem',
         'toast.tablePasted': 'Tabela colada!',

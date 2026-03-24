@@ -1,1521 +1,1335 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        />
-        <title>Prisma.md</title>
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23111827'/><polygon points='32,6 60,54 4,54' fill='none' stroke='%2316a34a' stroke-width='3'/><line x1='4' y1='30' x2='28' y2='30' stroke='%23f8fafc' stroke-width='2.5' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='16' stroke='%23f87171' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='26' stroke='%23fb923c' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='36' stroke='%234ade80' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='46' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='54' stroke='%23a78bfa' stroke-width='2' stroke-linecap='round'/></svg>"
-        />
-        <link rel="stylesheet" href="style.css" />
-        <!-- Marked.js for Markdown parsing (pinned to v4 — last version with setOptions highlight support) -->
-        <script src="https://cdn.jsdelivr.net/npm/marked@4/marked.min.js"></script>
-        <!-- highlight.js for code syntax highlighting -->
-        <link
-            id="hljs-light"
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css"
-        />
-        <link
-            id="hljs-dark"
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css"
-            disabled
-        />
-        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
-        <!-- CodeMirror editor with markdown syntax highlighting -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"
-        />
-        <link
-            id="cm-theme-dark"
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css"
-            disabled
-        />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/meta/meta.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/markdown/markdown.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/shell/shell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/mode/simple.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/rust/rust.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/yaml/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/toml/toml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/dockerfile/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/ruby/ruby.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/php/php.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/swift/swift.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/r/r.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/powershell/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/continuelist.min.js"></script>
-    </head>
-    <body>
-        <header>
-            <div class="brand">
-                <span class="brand-badge">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 16 16"
-                        width="18"
-                        height="18"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polygon points="8,2 14,13 2,13" />
-                        <line x1="2" y1="7.5" x2="7" y2="7.5" />
-                        <line x1="7" y1="7.5" x2="14" y2="5" />
-                        <line x1="7" y1="7.5" x2="14" y2="9" />
-                        <line x1="7" y1="7.5" x2="14" y2="13" />
-                    </svg>
-                </span>
-                <span class="brand-name">Prisma.md</span>
-            </div>
-            <div class="header-actions">
-                <a
-                    class="header-bmac"
-                    href="https://www.buymeacoffee.com/hlucas13"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Buy me a coffee"
-                >
-                    <img
-                        class="header-bmac__full"
-                        src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=hlucas13&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
-                        alt="Buy me a coffee"
-                    />
-                    <span class="header-bmac__icon" aria-hidden="true">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="20"
-                            height="20"
-                            fill="none"
-                            stroke="#000"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="M17 8h1a4 4 0 0 1 0 8h-1" />
-                            <path
-                                d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"
-                            />
-                            <line x1="6" y1="2" x2="6" y2="4" />
-                            <line x1="10" y1="2" x2="10" y2="4" />
-                            <line x1="14" y1="2" x2="14" y2="4" />
-                        </svg>
-                    </span>
-                </a>
-                <a
-                    class="header-action-btn"
-                    href="https://github.com/hlucas13/prisma.md"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub repository"
-                    title="GitHub repository"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        width="26"
-                        height="26"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
-                        />
-                    </svg>
-                </a>
-            </div>
-        </header>
-
-        <main>
-            <div class="pane editor-pane">
-                <button
-                    class="pane-header"
-                    id="pane-header-editor"
-                    aria-expanded="true"
-                    aria-controls="pane-body-editor"
-                >
-                    <span data-i18n="pane.markdown">Markdown</span>
-                    <svg
-                        class="pane-chevron"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                </button>
-                <div class="pane-body" id="pane-body-editor">
-                    <!-- Drop Overlay (scoped to editor pane) -->
-                    <div
-                        id="drop-overlay"
-                        class="drop-overlay"
-                        aria-hidden="true"
-                    >
-                        <div class="drop-overlay-box">
-                            <div class="drop-overlay-icon">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path
-                                        d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-15"
-                                    />
-                                    <polyline points="17 8 12 3 7 8" />
-                                    <line x1="12" y1="3" x2="12" y2="15" />
-                                </svg>
-                            </div>
-                            <p class="drop-overlay-title">Solte aqui</p>
-                            <p class="drop-overlay-desc">
-                                <strong>.md</strong> para carregar o arquivo
-                                &nbsp;·&nbsp; <strong>Imagem</strong> para
-                                inserir como Base64
-                            </p>
-                        </div>
-                    </div>
-                    <div class="editor-wrapper" id="editor-wrapper">
-                        <textarea
-                            id="editor"
-                            spellcheck="false"
-                            placeholder="Write your Markdown here…"
-                            data-i18n-placeholder="editor.placeholder"
-                        ></textarea>
-                    </div>
-                    <!-- Lint Panel (slides up above insights bar when issues exist) -->
-                    <div id="lint-panel" class="lint-panel" aria-hidden="true">
-                        <div class="lint-panel-header">
-                            <span
-                                class="lint-panel-title"
-                                data-i18n="lint.title"
-                                >Warnings</span
-                            >
-                            <button
-                                id="btn-lint-close"
-                                class="lint-panel-close"
-                                title="Close warnings"
-                                data-i18n-title="lint.close"
-                                aria-label="Close warnings panel"
-                                data-i18n-aria-label="lint.closeAria"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg>
-                            </button>
-                        </div>
-                        <ul id="lint-list" class="lint-list" role="list"></ul>
-                    </div>
-                    <!-- Insights Bar: word count · reading time · issues -->
-                    <div class="insights-bar">
-                        <div class="insights-stats">
-                            <span id="stat-words">–</span>
-                            <span class="insights-sep" aria-hidden="true"
-                                >·</span
-                            >
-                            <span id="stat-read-time">–</span>
-                            <span class="insights-sep" aria-hidden="true"
-                                >·</span
-                            >
-                            <span id="stat-chars">–</span>
-                        </div>
-                        <button
-                            id="btn-issues-toggle"
-                            class="issues-toggle"
-                            aria-expanded="false"
-                            hidden
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path
-                                    d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                                />
-                                <line x1="12" y1="9" x2="12" y2="13" />
-                                <line x1="12" y1="17" x2="12.01" y2="17" />
-                            </svg>
-                            <span id="stat-issues-count"></span>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.pane-body #pane-body-editor -->
-            </div>
-            <div class="divider" id="divider"></div>
-            <div class="pane preview-pane">
-                <button
-                    class="pane-header"
-                    id="pane-header-preview"
-                    aria-expanded="true"
-                    aria-controls="preview"
-                >
-                    <span data-i18n="pane.preview">Preview</span>
-                    <svg
-                        class="pane-chevron"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                </button>
-                <div id="preview" class="pane-body">
-                    <div class="markdown-body"></div>
-                </div>
-            </div>
-        </main>
-
-        <div id="toast" class="toast hidden">Copied!</div>
-
-        <!-- History Modal -->
-        <div id="history-modal" class="history-modal" inert>
-            <div
-                class="history-modal-backdrop"
-                id="history-modal-backdrop"
-            ></div>
-            <div class="history-modal-panel">
-                <div class="glass-effect"></div>
-                <div class="glass-tint"></div>
-                <div class="glass-shine"></div>
-                <div class="history-modal-content">
-                    <div class="history-modal-header">
-                        <span class="history-modal-title">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                width="18"
-                                height="18"
-                            >
-                                <circle cx="12" cy="12" r="10" />
-                                <polyline points="12 6 12 12 16 14" />
-                            </svg>
-                            <span data-i18n="history.title">Local History</span>
-                        </span>
-                        <button
-                            id="btn-close-history"
-                            class="history-modal-close"
-                            title="Fechar"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                width="18"
-                                height="18"
-                            >
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </button>
-                    </div>
-                    <p class="history-modal-hint" data-i18n="history.hint">
-                        Auto-saved every 30 s and on editor blur. Click a
-                        version to restore.
-                    </p>
-                    <div id="history-list" class="history-list"></div>
-                    <button
-                        id="btn-clear-history"
-                        class="history-clear-btn"
-                        type="button"
-                    >
-                        <span data-i18n="history.clearBtn">Clear all</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Table Generator Modal -->
-        <div id="table-modal" class="table-modal" inert>
-            <div class="table-modal-backdrop" id="table-modal-backdrop"></div>
-            <div class="table-modal-panel">
-                <div class="glass-effect"></div>
-                <div class="glass-tint"></div>
-                <div class="glass-shine"></div>
-                <div class="table-modal-content">
-                    <div class="table-modal-header">
-                        <span class="table-modal-title">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                width="18"
-                                height="18"
-                            >
-                                <rect
-                                    x="3"
-                                    y="3"
-                                    width="18"
-                                    height="18"
-                                    rx="2"
-                                />
-                                <line x1="3" y1="9" x2="21" y2="9" />
-                                <line x1="3" y1="15" x2="21" y2="15" />
-                                <line x1="9" y1="3" x2="9" y2="21" />
-                                <line x1="15" y1="3" x2="15" y2="21" />
-                            </svg>
-                            <span data-i18n="table.title">Insert Table</span>
-                        </span>
-                        <button
-                            id="btn-close-table"
-                            class="tbl-btn-close"
-                            type="button"
-                            aria-label="Close"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                width="14"
-                                height="14"
-                            >
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="table-modal-controls">
-                        <div class="tbl-label">
-                            <span data-i18n="table.rows">Rows</span>
-                            <div class="tbl-stepper">
-                                <button
-                                    class="tbl-step-btn"
-                                    id="tbl-rows-dec"
-                                    type="button"
-                                >
-                                    −
-                                </button>
-                                <input
-                                    type="number"
-                                    id="tbl-rows"
-                                    value="3"
-                                    min="2"
-                                    max="30"
-                                />
-                                <button
-                                    class="tbl-step-btn"
-                                    id="tbl-rows-inc"
-                                    type="button"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-                        <div class="tbl-label">
-                            <span data-i18n="table.cols">Columns</span>
-                            <div class="tbl-stepper">
-                                <button
-                                    class="tbl-step-btn"
-                                    id="tbl-cols-dec"
-                                    type="button"
-                                >
-                                    −
-                                </button>
-                                <input
-                                    type="number"
-                                    id="tbl-cols"
-                                    value="3"
-                                    min="1"
-                                    max="12"
-                                />
-                                <button
-                                    class="tbl-step-btn"
-                                    id="tbl-cols-inc"
-                                    type="button"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tbl-hint" data-i18n="table.hint">
-                        First row is the header · Tab to navigate
-                    </div>
-                    <div class="tbl-grid-wrapper">
-                        <div id="tbl-grid" class="tbl-grid"></div>
-                    </div>
-                    <div class="table-modal-footer">
-                        <button
-                            id="btn-insert-table"
-                            class="tbl-btn-insert"
-                            type="button"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                width="14"
-                                height="14"
-                            >
-                                <line x1="12" y1="5" x2="12" y2="19" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg>
-                            <span data-i18n="table.insert">Insert Table</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Floating Liquid Glass Dock -->
-        <div class="glass-dock">
-            <div class="glass-effect"></div>
-            <div class="glass-tint"></div>
-            <div class="glass-shine"></div>
-            <div class="glass-content">
-                <!-- 1. Themes — always visible -->
-                <button
-                    id="btn-themes"
-                    class="dock-btn has-menu"
-                    title="Preview theme"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <rect x="2" y="2" width="8" height="8" rx="2" />
-                        <rect x="14" y="2" width="8" height="8" rx="2" />
-                        <rect x="2" y="14" width="8" height="8" rx="2" />
-                        <rect x="14" y="14" width="8" height="8" rx="2" />
-                    </svg>
-                    <span class="dock-label" data-i18n="dock.themes"
-                        >Themes</span
-                    >
-                </button>
-
-                <!-- Hamburger — portrait-only (between Themes and Export) -->
-                <button
-                    id="btn-hamburger"
-                    class="dock-btn dock-hamburger-btn"
-                    aria-label="More"
-                    aria-expanded="false"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <circle
-                            cx="5"
-                            cy="12"
-                            r="1.5"
-                            fill="currentColor"
-                            stroke="none"
-                        />
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="1.5"
-                            fill="currentColor"
-                            stroke="none"
-                        />
-                        <circle
-                            cx="19"
-                            cy="12"
-                            r="1.5"
-                            fill="currentColor"
-                            stroke="none"
-                        />
-                    </svg>
-                    <span class="dock-label" data-i18n="dock.more">More</span>
-                </button>
-
-                <!-- 2. Table — landscape-only -->
-                <button
-                    id="btn-table"
-                    class="dock-btn dock-landscape-btn"
-                    title="Insert Table"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <line x1="3" y1="9" x2="21" y2="9" />
-                        <line x1="3" y1="15" x2="21" y2="15" />
-                        <line x1="9" y1="3" x2="9" y2="21" />
-                        <line x1="15" y1="3" x2="15" y2="21" />
-                    </svg>
-                    <span class="dock-label" data-i18n="dock.table">Table</span>
-                </button>
-
-                <!-- 3. Export — always visible -->
-                <button
-                    id="btn-export"
-                    class="dock-btn has-menu"
-                    title="Export"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                        <polyline points="16 6 12 2 8 6" />
-                        <line x1="12" y1="2" x2="12" y2="15" />
-                    </svg>
-                    <span class="dock-label" data-i18n="dock.export"
-                        >Export</span
-                    >
-                </button>
-
-                <!-- 4. History — landscape-only -->
-                <button
-                    id="btn-history"
-                    class="dock-btn dock-landscape-btn"
-                    title="Local history"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    <span class="dock-label" data-i18n="dock.history"
-                        >History</span
-                    >
-                </button>
-
-                <!-- 5. Clear — landscape-only, danger -->
-                <button
-                    id="btn-clear"
-                    class="dock-btn dock-landscape-btn dock-btn--danger"
-                    title="Clear editor"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="3 6 5 6 21 6" />
-                        <path
-                            d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"
-                        />
-                        <path d="M10 11v6M14 11v6" />
-                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                    </svg>
-                    <span class="dock-label" data-i18n="dock.clear">Clear</span>
-                </button>
-
-                <div class="dock-sep" aria-hidden="true"></div>
-
-                <!-- 6. Settings — always visible -->
-                <button
-                    id="btn-settings"
-                    class="dock-btn has-menu"
-                    title="Settings"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <line x1="4" y1="21" x2="4" y2="14" />
-                        <line x1="4" y1="10" x2="4" y2="3" />
-                        <line x1="12" y1="21" x2="12" y2="12" />
-                        <line x1="12" y1="8" x2="12" y2="3" />
-                        <line x1="20" y1="21" x2="20" y2="16" />
-                        <line x1="20" y1="12" x2="20" y2="3" />
-                        <line x1="1" y1="14" x2="7" y2="14" />
-                        <line x1="9" y1="8" x2="15" y2="8" />
-                        <line x1="17" y1="16" x2="23" y2="16" />
-                    </svg>
-                    <span class="dock-label" data-i18n="dock.settings"
-                        >Settings</span
-                    >
-                </button>
-            </div>
-        </div>
-
-        <!-- Hamburger Panel (small portrait screens) — Table, History, Clear -->
-        <div id="hamburger-panel" class="platform-menu hamburger-panel" inert>
-            <div class="glass-effect"></div>
-            <div class="glass-tint"></div>
-            <div class="glass-shine"></div>
-            <div class="hamburger-grid">
-                <button class="hamburger-item" data-delegates="btn-table">
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <line x1="3" y1="9" x2="21" y2="9" />
-                        <line x1="3" y1="15" x2="21" y2="15" />
-                        <line x1="9" y1="3" x2="9" y2="21" />
-                        <line x1="15" y1="3" x2="15" y2="21" />
-                    </svg>
-                    <span data-i18n="dock.table">Table</span>
-                </button>
-                <button class="hamburger-item" data-delegates="btn-history">
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    <span data-i18n="dock.history">History</span>
-                </button>
-                <button
-                    class="hamburger-item hamburger-item--danger"
-                    data-delegates="btn-clear"
-                >
-                    <svg
-                        class="dock-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="3 6 5 6 21 6" />
-                        <path
-                            d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"
-                        />
-                        <path d="M10 11v6M14 11v6" />
-                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                    </svg>
-                    <span data-i18n="dock.clear">Clear</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Export Menu -->
-        <div id="export-menu" class="platform-menu" inert>
-            <div class="glass-effect"></div>
-            <div class="glass-tint"></div>
-            <div class="glass-shine"></div>
-            <div class="platform-menu-content">
-                <div class="platform-menu-label" data-i18n="export.label">
-                    Copy as…
-                </div>
-                <button id="btn-copy-universal" class="platform-btn">
-                    <span class="platform-btn-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <rect x="9" y="9" width="13" height="13" rx="2" />
-                            <path
-                                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                            />
-                        </svg>
-                    </span>
-                    <span class="platform-btn-text">
-                        <span class="platform-btn-name">Universal</span>
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="export.universalDesc"
-                            >Rich HTML · Word, Notion and other apps</span
-                        >
-                    </span>
-                </button>
-                <button id="btn-copy-teams" class="platform-btn">
-                    <span class="platform-btn-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path
-                                d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-                            />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
-                    </span>
-                    <span class="platform-btn-text">
-                        <span class="platform-btn-name">Microsoft Teams</span>
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="export.teamsDesc"
-                            >Inline HTML with Segoe UI styles · code
-                            preserved</span
-                        >
-                    </span>
-                </button>
-                <button id="btn-copy-email" class="platform-btn">
-                    <span class="platform-btn-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path
-                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                            />
-                            <polyline points="22,6 12,13 2,6" />
-                        </svg>
-                    </span>
-                    <span class="platform-btn-text">
-                        <span class="platform-btn-name">Outlook / Gmail</span>
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="export.emailDesc"
-                            >Conservative inline CSS · tables and bold
-                            guaranteed</span
-                        >
-                    </span>
-                </button>
-                <button id="btn-copy-slack" class="platform-btn">
-                    <span class="platform-btn-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path
-                                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-                            />
-                        </svg>
-                    </span>
-                    <span class="platform-btn-text">
-                        <span class="platform-btn-name">Slack</span>
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="export.slackDesc"
-                            >mrkdwn text · Slack native format</span
-                        >
-                    </span>
-                </button>
-                <div class="settings-sep"></div>
-                <button id="btn-print-pdf" class="platform-btn" type="button">
-                    <span class="platform-btn-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <polyline points="6 9 6 2 18 2 18 9" />
-                            <path
-                                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
-                            />
-                            <rect x="6" y="14" width="12" height="8" />
-                        </svg>
-                    </span>
-                    <span class="platform-btn-text">
-                        <span
-                            class="platform-btn-name"
-                            data-i18n="export.printName"
-                            >Print / PDF</span
-                        >
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="export.printDesc"
-                            >Native preview · uses active theme</span
-                        >
-                    </span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Settings Menu -->
-        <div id="settings-menu" class="platform-menu" inert>
-            <div class="glass-effect"></div>
-            <div class="glass-tint"></div>
-            <div class="glass-shine"></div>
-            <div class="platform-menu-content">
-                <div class="platform-menu-label" data-i18n="settings.label">
-                    Settings
-                </div>
-                <div class="settings-row">
-                    <span class="settings-row-icon">
-                        <svg
-                            id="icon-sync"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <rect x="3" y="11" width="18" height="11" rx="2" />
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                        </svg>
-                    </span>
-                    <span class="settings-row-text">
-                        <span
-                            class="settings-row-name"
-                            data-i18n="settings.syncName"
-                            >Sync scroll</span
-                        >
-                        <span
-                            class="settings-row-desc"
-                            data-i18n="settings.syncDesc"
-                            >Syncs scroll between editor and preview</span
-                        >
-                    </span>
-                    <button
-                        class="liquid-toggle"
-                        id="toggle-sync"
-                        role="switch"
-                        aria-checked="false"
-                    >
-                        <div class="knockout">
-                            <div class="indicator indicator--masked">
-                                <div class="mask"></div>
-                            </div>
-                        </div>
-                        <div class="indicator__liquid">
-                            <div class="shadow"></div>
-                            <div class="wrapper">
-                                <div class="liquids">
-                                    <div class="liquid__shadow"></div>
-                                    <div class="liquid__track"></div>
-                                </div>
-                            </div>
-                            <div class="cover"></div>
-                        </div>
-                    </button>
-                </div>
-                <div class="settings-sep"></div>
-                <div class="settings-row">
-                    <span class="settings-row-icon">
-                        <svg
-                            id="icon-theme"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path
-                                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                            />
-                        </svg>
-                    </span>
-                    <span class="settings-row-text">
-                        <span
-                            class="settings-row-name"
-                            data-i18n="settings.themeName"
-                            >Dark mode</span
-                        >
-                        <span
-                            class="settings-row-desc"
-                            data-i18n="settings.themeDesc"
-                            >Toggle between light and dark mode</span
-                        >
-                    </span>
-                    <button
-                        class="liquid-toggle"
-                        id="toggle-theme"
-                        role="switch"
-                        aria-checked="false"
-                    >
-                        <div class="knockout">
-                            <div class="indicator indicator--masked">
-                                <div class="mask"></div>
-                            </div>
-                        </div>
-                        <div class="indicator__liquid">
-                            <div class="shadow"></div>
-                            <div class="wrapper">
-                                <div class="liquids">
-                                    <div class="liquid__shadow"></div>
-                                    <div class="liquid__track"></div>
-                                </div>
-                            </div>
-                            <div class="cover"></div>
-                        </div>
-                    </button>
-                </div>
-                <div class="settings-sep"></div>
-                <div class="settings-row">
-                    <span class="settings-row-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                        </svg>
-                    </span>
-                    <span class="settings-row-text">
-                        <span
-                            class="settings-row-name"
-                            data-i18n="settings.glassName"
-                            >Frosted glass</span
-                        >
-                        <span
-                            class="settings-row-desc"
-                            data-i18n="settings.glassDesc"
-                            >Frosted glass effect across the UI</span
-                        >
-                    </span>
-                    <button
-                        class="liquid-toggle"
-                        id="toggle-glass"
-                        role="switch"
-                        aria-checked="false"
-                    >
-                        <div class="knockout">
-                            <div class="indicator indicator--masked">
-                                <div class="mask"></div>
-                            </div>
-                        </div>
-                        <div class="indicator__liquid">
-                            <div class="shadow"></div>
-                            <div class="wrapper">
-                                <div class="liquids">
-                                    <div class="liquid__shadow"></div>
-                                    <div class="liquid__track"></div>
-                                </div>
-                            </div>
-                            <div class="cover"></div>
-                        </div>
-                    </button>
-                </div>
-                <div class="settings-sep"></div>
-                <div class="settings-row settings-row--lang">
-                    <span class="settings-row-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="2" y1="12" x2="22" y2="12" />
-                            <path
-                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                            />
-                        </svg>
-                    </span>
-                    <span class="settings-row-text">
-                        <span
-                            class="settings-row-name"
-                            data-i18n="settings.langName"
-                            >Language</span
-                        >
-                        <span
-                            class="settings-row-desc"
-                            data-i18n="settings.langDesc"
-                            >Interface language</span
-                        >
-                    </span>
-                    <div class="lang-selector" id="lang-select">
-                        <button class="lang-trigger" aria-expanded="false">
-                            <span class="lang-trigger-label">EN (UK)</span>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="10"
-                                height="6"
-                                viewBox="0 0 10 6"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="M1 1l4 4 4-4" />
-                            </svg>
-                        </button>
-                        <ul class="lang-dropdown">
-                            <li class="lang-option" data-lang="en">
-                                EN — English
-                            </li>
-                            <li class="lang-option" data-lang="es">
-                                ES — Español
-                            </li>
-                            <li class="lang-option" data-lang="fr">
-                                FR — Français
-                            </li>
-                            <li class="lang-option" data-lang="pt-BR">
-                                PT — Português (BR)
-                            </li>
-                            <li class="lang-option" data-lang="pt-PT">
-                                PT — Português (PT)
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="settings-sep"></div>
-                <button id="btn-help" class="platform-btn" type="button">
-                    <span class="platform-btn-icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                            <line x1="12" y1="17" x2="12.01" y2="17" />
-                        </svg>
-                    </span>
-                    <span class="platform-btn-text">
-                        <span class="platform-btn-name" data-i18n="help.btnName"
-                            >Help & Wiki</span
-                        >
-                        <span class="platform-btn-desc" data-i18n="help.btnDesc"
-                            >Features, Markdown guide &amp; shortcuts</span
-                        >
-                    </span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Themes Menu -->
-        <div id="themes-menu" class="platform-menu" inert>
-            <div class="glass-effect"></div>
-            <div class="glass-tint"></div>
-            <div class="glass-shine"></div>
-            <div class="platform-menu-content">
-                <div class="platform-menu-label" data-i18n="themes.label">
-                    Preview theme
-                </div>
-                <button class="pdf-theme-row active" data-pdf-theme="github">
-                    <span
-                        class="pdf-theme-dot"
-                        style="background: #0969da"
-                    ></span>
-                    <span class="platform-btn-text">
-                        <span class="platform-btn-name">GitHub</span>
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="themes.githubDesc"
-                            >Classic · blue/green · light &amp; dark</span
-                        >
-                    </span>
-                    <svg
-                        class="pdf-theme-check"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                </button>
-                <button class="pdf-theme-row" data-pdf-theme="modern">
-                    <span
-                        class="pdf-theme-dot"
-                        style="background: #6366f1"
-                    ></span>
-                    <span class="platform-btn-text">
-                        <span
-                            class="platform-btn-name"
-                            data-i18n="themes.modern"
-                            >Modern</span
-                        >
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="themes.modernDesc"
-                            >Indigo · Helvetica · light &amp; dark</span
-                        >
-                    </span>
-                    <svg
-                        class="pdf-theme-check"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                </button>
-                <button class="pdf-theme-row" data-pdf-theme="academic">
-                    <span
-                        class="pdf-theme-dot"
-                        style="background: #92400e"
-                    ></span>
-                    <span class="platform-btn-text">
-                        <span
-                            class="platform-btn-name"
-                            data-i18n="themes.academic"
-                            >Academic</span
-                        >
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="themes.academicDesc"
-                            >Serif Georgia · sepia · light &amp; dark</span
-                        >
-                    </span>
-                    <svg
-                        class="pdf-theme-check"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                </button>
-                <button class="pdf-theme-row" data-pdf-theme="minimal">
-                    <span
-                        class="pdf-theme-dot"
-                        style="background: #374151"
-                    ></span>
-                    <span class="platform-btn-text">
-                        <span
-                            class="platform-btn-name"
-                            data-i18n="themes.minimal"
-                            >Minimal</span
-                        >
-                        <span
-                            class="platform-btn-desc"
-                            data-i18n="themes.minimalDesc"
-                            >Neutral · distraction-free · light &amp; dark</span
-                        >
-                    </span>
-                    <svg
-                        class="pdf-theme-check"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Hidden SVG: Physics-based Liquid Glass distortion filters -->
-        <!-- Two filters: dock (pill) and panel (rounded-rect modals/menus).  -->
-        <!-- feImage href + feDisplacementMap scale are written by            -->
-        <!-- GlassDistortion in glass-distortion.js on load and resize.       -->
-        <svg
-            class="glass-filter-defs"
-            aria-hidden="true"
-            style="position: absolute; width: 0; height: 0; overflow: hidden"
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Prisma.md</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23111827'/><polygon points='32,6 60,54 4,54' fill='none' stroke='%2316a34a' stroke-width='3'/><line x1='4' y1='30' x2='28' y2='30' stroke='%23f8fafc' stroke-width='2.5' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='16' stroke='%23f87171' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='26' stroke='%23fb923c' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='36' stroke='%234ade80' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='46' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round'/><line x1='28' y1='30' x2='60' y2='54' stroke='%23a78bfa' stroke-width='2' stroke-linecap='round'/></svg>"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Marked.js for Markdown parsing (pinned to v4 — last version with setOptions highlight support) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4/marked.min.js"></script>
+    <!-- highlight.js for code syntax highlighting -->
+    <link
+      id="hljs-light"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css"
+    />
+    <link
+      id="hljs-dark"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css"
+      disabled
+    />
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <!-- CodeMirror editor with markdown syntax highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"
+    />
+    <link
+      id="cm-theme-dark"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css"
+      disabled
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/meta/meta.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/shell/shell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/mode/simple.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/rust/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/yaml/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/toml/toml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/dockerfile/dockerfile.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/ruby/ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/php/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/swift/swift.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/r/r.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/powershell/powershell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/continuelist.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="brand-badge">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon points="8,2 14,13 2,13" />
+            <line x1="2" y1="7.5" x2="7" y2="7.5" />
+            <line x1="7" y1="7.5" x2="14" y2="5" />
+            <line x1="7" y1="7.5" x2="14" y2="9" />
+            <line x1="7" y1="7.5" x2="14" y2="13" />
+          </svg>
+        </span>
+        <span class="brand-name">Prisma.md</span>
+      </div>
+      <div class="header-actions">
+        <a
+          class="header-bmac"
+          href="https://www.buymeacoffee.com/hlucas13"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Buy me a coffee"
         >
-            <defs>
-                <!-- Dock pill filter — updated by ResizeObserver in JS.
+          <img
+            class="header-bmac__full"
+            src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=hlucas13&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+            alt="Buy me a coffee"
+          />
+          <span class="header-bmac__icon" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="#000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M17 8h1a4 4 0 0 1 0 8h-1" />
+              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z" />
+              <line x1="6" y1="2" x2="6" y2="4" />
+              <line x1="10" y1="2" x2="10" y2="4" />
+              <line x1="14" y1="2" x2="14" y2="4" />
+            </svg>
+          </span>
+        </a>
+        <a
+          class="header-action-btn"
+          href="https://github.com/hlucas13/prisma.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub repository"
+          title="GitHub repository"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="26"
+            height="26"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+            />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="pane editor-pane">
+        <button
+          class="pane-header"
+          id="pane-header-editor"
+          aria-expanded="true"
+          aria-controls="pane-body-editor"
+        >
+          <span data-i18n="pane.markdown">Markdown</span>
+          <svg
+            class="pane-chevron"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div class="pane-body" id="pane-body-editor">
+          <!-- Drop Overlay (scoped to editor pane) -->
+          <div id="drop-overlay" class="drop-overlay" aria-hidden="true">
+            <div class="drop-overlay-box">
+              <div class="drop-overlay-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-15" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+              </div>
+              <p class="drop-overlay-title">Solte aqui</p>
+              <p class="drop-overlay-desc">
+                <strong>.md</strong> para carregar o arquivo &nbsp;·&nbsp;
+                <strong>Imagem</strong> para inserir como Base64
+              </p>
+            </div>
+          </div>
+          <div class="editor-wrapper" id="editor-wrapper">
+            <textarea
+              id="editor"
+              spellcheck="false"
+              placeholder="Write your Markdown here…"
+              data-i18n-placeholder="editor.placeholder"
+            ></textarea>
+          </div>
+          <!-- Lint Panel (slides up above insights bar when issues exist) -->
+          <div id="lint-panel" class="lint-panel" aria-hidden="true">
+            <div class="lint-panel-header">
+              <span class="lint-panel-title" data-i18n="lint.title"
+                >Warnings</span
+              >
+              <button
+                id="btn-lint-close"
+                class="lint-panel-close"
+                title="Close warnings"
+                data-i18n-title="lint.close"
+                aria-label="Close warnings panel"
+                data-i18n-aria-label="lint.closeAria"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+            <ul id="lint-list" class="lint-list" role="list"></ul>
+          </div>
+          <!-- Insights Bar: word count · reading time · issues -->
+          <div class="insights-bar">
+            <div class="insights-stats">
+              <span id="stat-words">–</span>
+              <span class="insights-sep" aria-hidden="true">·</span>
+              <span id="stat-read-time">–</span>
+              <span class="insights-sep" aria-hidden="true">·</span>
+              <span id="stat-chars">–</span>
+            </div>
+            <button
+              id="btn-issues-toggle"
+              class="issues-toggle"
+              aria-expanded="false"
+              hidden
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <span id="stat-issues-count"></span>
+            </button>
+          </div>
+        </div>
+        <!-- /.pane-body #pane-body-editor -->
+      </div>
+      <div class="divider" id="divider"></div>
+      <div class="pane preview-pane">
+        <button
+          class="pane-header"
+          id="pane-header-preview"
+          aria-expanded="true"
+          aria-controls="preview"
+        >
+          <span data-i18n="pane.preview">Preview</span>
+          <svg
+            class="pane-chevron"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div id="preview" class="pane-body">
+          <div class="markdown-body"></div>
+        </div>
+      </div>
+    </main>
+
+    <div id="toast" class="toast hidden">Copied!</div>
+
+    <!-- History Modal -->
+    <div id="history-modal" class="history-modal" inert>
+      <div class="history-modal-backdrop" id="history-modal-backdrop"></div>
+      <div class="history-modal-panel">
+        <div class="glass-effect"></div>
+        <div class="glass-tint"></div>
+        <div class="glass-shine"></div>
+        <div class="history-modal-content">
+          <div class="history-modal-header">
+            <span class="history-modal-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="18"
+                height="18"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span data-i18n="history.title">Local History</span>
+            </span>
+            <button
+              id="btn-close-history"
+              class="history-modal-close"
+              title="Fechar"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="18"
+                height="18"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <p class="history-modal-hint" data-i18n="history.hint">
+            Auto-saved every 30 s and on editor blur. Click a version to
+            restore.
+          </p>
+          <div id="history-list" class="history-list"></div>
+          <button
+            id="btn-clear-history"
+            class="history-clear-btn"
+            type="button"
+          >
+            <span data-i18n="history.clearBtn">Clear all</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Generator Modal -->
+    <div id="table-modal" class="table-modal" inert>
+      <div class="table-modal-backdrop" id="table-modal-backdrop"></div>
+      <div class="table-modal-panel">
+        <div class="glass-effect"></div>
+        <div class="glass-tint"></div>
+        <div class="glass-shine"></div>
+        <div class="table-modal-content">
+          <div class="table-modal-header">
+            <span class="table-modal-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="18"
+                height="18"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="3" y1="15" x2="21" y2="15" />
+                <line x1="9" y1="3" x2="9" y2="21" />
+                <line x1="15" y1="3" x2="15" y2="21" />
+              </svg>
+              <span data-i18n="table.title">Insert Table</span>
+            </span>
+            <button
+              id="btn-close-table"
+              class="tbl-btn-close"
+              type="button"
+              aria-label="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="14"
+                height="14"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <div class="table-modal-controls">
+            <div class="tbl-label">
+              <span data-i18n="table.rows">Rows</span>
+              <div class="tbl-stepper">
+                <button class="tbl-step-btn" id="tbl-rows-dec" type="button">
+                  −
+                </button>
+                <input type="number" id="tbl-rows" value="3" min="2" max="30" />
+                <button class="tbl-step-btn" id="tbl-rows-inc" type="button">
+                  +
+                </button>
+              </div>
+            </div>
+            <div class="tbl-label">
+              <span data-i18n="table.cols">Columns</span>
+              <div class="tbl-stepper">
+                <button class="tbl-step-btn" id="tbl-cols-dec" type="button">
+                  −
+                </button>
+                <input type="number" id="tbl-cols" value="3" min="1" max="12" />
+                <button class="tbl-step-btn" id="tbl-cols-inc" type="button">
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="tbl-hint" data-i18n="table.hint">
+            First row is the header · Tab to navigate
+          </div>
+          <div class="tbl-grid-wrapper">
+            <div id="tbl-grid" class="tbl-grid"></div>
+          </div>
+          <div class="table-modal-footer">
+            <button id="btn-insert-table" class="tbl-btn-insert" type="button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="14"
+                height="14"
+              >
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              <span data-i18n="table.insert">Insert Table</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Liquid Glass Dock -->
+    <div class="glass-dock">
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="glass-content">
+        <!-- 1. Themes — always visible -->
+        <button id="btn-themes" class="dock-btn has-menu" title="Preview theme">
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="2" width="8" height="8" rx="2" />
+            <rect x="14" y="2" width="8" height="8" rx="2" />
+            <rect x="2" y="14" width="8" height="8" rx="2" />
+            <rect x="14" y="14" width="8" height="8" rx="2" />
+          </svg>
+          <span class="dock-label" data-i18n="dock.themes">Themes</span>
+        </button>
+
+        <!-- Hamburger — portrait-only (between Themes and Export) -->
+        <button
+          id="btn-hamburger"
+          class="dock-btn dock-hamburger-btn"
+          aria-label="More"
+          aria-expanded="false"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none" />
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+            <circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none" />
+          </svg>
+          <span class="dock-label" data-i18n="dock.more">More</span>
+        </button>
+
+        <!-- 2. Table — landscape-only -->
+        <button
+          id="btn-table"
+          class="dock-btn dock-landscape-btn"
+          title="Insert Table"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <line x1="3" y1="9" x2="21" y2="9" />
+            <line x1="3" y1="15" x2="21" y2="15" />
+            <line x1="9" y1="3" x2="9" y2="21" />
+            <line x1="15" y1="3" x2="15" y2="21" />
+          </svg>
+          <span class="dock-label" data-i18n="dock.table">Table</span>
+        </button>
+
+        <!-- 3. Export — always visible -->
+        <button id="btn-export" class="dock-btn has-menu" title="Export">
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" y1="2" x2="12" y2="15" />
+          </svg>
+          <span class="dock-label" data-i18n="dock.export">Export</span>
+        </button>
+
+        <!-- 4. History — landscape-only -->
+        <button
+          id="btn-history"
+          class="dock-btn dock-landscape-btn"
+          title="Local history"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span class="dock-label" data-i18n="dock.history">History</span>
+        </button>
+
+        <!-- 5. Clear — landscape-only, danger -->
+        <button
+          id="btn-clear"
+          class="dock-btn dock-landscape-btn dock-btn--danger"
+          title="Clear editor"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+            <path d="M10 11v6M14 11v6" />
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+          </svg>
+          <span class="dock-label" data-i18n="dock.clear">Clear</span>
+        </button>
+
+        <div class="dock-sep" aria-hidden="true"></div>
+
+        <!-- 6. Settings — always visible -->
+        <button id="btn-settings" class="dock-btn has-menu" title="Settings">
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="4" y1="21" x2="4" y2="14" />
+            <line x1="4" y1="10" x2="4" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12" y2="3" />
+            <line x1="20" y1="21" x2="20" y2="16" />
+            <line x1="20" y1="12" x2="20" y2="3" />
+            <line x1="1" y1="14" x2="7" y2="14" />
+            <line x1="9" y1="8" x2="15" y2="8" />
+            <line x1="17" y1="16" x2="23" y2="16" />
+          </svg>
+          <span class="dock-label" data-i18n="dock.settings">Settings</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hamburger Panel (small portrait screens) — Table, History, Clear -->
+    <div id="hamburger-panel" class="platform-menu hamburger-panel" inert>
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="hamburger-grid">
+        <button class="hamburger-item" data-delegates="btn-table">
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <line x1="3" y1="9" x2="21" y2="9" />
+            <line x1="3" y1="15" x2="21" y2="15" />
+            <line x1="9" y1="3" x2="9" y2="21" />
+            <line x1="15" y1="3" x2="15" y2="21" />
+          </svg>
+          <span data-i18n="dock.table">Table</span>
+        </button>
+        <button class="hamburger-item" data-delegates="btn-history">
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span data-i18n="dock.history">History</span>
+        </button>
+        <button
+          class="hamburger-item hamburger-item--danger"
+          data-delegates="btn-clear"
+        >
+          <svg
+            class="dock-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+            <path d="M10 11v6M14 11v6" />
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+          </svg>
+          <span data-i18n="dock.clear">Clear</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Export Menu -->
+    <div id="export-menu" class="platform-menu" inert>
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="platform-menu-content">
+        <div class="platform-menu-label" data-i18n="export.label">Copy as…</div>
+        <button id="btn-copy-universal" class="platform-btn">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" />
+              <path
+                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Universal</span>
+            <span class="platform-btn-desc" data-i18n="export.universalDesc"
+              >Rich HTML · Word, Notion and other apps</span
+            >
+          </span>
+        </button>
+        <button id="btn-copy-teams" class="platform-btn">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Microsoft Teams</span>
+            <span class="platform-btn-desc" data-i18n="export.teamsDesc"
+              >Inline HTML with Segoe UI styles · code preserved</span
+            >
+          </span>
+        </button>
+        <button id="btn-copy-email" class="platform-btn">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Outlook / Gmail</span>
+            <span class="platform-btn-desc" data-i18n="export.emailDesc"
+              >Conservative inline CSS · tables and bold guaranteed</span
+            >
+          </span>
+        </button>
+        <button id="btn-copy-slack" class="platform-btn">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">Slack</span>
+            <span class="platform-btn-desc" data-i18n="export.slackDesc"
+              >mrkdwn text · Slack native format</span
+            >
+          </span>
+        </button>
+        <div class="settings-sep"></div>
+        <button id="btn-print-pdf" class="platform-btn" type="button">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 6 2 18 2 18 9" />
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              />
+              <rect x="6" y="14" width="12" height="8" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name" data-i18n="export.printName"
+              >Print / PDF</span
+            >
+            <span class="platform-btn-desc" data-i18n="export.printDesc"
+              >Native preview · uses active theme</span
+            >
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Settings Menu -->
+    <div id="settings-menu" class="platform-menu" inert>
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="platform-menu-content">
+        <div class="platform-menu-label" data-i18n="settings.label">
+          Settings
+        </div>
+        <div class="settings-row">
+          <span class="settings-row-icon">
+            <svg
+              id="icon-sync"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </span>
+          <span class="settings-row-text">
+            <span class="settings-row-name" data-i18n="settings.syncName"
+              >Sync scroll</span
+            >
+            <span class="settings-row-desc" data-i18n="settings.syncDesc"
+              >Syncs scroll between editor and preview</span
+            >
+          </span>
+          <button
+            class="liquid-toggle"
+            id="toggle-sync"
+            role="switch"
+            aria-checked="false"
+          >
+            <div class="knockout">
+              <div class="indicator indicator--masked">
+                <div class="mask"></div>
+              </div>
+            </div>
+            <div class="indicator__liquid">
+              <div class="shadow"></div>
+              <div class="wrapper">
+                <div class="liquids">
+                  <div class="liquid__shadow"></div>
+                  <div class="liquid__track"></div>
+                </div>
+              </div>
+              <div class="cover"></div>
+            </div>
+          </button>
+        </div>
+        <div class="settings-sep"></div>
+        <div class="settings-row">
+          <span class="settings-row-icon">
+            <svg
+              id="icon-theme"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </span>
+          <span class="settings-row-text">
+            <span class="settings-row-name" data-i18n="settings.themeName"
+              >Dark mode</span
+            >
+            <span class="settings-row-desc" data-i18n="settings.themeDesc"
+              >Toggle between light and dark mode</span
+            >
+          </span>
+          <button
+            class="liquid-toggle"
+            id="toggle-theme"
+            role="switch"
+            aria-checked="false"
+          >
+            <div class="knockout">
+              <div class="indicator indicator--masked">
+                <div class="mask"></div>
+              </div>
+            </div>
+            <div class="indicator__liquid">
+              <div class="shadow"></div>
+              <div class="wrapper">
+                <div class="liquids">
+                  <div class="liquid__shadow"></div>
+                  <div class="liquid__track"></div>
+                </div>
+              </div>
+              <div class="cover"></div>
+            </div>
+          </button>
+        </div>
+        <div class="settings-sep"></div>
+        <div class="settings-row">
+          <span class="settings-row-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+            </svg>
+          </span>
+          <span class="settings-row-text">
+            <span class="settings-row-name" data-i18n="settings.glassName"
+              >Frosted glass</span
+            >
+            <span class="settings-row-desc" data-i18n="settings.glassDesc"
+              >Frosted glass effect across the UI</span
+            >
+          </span>
+          <button
+            class="liquid-toggle"
+            id="toggle-glass"
+            role="switch"
+            aria-checked="false"
+          >
+            <div class="knockout">
+              <div class="indicator indicator--masked">
+                <div class="mask"></div>
+              </div>
+            </div>
+            <div class="indicator__liquid">
+              <div class="shadow"></div>
+              <div class="wrapper">
+                <div class="liquids">
+                  <div class="liquid__shadow"></div>
+                  <div class="liquid__track"></div>
+                </div>
+              </div>
+              <div class="cover"></div>
+            </div>
+          </button>
+        </div>
+        <div class="settings-sep"></div>
+        <div class="settings-row settings-row--lang">
+          <span class="settings-row-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              />
+            </svg>
+          </span>
+          <span class="settings-row-text">
+            <span class="settings-row-name" data-i18n="settings.langName"
+              >Language</span
+            >
+            <span class="settings-row-desc" data-i18n="settings.langDesc"
+              >Interface language</span
+            >
+          </span>
+          <div class="lang-selector" id="lang-select">
+            <button class="lang-trigger" aria-expanded="false">
+              <span class="lang-trigger-label">EN (UK)</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M1 1l4 4 4-4" />
+              </svg>
+            </button>
+            <ul class="lang-dropdown">
+              <li class="lang-option" data-lang="en">EN — English</li>
+              <li class="lang-option" data-lang="es">ES — Español</li>
+              <li class="lang-option" data-lang="fr">FR — Français</li>
+              <li class="lang-option" data-lang="pt-BR">PT — Português (BR)</li>
+              <li class="lang-option" data-lang="pt-PT">PT — Português (PT)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="settings-sep"></div>
+        <button id="btn-help" class="platform-btn" type="button">
+          <span class="platform-btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name" data-i18n="help.btnName"
+              >Help & Wiki</span
+            >
+            <span class="platform-btn-desc" data-i18n="help.btnDesc"
+              >Features, Markdown guide &amp; shortcuts</span
+            >
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Themes Menu -->
+    <div id="themes-menu" class="platform-menu" inert>
+      <div class="glass-effect"></div>
+      <div class="glass-tint"></div>
+      <div class="glass-shine"></div>
+      <div class="platform-menu-content">
+        <div class="platform-menu-label" data-i18n="themes.label">
+          Preview theme
+        </div>
+        <button class="pdf-theme-row active" data-pdf-theme="github">
+          <span class="pdf-theme-dot" style="background: #0969da"></span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name">GitHub</span>
+            <span class="platform-btn-desc" data-i18n="themes.githubDesc"
+              >Classic · blue/green · light &amp; dark</span
+            >
+          </span>
+          <svg
+            class="pdf-theme-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button class="pdf-theme-row" data-pdf-theme="modern">
+          <span class="pdf-theme-dot" style="background: #6366f1"></span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name" data-i18n="themes.modern"
+              >Modern</span
+            >
+            <span class="platform-btn-desc" data-i18n="themes.modernDesc"
+              >Indigo · Helvetica · light &amp; dark</span
+            >
+          </span>
+          <svg
+            class="pdf-theme-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button class="pdf-theme-row" data-pdf-theme="academic">
+          <span class="pdf-theme-dot" style="background: #92400e"></span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name" data-i18n="themes.academic"
+              >Academic</span
+            >
+            <span class="platform-btn-desc" data-i18n="themes.academicDesc"
+              >Serif Georgia · sepia · light &amp; dark</span
+            >
+          </span>
+          <svg
+            class="pdf-theme-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+        <button class="pdf-theme-row" data-pdf-theme="minimal">
+          <span class="pdf-theme-dot" style="background: #374151"></span>
+          <span class="platform-btn-text">
+            <span class="platform-btn-name" data-i18n="themes.minimal"
+              >Minimal</span
+            >
+            <span class="platform-btn-desc" data-i18n="themes.minimalDesc"
+              >Neutral · distraction-free · light &amp; dark</span
+            >
+          </span>
+          <svg
+            class="pdf-theme-check"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hidden SVG: Physics-based Liquid Glass distortion filters -->
+    <!-- Two filters: dock (pill) and panel (rounded-rect modals/menus).  -->
+    <!-- feImage href + feDisplacementMap scale are written by            -->
+    <!-- GlassDistortion in glass-distortion.js on load and resize.       -->
+    <svg
+      class="glass-filter-defs"
+      aria-hidden="true"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <!-- Dock pill filter — updated by ResizeObserver in JS.
                      Uses userSpaceOnUse pixel coordinates; feImage width/height
                      are set from JS to match the exact dock dimensions. -->
-                <filter
-                    id="glass-distortion-dock"
-                    x="-2%"
-                    y="-2%"
-                    width="104%"
-                    height="104%"
-                    color-interpolation-filters="sRGB"
-                >
-                    <feImage
-                        id="glass-dock-map"
-                        href=""
-                        x="0"
-                        y="0"
-                        width="400"
-                        height="60"
-                        preserveAspectRatio="none"
-                        result="displacement_map"
-                    />
-                    <feDisplacementMap
-                        in="SourceGraphic"
-                        in2="displacement_map"
-                        scale="0"
-                        xChannelSelector="R"
-                        yChannelSelector="G"
-                    />
-                </filter>
+        <filter
+          id="glass-distortion-dock"
+          x="-2%"
+          y="-2%"
+          width="104%"
+          height="104%"
+          color-interpolation-filters="sRGB"
+        >
+          <feImage
+            id="glass-dock-map"
+            href=""
+            x="0"
+            y="0"
+            width="400"
+            height="60"
+            preserveAspectRatio="none"
+            result="displacement_map"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="displacement_map"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
 
-                <!-- Panel filter — modals and platform menus.
+        <!-- Panel filter — modals and platform menus.
                      primitiveUnits="objectBoundingBox" + feImage width/height=1
                      make the displacement map stretch to fill any element, so
                      the same filter gives correct edge refraction at every size.
                      scale is set as a bounding-box fraction by JS. -->
-                <filter
-                    id="glass-distortion-panel"
-                    x="0"
-                    y="0"
-                    width="1"
-                    height="1"
-                    primitiveUnits="objectBoundingBox"
-                    color-interpolation-filters="sRGB"
-                >
-                    <feImage
-                        id="glass-panel-map"
-                        href=""
-                        x="0"
-                        y="0"
-                        width="1"
-                        height="1"
-                        preserveAspectRatio="none"
-                        result="displacement_map"
-                    />
-                    <feDisplacementMap
-                        in="SourceGraphic"
-                        in2="displacement_map"
-                        scale="0"
-                        xChannelSelector="R"
-                        yChannelSelector="G"
-                    />
-                </filter>
-            </defs>
-        </svg>
-
-        <!-- SVG filters for liquid toggles -->
-        <svg
-            aria-hidden="true"
-            style="position: absolute; width: 0; height: 0; overflow: hidden"
+        <filter
+          id="glass-distortion-panel"
+          x="0"
+          y="0"
+          width="1"
+          height="1"
+          primitiveUnits="objectBoundingBox"
+          color-interpolation-filters="sRGB"
         >
-            <defs>
-                <filter
-                    id="lt-goo"
-                    x="-20%"
-                    y="-20%"
-                    width="140%"
-                    height="140%"
-                >
-                    <feGaussianBlur
-                        in="SourceGraphic"
-                        result="blur"
-                        stdDeviation="4"
-                    />
-                    <feColorMatrix
-                        in="blur"
-                        result="matrix"
-                        type="matrix"
-                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
-                    />
-                    <feComposite in="matrix" operator="atop" />
-                </filter>
-                <filter id="lt-remove-black" color-interpolation-filters="sRGB">
-                    <feColorMatrix
-                        type="matrix"
-                        values="1 0 0 0 0
+          <feImage
+            id="glass-panel-map"
+            href=""
+            x="0"
+            y="0"
+            width="1"
+            height="1"
+            preserveAspectRatio="none"
+            result="displacement_map"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="displacement_map"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- SVG filters for liquid toggles -->
+    <svg
+      aria-hidden="true"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <filter id="lt-goo" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="4" />
+          <feColorMatrix
+            in="blur"
+            result="matrix"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+          />
+          <feComposite in="matrix" operator="atop" />
+        </filter>
+        <filter id="lt-remove-black" color-interpolation-filters="sRGB">
+          <feColorMatrix
+            type="matrix"
+            values="1 0 0 0 0
                                 0 1 0 0 0
                                 0 0 1 0 0
                                 -255 -255 -255 0 1"
-                        result="black-pixels"
-                    />
-                    <feMorphology
-                        in="black-pixels"
-                        operator="dilate"
-                        radius="0.5"
-                        result="smoothed"
-                    />
-                    <feComposite
-                        in="SourceGraphic"
-                        in2="smoothed"
-                        operator="out"
-                    />
-                </filter>
-            </defs>
-        </svg>
+            result="black-pixels"
+          />
+          <feMorphology
+            in="black-pixels"
+            operator="dilate"
+            radius="0.5"
+            result="smoothed"
+          />
+          <feComposite in="SourceGraphic" in2="smoothed" operator="out" />
+        </filter>
+      </defs>
+    </svg>
 
-        <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
-        <!-- Help / Wiki Modal -->
-        <div id="help-modal" class="help-modal" inert>
-            <div class="help-modal-backdrop" id="help-modal-backdrop"></div>
-            <div class="help-modal-panel">
-                <div class="glass-effect"></div>
-                <div class="glass-tint"></div>
-                <div class="glass-shine"></div>
-                <div class="help-modal-content">
-                    <div class="help-modal-header">
-                        <span class="help-modal-title">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                width="18"
-                                height="18"
-                            >
-                                <circle cx="12" cy="12" r="10" />
-                                <path
-                                    d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"
-                                />
-                                <line x1="12" y1="17" x2="12.01" y2="17" />
-                            </svg>
-                            <span data-i18n="help.title">Help & Wiki</span>
-                        </span>
-                        <button
-                            id="btn-close-help"
-                            class="history-modal-close"
-                            title="Close"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                width="18"
-                                height="18"
-                            >
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div id="help-body" class="help-body"></div>
-                </div>
-            </div>
+    <!-- Help / Wiki Modal -->
+    <div id="help-modal" class="help-modal" inert>
+      <div class="help-modal-backdrop" id="help-modal-backdrop"></div>
+      <div class="help-modal-panel">
+        <div class="glass-effect"></div>
+        <div class="glass-tint"></div>
+        <div class="glass-shine"></div>
+        <div class="help-modal-content">
+          <div class="help-modal-header">
+            <span class="help-modal-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="18"
+                height="18"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <span data-i18n="help.title">Help & Wiki</span>
+            </span>
+            <button
+              id="btn-close-help"
+              class="history-modal-close"
+              title="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="18"
+                height="18"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <div id="help-body" class="help-body"></div>
         </div>
+      </div>
+    </div>
 
-        <script src="app.bundle.js"></script>
-    </body>
+    <script src="app.bundle.js"></script>
+  </body>
 </html>

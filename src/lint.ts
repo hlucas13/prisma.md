@@ -1,10 +1,10 @@
 // ── Markdown lint + grammar checker (pure functions) ──
-import { t } from './i18n.js';
+import { t } from './i18n';
 
 export function maskCodeContent(text) {
     // Fenced code blocks: keep newlines to preserve line numbers
     let masked = text.replace(/```[\s\S]*?```/g, (m) =>
-        '\n'.repeat((m.match(/\n/g) || []).length),
+        '\n'.repeat((m.match(/\n/g) || []).length)
     );
     // Inline code: replace with same-length spaces
     masked = masked.replace(/`[^`\n]+`/g, (m) => ' '.repeat(m.length));

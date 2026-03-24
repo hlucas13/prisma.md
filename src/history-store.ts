@@ -1,5 +1,5 @@
 // ── Local history — storage helpers ──
-import { t, currentLang } from './i18n.js';
+import { currentLang, t } from './i18n';
 
 const HISTORY_KEY = 'prisma-md-history';
 const HISTORY_MAX = 25;
@@ -41,7 +41,7 @@ export function formatHistoryDate(ts) {
             month: '2-digit',
             hour: '2-digit',
             minute: '2-digit',
-        },
+        }
     );
 }
 

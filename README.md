@@ -44,12 +44,12 @@ Write Markdown on the left, see the rendered result on the right. Your content i
 
 Four built-in themes, each with full light and dark variants, applied instantly without a page reload:
 
-| Theme | Style |
-|-------|-------|
-| **GitHub** | Classic · blue/green · light & dark |
-| **Modern** | Indigo · Helvetica · light & dark |
-| **Academic** | Serif Georgia · sepia · light & dark |
-| **Minimal** | Neutral · distraction-free · light & dark |
+| Theme        | Style                                     |
+| ------------ | ----------------------------------------- |
+| **GitHub**   | Classic · blue/green · light & dark       |
+| **Modern**   | Indigo · Helvetica · light & dark         |
+| **Academic** | Serif Georgia · sepia · light & dark      |
+| **Minimal**  | Neutral · distraction-free · light & dark |
 
 ### Settings
 
@@ -70,14 +70,14 @@ Always-visible bar at the bottom of the editor pane showing:
 
 Runs on every keystroke (debounced) and reports issues inline:
 
-| Rule | Type |
-|------|------|
-| Heading hierarchy skip (e.g. H1 → H3) | Lint |
-| Multiple H1 headings in one document | Lint |
-| Unclosed inline link — missing `)` | Lint |
-| Image without alt text | Lint |
+| Rule                                       | Type    |
+| ------------------------------------------ | ------- |
+| Heading hierarchy skip (e.g. H1 → H3)      | Lint    |
+| Multiple H1 headings in one document       | Lint    |
+| Unclosed inline link — missing `)`         | Lint    |
+| Image without alt text                     | Lint    |
 | Repeated consecutive word (≥ 3 characters) | Grammar |
-| Double space in the middle of a line | Grammar |
+| Double space in the middle of a line       | Grammar |
 
 Code content (fenced blocks and inline code) is masked before linting so rules never fire inside code.  
 Clicking a warning in the panel moves the cursor to the affected line.
@@ -96,31 +96,43 @@ Built-in modal (accessible from the dock) with a full feature guide, a Markdown 
 
 ## Keyboard Shortcuts
 
-| Keys | Action |
-|------|--------|
-| `Tab` | Indent line / list item |
-| `Shift` + `Tab` | Unindent line / list item |
-| `Enter` | Continue list — auto-inserts the next bullet or number |
-| `Esc` | Close the open modal or menu |
+| Keys            | Action                                                 |
+| --------------- | ------------------------------------------------------ |
+| `Tab`           | Indent line / list item                                |
+| `Shift` + `Tab` | Unindent line / list item                              |
+| `Enter`         | Continue list — auto-inserts the next bullet or number |
+| `Esc`           | Close the open modal or menu                           |
 
 ---
 
 ## Tech Stack
 
-| Library | Version | Purpose |
-|---------|---------|----------|
-| [Marked.js](https://marked.js.org/) | v4 | Markdown parsing — GFM, tables, line breaks |
-| [CodeMirror](https://codemirror.net/5/) | 5.65.16 | Editor with Markdown syntax highlighting and fenced code block language resolution |
-| [highlight.js](https://highlightjs.org/) | 11.9.0 | Code block syntax highlighting in the preview |
-| [GSAP](https://gsap.com/) | 3 | Animated Liquid Glass toggle transitions |
+### Runtime (CDN — no local install required)
 
-All libraries are loaded from CDN — no local installation required.
+| Library                                  | Version | Purpose                                                                            |
+| ---------------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| [Marked.js](https://marked.js.org/)      | v4      | Markdown parsing — GFM, tables, line breaks                                        |
+| [CodeMirror](https://codemirror.net/5/)  | 5.65.16 | Editor with Markdown syntax highlighting and fenced code block language resolution |
+| [highlight.js](https://highlightjs.org/) | 11.9.0  | Code block syntax highlighting in the preview                                      |
+| [GSAP](https://gsap.com/)                | 3       | Animated Liquid Glass toggle transitions                                           |
+
+### Build & Dev tooling (local, not shipped)
+
+| Tool                                                                                  | Purpose                                                                                              |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [esbuild](https://esbuild.github.io/)                                                 | Bundles `js/main.ts` and all imports into a single IIFE `app.bundle.js` in ~25 ms                    |
+| [TypeScript](https://www.typescriptlang.org/)                                         | Type-checking (`tsc --noEmit`); compilation handled by esbuild                                       |
+| [ESLint](https://eslint.org/) + [`@typescript-eslint`](https://typescript-eslint.io/) | Static analysis on all `.ts` source files                                                            |
+| [Prettier](https://prettier.io/)                                                      | Formatting — config in `.prettierrc`                                                                 |
+| [Husky](https://typicode.github.io/husky/)                                            | Git hooks: runs lint-staged on `pre-commit` and commitlint on `commit-msg`                           |
+| [lint-staged](https://github.com/lint-staged/lint-staged)                             | On commit, runs ESLint + Prettier only on staged `.ts` files, and Prettier on other staged files     |
+| [commitlint](https://commitlint.js.org/)                                              | Enforces [Conventional Commits](https://www.conventionalcommits.org/) format on every commit message |
 
 ---
 
 ## Liquid Glass
 
-The UI chrome (dock, menus, modals, and toggles) is built around a physics-based Liquid Glass system, documented in the module `js/glass-distortion.js`.
+The UI chrome (dock, menus, modals, and toggles) is built around a physics-based Liquid Glass system, documented in the module `src/glass-distortion.ts`.
 
 The implementation follows the refraction principles described in **[Liquid Glass — CSS & SVG](https://kube.io/blog/liquid-glass-css-svg/)** by Kube:
 
@@ -137,24 +149,29 @@ The implementation follows the refraction principles described in **[Liquid Glas
 
 ```
 prisma.md/
-├── index.html          # Single-page app shell; loads CDN libraries and app.bundle.js
-├── style.css           # All styles — layout, themes, Liquid Glass, animations
-├── app.bundle.js       # Bundled output (generated by build.js — do not edit manually)
-├── build.js            # Node.js bundler script; concatenates js/ modules into app.bundle.js
+├── index.html              # Single-page app shell; loads CDN libraries and app.bundle.js
+├── style.css               # All styles — layout, themes, Liquid Glass, animations
+├── app.bundle.js           # Bundled output (generated by build.js — do not edit manually)
+├── build.js                # esbuild script; bundles src/main.ts into app.bundle.js
+├── tsconfig.json           # TypeScript config (noEmit — compilation is done by esbuild)
+├── eslint.config.js        # ESLint flat config with @typescript-eslint rules
+├── commitlint.config.js    # Commitlint config (extends @commitlint/config-conventional)
+├── .prettierrc             # Prettier formatting rules
 │
-└── js/                 # Source modules (ES module syntax; bundled for production)
-    ├── i18n.js             # Translation strings and t() lookup for all supported locales
-    ├── samples.js          # Per-locale sample Markdown shown on first load
-    ├── lint.js             # Markdown linter and grammar checker (pure functions)
-    ├── converter.js        # HTML → Markdown, TSV → Markdown table, Markdown → Slack mrkdwn
-    ├── export-builder.js   # Inline-styled HTML builder for Teams and email copy targets
-    ├── preview-themes.js   # CSS override strings for each preview theme (light + dark)
-    ├── history-store.js    # localStorage read/write helpers for local history snapshots
-    ├── glass-distortion.js # Physics-based SVG displacement map generator (Snell's law)
-    └── main.js             # Application entry point — wires together all modules and the DOM
+└── src/                    # TypeScript source modules (ES module syntax; bundled for production)
+    ├── globals.d.ts            # Ambient declarations for CDN globals (CodeMirror, marked, hljs)
+    ├── i18n.ts                 # Translation strings and t() lookup for all supported locales
+    ├── samples.ts              # Per-locale sample Markdown shown on first load
+    ├── lint.ts                 # Markdown linter and grammar checker (pure functions)
+    ├── converter.ts            # HTML → Markdown, TSV → Markdown table, Markdown → Slack mrkdwn
+    ├── export-builder.ts       # Inline-styled HTML builder for Teams and email copy targets
+    ├── preview-themes.ts       # CSS override strings for each preview theme (light + dark)
+    ├── history-store.ts        # localStorage read/write helpers for local history snapshots
+    ├── glass-distortion.ts     # Physics-based SVG displacement map generator (Snell's law)
+    └── main.ts                 # Application entry point — wires together all modules and the DOM
 ```
 
-> **Note:** `app.bundle.js` is the file actually loaded by `index.html`. It is produced by `build.js`, which strips ES module syntax (`import`/`export`) and wraps all modules in a single IIFE. The individual files under `js/` are the authoritative source — edit those, then rebuild.
+> **Note:** `app.bundle.js` is the file actually loaded by `index.html`. It is produced by `build.js` using [esbuild](https://esbuild.github.io/), which bundles `src/main.ts` and all its imports into a single IIFE. The individual `.ts` files under `src/` are the authoritative source — edit those, then rebuild.
 
 ---
 
@@ -172,7 +189,7 @@ Contributions are welcome! Feel free to open an **Issue** to report bugs, sugges
 
 ## Running Locally
 
-No build step is needed to run the app:
+No build step is needed to _run_ the app:
 
 ```bash
 # Clone the repository
@@ -199,25 +216,57 @@ Then open `http://localhost:8080` in the browser.
 
 ---
 
-## Rebuilding `app.bundle.js`
+## Development Setup
 
-`app.bundle.js` must be regenerated whenever any file under `js/` changes.
-
-**Requirements:** Node.js (any recent LTS version — no `npm install` needed, the bundler uses only built-in `fs` and `path` modules).
+Install dev dependencies (only needed to rebuild or use linting tools):
 
 ```bash
-node build.js
+npm install
+```
+
+### Rebuilding `app.bundle.js`
+
+`app.bundle.js` must be regenerated whenever any file under `src/` changes.
+
+```bash
+npm run build
 ```
 
 Expected output:
 
 ```
-✅  app.bundle.js — XXXX lines, XX.X KB
+  app.bundle.js  130kb
+⚡ Done in 25ms
+✅  app.bundle.js — XXXX lines, XXX.X KB
 ```
 
-The bundler:
+esbuild resolves all TypeScript imports from `src/main.ts`, compiles them, and outputs a single browser-ready IIFE.
 
-1. Reads each module in dependency order (`i18n` → `samples` → `lint` → `converter` → `export-builder` → `preview-themes` → `history-store` → `glass-distortion` → `main`)
-2. Strips `import` and `export` declarations
-3. Wraps everything in a single IIFE (`(() => { 'use strict'; … })();`)
-4. Writes `app.bundle.js` to the repository root
+### Other scripts
+
+```bash
+npm run typecheck   # Type-check all .ts files with tsc (no output emitted)
+npm run lint        # Run ESLint on src/
+```
+
+### Commit workflow
+
+Git hooks are managed by **Husky** and run automatically on `git commit`:
+
+| Hook         | What runs                                                                                                   |
+| ------------ | ----------------------------------------------------------------------------------------------------------- |
+| `pre-commit` | ESLint `--fix` + Prettier on staged `src/**/*.ts` files; Prettier on staged `.html`, `.css`, `.json`, `.md` |
+| `commit-msg` | commitlint — rejects messages that don't follow Conventional Commits                                        |
+
+**Conventional Commits format:**
+
+```
+<type>(optional scope): description
+
+feat: add dark mode toggle
+fix(editor): correct scroll sync offset
+docs: update README
+chore: upgrade esbuild
+```
+
+Accepted types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`, `build`, `revert`.

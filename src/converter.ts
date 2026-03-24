@@ -1,12 +1,12 @@
 // ── Conversion utilities: HTML→Markdown, TSV→Markdown, Markdown→Slack ──
-import { t } from './i18n.js';
+import { t } from './i18n';
 
 export function convertToSlack(md) {
     let out = md;
 
     // Images (must come before links)
     out = out.replace(/!\[([^\]]*)\]\([^)]+\)/g, (_, alt) =>
-        alt ? t('slack.image', alt) : t('slack.imagePlain'),
+        alt ? t('slack.image', alt) : t('slack.imagePlain')
     );
 
     // Links → <url|text>
@@ -28,7 +28,7 @@ export function convertToSlack(md) {
     // Horizontal rules
     out = out.replace(
         /^[-*_]{3,}$/gm,
-        '\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500',
+        '\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500'
     );
 
     // Task lists
@@ -163,8 +163,8 @@ function tableNodeToMarkdown(tableNode) {
     if (!rows.length) return '';
     const allCells = rows.map((row) =>
         [...row.querySelectorAll('th, td')].map((c) =>
-            c.textContent.trim().replace(/\|/g, '\\|'),
-        ),
+            c.textContent.trim().replace(/\|/g, '\\|')
+        )
     );
     const colCount = Math.max(...allCells.map((r) => r.length));
     const padded = allCells.map((r) => {
@@ -202,7 +202,7 @@ export function tsvToMarkdown(tsv) {
             r
                 .replace(/\r$/, '')
                 .split('\t')
-                .map((c) => c.trim().replace(/\|/g, '\\|')),
+                .map((c) => c.trim().replace(/\|/g, '\\|'))
         );
     if (!rows.length) return tsv;
     const colCount = Math.max(...rows.map((r) => r.length));

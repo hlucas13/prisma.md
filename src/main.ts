@@ -4,18 +4,19 @@ import {
     htmlToMarkdown,
     isTsvData,
     tsvToMarkdown,
-} from './converter.js';
-import { buildInlineStyledHTML } from './export-builder.js';
+} from './converter';
+import { buildInlineStyledHTML } from './export-builder';
+import './glass-distortion';
 import {
     clearHistory,
     formatHistoryDate,
     getHistory,
     saveSnapshot,
-} from './history-store.js';
-import { setCurrentLang, t } from './i18n.js';
-import { runGrammar, runMarkdownLint } from './lint.js';
-import { PREVIEW_THEMES } from './preview-themes.js';
-import { getSampleMarkdown } from './samples.js';
+} from './history-store';
+import { setCurrentLang, t } from './i18n';
+import { runGrammar, runMarkdownLint } from './lint';
+import { PREVIEW_THEMES } from './preview-themes';
+import { getSampleMarkdown } from './samples';
 
 // SVG paths for sync states
 const SVG_LOCK_CLOSED =
@@ -30,24 +31,33 @@ const SVG_SUN =
 function applyLanguage(lang) {
     setCurrentLang(lang);
     document.documentElement.lang = lang;
-    for (const el of document.querySelectorAll('[data-i18n]')) {
+    for (const el of document.querySelectorAll<HTMLElement>('[data-i18n]')) {
         el.textContent = t(el.dataset.i18n);
     }
-    for (const el of document.querySelectorAll('[data-i18n-title]')) {
-        el.title = t(el.dataset.i18nTitle);
+    for (const el of document.querySelectorAll<HTMLElement>(
+        '[data-i18n-title]'
+    )) {
+        (el as HTMLElement).title = t(el.dataset.i18nTitle);
     }
-    for (const el of document.querySelectorAll('[data-i18n-aria-label]')) {
+    for (const el of document.querySelectorAll<HTMLElement>(
+        '[data-i18n-aria-label]'
+    )) {
         el.setAttribute('aria-label', t(el.dataset.i18nAriaLabel));
     }
-    for (const el of document.querySelectorAll('[data-i18n-placeholder]')) {
-        el.placeholder = t(el.dataset.i18nPlaceholder);
+    for (const el of document.querySelectorAll<HTMLElement>(
+        '[data-i18n-placeholder]'
+    )) {
+        (el as HTMLInputElement).placeholder = t(el.dataset.i18nPlaceholder);
     }
     const langContainer = document.getElementById('lang-select');
     if (langContainer) {
         langContainer
             .querySelectorAll('.lang-option')
-            .forEach((el) =>
-                el.classList.toggle('selected', el.dataset.lang === lang),
+            .forEach((el: Element) =>
+                el.classList.toggle(
+                    'selected',
+                    (el as HTMLElement).dataset.lang === lang
+                )
             );
         const triggerLabel = langContainer.querySelector('.lang-trigger-label');
         if (triggerLabel) triggerLabel.textContent = langTriggerLabel(lang);
@@ -66,9 +76,9 @@ const btnClear = document.getElementById('btn-clear');
 const btnSettings = document.getElementById('btn-settings');
 const divider = document.getElementById('divider');
 const toast = document.getElementById('toast');
-const hljsLight = document.getElementById('hljs-light');
-const hljsDark = document.getElementById('hljs-dark');
-const cmThemeDark = document.getElementById('cm-theme-dark');
+const hljsLight = document.getElementById('hljs-light') as HTMLLinkElement;
+const hljsDark = document.getElementById('hljs-dark') as HTMLLinkElement;
+const cmThemeDark = document.getElementById('cm-theme-dark') as HTMLLinkElement;
 const exportMenu = document.getElementById('export-menu');
 const settingsMenu = document.getElementById('settings-menu');
 const btnCopyUniversal = document.getElementById('btn-copy-universal');
@@ -87,8 +97,8 @@ const hamburgerPanel = document.getElementById('hamburger-panel');
 const btnTable = document.getElementById('btn-table');
 const tableModal = document.getElementById('table-modal');
 const tableModalBackdrop = document.getElementById('table-modal-backdrop');
-const tblRows = document.getElementById('tbl-rows');
-const tblCols = document.getElementById('tbl-cols');
+const tblRows = document.getElementById('tbl-rows') as HTMLInputElement;
+const tblCols = document.getElementById('tbl-cols') as HTMLInputElement;
 const tblGrid = document.getElementById('tbl-grid');
 const btnCloseTable = document.getElementById('btn-close-table');
 const btnInsertTable = document.getElementById('btn-insert-table');
@@ -142,7 +152,7 @@ const EXTRA_MODES = [
 // Merge into modeInfo for findModeByName (used by some CodeMirror consumers).
 if (!CodeMirror.modeInfo) CodeMirror.modeInfo = [];
 const existingNames = new Set(
-    CodeMirror.modeInfo.map((m) => m.name.toLowerCase()),
+    CodeMirror.modeInfo.map((m) => m.name.toLowerCase())
 );
 for (const entry of EXTRA_MODES) {
     if (!existingNames.has(entry.name.toLowerCase())) {
@@ -280,7 +290,7 @@ function saveContent() {
 // ── Render ──
 function render() {
     preview.querySelector('.markdown-body').innerHTML = marked.parse(
-        cm.getValue(),
+        cm.getValue()
     );
 }
 
@@ -440,17 +450,20 @@ btnHamburger.addEventListener('click', (e) => {
     btnHamburger.setAttribute('aria-expanded', String(open));
 });
 
-hamburgerPanel.querySelectorAll('[data-delegates]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-        document.getElementById(btn.dataset.delegates).click();
+hamburgerPanel
+    .querySelectorAll<HTMLElement>('[data-delegates]')
+    .forEach((btn) => {
+        btn.addEventListener('click', () => {
+            document.getElementById(btn.dataset.delegates).click();
+        });
     });
-});
 
 document.addEventListener('click', (e) => {
+    const target = e.target as Node;
     if (
-        !allMenus.some((m) => m.contains(e.target)) &&
-        !e.target.closest(
-            '#btn-export, #btn-settings, #btn-themes, #btn-hamburger',
+        !allMenus.some((m) => m.contains(target)) &&
+        !(target as HTMLElement).closest(
+            '#btn-export, #btn-settings, #btn-themes, #btn-hamburger'
         )
     ) {
         closeAllMenus();
@@ -466,7 +479,7 @@ btnCopyUniversal.addEventListener('click', async () => {
     closeAllMenus();
     const body = preview.querySelector('.markdown-body');
     const html = body.innerHTML;
-    const plain = body.innerText;
+    const plain = (body as HTMLElement).innerText;
     try {
         await navigator.clipboard.write([
             new ClipboardItem({
@@ -524,8 +537,10 @@ document.addEventListener('mousemove', (e) => {
     const total = rect.width;
     const pct = Math.min(Math.max((offset / total) * 100, 15), 85);
 
-    document.querySelector('.editor-pane').style.flex = `0 0 ${pct}%`;
-    document.querySelector('.preview-pane').style.flex = `0 0 ${100 - pct}%`;
+    (document.querySelector('.editor-pane') as HTMLElement).style.flex =
+        `0 0 ${pct}%`;
+    (document.querySelector('.preview-pane') as HTMLElement).style.flex =
+        `0 0 ${100 - pct}%`;
     cm.refresh();
 });
 
@@ -608,7 +623,7 @@ toggleSync.addEventListener('click', () => {
     iconSync.innerHTML = syncScrollEnabled ? SVG_LOCK_CLOSED : SVG_LOCK_OPEN;
     localStorage.setItem(
         'markdown-preview-sync',
-        syncScrollEnabled ? '1' : '0',
+        syncScrollEnabled ? '1' : '0'
     );
 });
 
@@ -645,7 +660,7 @@ const savedTheme = localStorage.getItem('markdown-preview-theme');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 applyTheme(
     savedTheme !== null ? savedTheme === 'dark' : prefersDark.matches,
-    false,
+    false
 );
 
 // Follow system changes live (only when the user hasn't set a preference)
@@ -664,9 +679,10 @@ btnCopyTeams.addEventListener('click', async () => {
     closeAllMenus();
     const html = buildInlineStyledHTML(
         preview.querySelector('.markdown-body'),
-        'teams',
+        'teams'
     );
-    const plain = preview.querySelector('.markdown-body').innerText;
+    const plain = (preview.querySelector('.markdown-body') as HTMLElement)
+        .innerText;
     try {
         await navigator.clipboard.write([
             new ClipboardItem({
@@ -689,9 +705,10 @@ btnCopyEmail.addEventListener('click', async () => {
     closeAllMenus();
     const html = buildInlineStyledHTML(
         preview.querySelector('.markdown-body'),
-        'email',
+        'email'
     );
-    const plain = preview.querySelector('.markdown-body').innerText;
+    const plain = (preview.querySelector('.markdown-body') as HTMLElement)
+        .innerText;
     try {
         await navigator.clipboard.write([
             new ClipboardItem({
@@ -803,7 +820,7 @@ editorPane.addEventListener('drop', (e) => {
     e.stopPropagation(); // prevent the document drop handler above from also running
     hideDragUI();
 
-    const files = e.dataTransfer?.files;
+    const files = (e as DragEvent).dataTransfer?.files;
     if (!files || files.length === 0) return;
 
     const file = files[0];
@@ -850,14 +867,16 @@ function applyPreviewTheme(name) {
         document.head.appendChild(el);
     }
     el.textContent = PREVIEW_THEMES[name] ?? PREVIEW_THEMES.github;
-    for (const row of document.querySelectorAll('.pdf-theme-row')) {
+    for (const row of document.querySelectorAll<HTMLElement>(
+        '.pdf-theme-row'
+    )) {
         row.classList.toggle('active', row.dataset.pdfTheme === name);
     }
     localStorage.setItem('prisma-preview-theme', name);
 }
 
 // Theme row selection
-for (const row of document.querySelectorAll('.pdf-theme-row')) {
+for (const row of document.querySelectorAll<HTMLElement>('.pdf-theme-row')) {
     row.addEventListener('click', () => {
         applyPreviewTheme(row.dataset.pdfTheme);
     });
@@ -871,7 +890,7 @@ btnPrintPdf.addEventListener('click', () => {
 });
 // ── Paste handler: HTML → Markdown, TSV → Markdown table ──
 cm.on('paste', (_, e) => {
-    const cd = e.clipboardData || window.clipboardData;
+    const cd = (e as ClipboardEvent).clipboardData;
     if (!cd) return;
 
     const plain = cd.getData('text/plain');
@@ -899,7 +918,7 @@ cm.on('paste', (_, e) => {
     if (html) {
         const hasMarkup =
             /<(h[1-6]|p|ul|ol|li|table|blockquote|pre|strong|em|br)\b/i.test(
-                html,
+                html
             );
         if (hasMarkup) {
             e.preventDefault();
@@ -1017,8 +1036,8 @@ function buildTableGrid() {
                 r === 0
                     ? t('table.colPlaceholder', c + 1)
                     : t('table.cellPlaceholder', r, c + 1);
-            inp.dataset.row = r;
-            inp.dataset.col = c;
+            inp.dataset.row = String(r);
+            inp.dataset.col = String(c);
 
             // Round corners on edge cells so focus box-shadow follows wrapper's border-radius
             const isFirstRow = r === 0;
@@ -1037,9 +1056,9 @@ function buildTableGrid() {
                     e.preventDefault();
                     const nextR = r + 1 < rows ? r + 1 : r;
                     const next = tblGrid.querySelector(
-                        `[data-row='${nextR}'][data-col='${c}']`,
+                        `[data-row='${nextR}'][data-col='${c}']`
                     );
-                    if (next) next.focus();
+                    if (next) (next as HTMLElement).focus();
                 }
             });
 
@@ -1049,7 +1068,7 @@ function buildTableGrid() {
 
     // Focus first header cell
     const first = tblGrid.querySelector('.tbl-cell');
-    if (first) requestAnimationFrame(() => first.focus());
+    if (first) requestAnimationFrame(() => (first as HTMLElement).focus());
 }
 
 function openTableModal() {
@@ -1066,7 +1085,7 @@ function closeTableModal() {
 function generateMarkdownTable() {
     const rows = Math.max(2, Number.parseInt(tblRows.value, 10) || 3);
     const cols = Math.max(1, Number.parseInt(tblCols.value, 10) || 3);
-    const cells = [...tblGrid.querySelectorAll('.tbl-cell')];
+    const cells = [...tblGrid.querySelectorAll<HTMLInputElement>('.tbl-cell')];
 
     let md = '\n';
 
@@ -1118,19 +1137,23 @@ btnInsertTable.addEventListener('click', () => {
 
 // Stepper buttons
 document.getElementById('tbl-rows-dec').addEventListener('click', () => {
-    tblRows.value = Math.max(2, Number.parseInt(tblRows.value, 10) - 1);
+    tblRows.value = String(Math.max(2, Number.parseInt(tblRows.value, 10) - 1));
     buildTableGrid();
 });
 document.getElementById('tbl-rows-inc').addEventListener('click', () => {
-    tblRows.value = Math.min(30, Number.parseInt(tblRows.value, 10) + 1);
+    tblRows.value = String(
+        Math.min(30, Number.parseInt(tblRows.value, 10) + 1)
+    );
     buildTableGrid();
 });
 document.getElementById('tbl-cols-dec').addEventListener('click', () => {
-    tblCols.value = Math.max(1, Number.parseInt(tblCols.value, 10) - 1);
+    tblCols.value = String(Math.max(1, Number.parseInt(tblCols.value, 10) - 1));
     buildTableGrid();
 });
 document.getElementById('tbl-cols-inc').addEventListener('click', () => {
-    tblCols.value = Math.min(12, Number.parseInt(tblCols.value, 10) + 1);
+    tblCols.value = String(
+        Math.min(12, Number.parseInt(tblCols.value, 10) + 1)
+    );
     buildTableGrid();
 });
 
@@ -1168,16 +1191,17 @@ function langTriggerLabel(lang) {
     }
 
     trigger.addEventListener('click', () => {
-        selector.classList.contains('open') ? closeDropdown() : openDropdown();
+        if (selector.classList.contains('open')) closeDropdown();
+        else openDropdown();
     });
 
     document.addEventListener('click', (e) => {
-        if (!selector.contains(e.target)) closeDropdown();
+        if (!selector.contains(e.target as Node)) closeDropdown();
     });
 
     options.forEach((opt) => {
         opt.addEventListener('click', () => {
-            const lang = opt.dataset.lang;
+            const lang = (opt as HTMLElement).dataset.lang;
             options.forEach((o) => o.classList.toggle('selected', o === opt));
             const triggerLabel = selector.querySelector('.lang-trigger-label');
             if (triggerLabel) triggerLabel.textContent = langTriggerLabel(lang);
@@ -1202,7 +1226,7 @@ requestAnimationFrame(() => cm.refresh());
 
 // ── Portrait pane collapse/expand ──
 const portraitQuery = window.matchMedia(
-    '(max-width: 768px), (orientation: portrait)',
+    '(max-width: 768px), (orientation: portrait)'
 );
 const paneHeaderEditor = document.getElementById('pane-header-editor');
 const paneHeaderPreview = document.getElementById('pane-header-preview');
@@ -1235,10 +1259,10 @@ function togglePane(pane, header) {
 }
 
 paneHeaderEditor.addEventListener('click', () =>
-    togglePane(editorPaneEl, paneHeaderEditor),
+    togglePane(editorPaneEl, paneHeaderEditor)
 );
 paneHeaderPreview.addEventListener('click', () =>
-    togglePane(previewPaneEl, paneHeaderPreview),
+    togglePane(previewPaneEl, paneHeaderPreview)
 );
 
 // Reset collapse state when switching between portrait ↔ landscape
@@ -1289,7 +1313,7 @@ function buildHelpBody() {
             ([name, desc]) => `<div class="help-export-item">
         <span class="help-export-name">${name}</span>
         <span class="help-export-desc">${desc}</span>
-    </div>`,
+    </div>`
         )
         .join('');
 
@@ -1314,14 +1338,16 @@ function buildHelpBody() {
         .map(([syn, desc]) => `<tr><td>${syn}</td><td>${desc}</td></tr>`)
         .join('');
 
-    const kbdRows = [
-        [['Tab'], 'Indent line / list item'],
-        [['Shift', 'Tab'], 'Unindent line / list item'],
-        [['Enter'], 'Continue list — auto-inserts next bullet or number'],
-        [['Esc'], 'Close open modal or menu'],
-    ]
+    const kbdRows = (
+        [
+            [['Tab'], 'Indent line / list item'],
+            [['Shift', 'Tab'], 'Unindent line / list item'],
+            [['Enter'], 'Continue list — auto-inserts next bullet or number'],
+            [['Esc'], 'Close open modal or menu'],
+        ] as [string[], string][]
+    )
         .map(([keys, desc]) => {
-            const kbds = keys.map((k) => `<kbd>${k}</kbd>`).join(' + ');
+            const kbds = keys.map((k: string) => `<kbd>${k}</kbd>`).join(' + ');
             return `<div class="help-shortcut-row">
             <span class="help-shortcut-keys">${kbds}</span>
             <span class="help-shortcut-desc">${desc}</span>
@@ -1339,33 +1365,33 @@ function buildHelpBody() {
             <li>${t('help.s1d3')}</li>
             <li>${t('help.s1d4')}</li>
             <li>${t('help.s1d5')}</li>
-        </ul>`,
+        </ul>`
         ),
         section(
             iconExport,
             t('help.s2'),
             `<p class="help-p">${t('help.s2intro')}</p>
-            <div class="help-export-grid">${exportRows}</div>`,
+            <div class="help-export-grid">${exportRows}</div>`
         ),
         section(
             iconHistory,
             t('help.s3'),
-            `<p class="help-p">${t('help.s3d1')}</p>`,
+            `<p class="help-p">${t('help.s3d1')}</p>`
         ),
         section(
             iconTable,
             t('help.s4'),
-            `<p class="help-p">${t('help.s4d1')}</p>`,
+            `<p class="help-p">${t('help.s4d1')}</p>`
         ),
         section(
             iconThemes,
             t('help.s5'),
-            `<p class="help-p">${t('help.s5d1')}</p>`,
+            `<p class="help-p">${t('help.s5d1')}</p>`
         ),
         section(
             iconSettings,
             t('help.s6'),
-            `<p class="help-p">${t('help.s6d1')}</p>`,
+            `<p class="help-p">${t('help.s6d1')}</p>`
         ),
         section(
             iconMd,
@@ -1373,12 +1399,12 @@ function buildHelpBody() {
             `<table class="help-md-table">
             <thead><tr><th>Syntax</th><th>Output</th></tr></thead>
             <tbody>${mdRows}</tbody>
-        </table>`,
+        </table>`
         ),
         section(
             iconKbd,
             t('help.s8'),
-            `<div class="help-shortcuts-grid">${kbdRows}</div>`,
+            `<div class="help-shortcuts-grid">${kbdRows}</div>`
         ),
     ].join('');
 }

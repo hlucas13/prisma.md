@@ -1,5 +1,5 @@
 // ── Sample Markdown content (one per supported language) ──
-import { currentLang } from './i18n.js';
+import { currentLang } from './i18n';
 
 export function getSampleMarkdown() {
     if (currentLang === 'pt-PT') {
@@ -687,4 +687,3 @@ Images can be external URLs or Base64 via drag & drop:
 *Switch language, theme and dark mode from the dock at the bottom of the screen.*
 `;
 }
-

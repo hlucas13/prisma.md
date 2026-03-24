@@ -68,7 +68,7 @@ const GlassDistortion = {
         // Upper bound R*0.85 ensures bezel never overshoots the corner curve.
         const bezelW = Math.min(
             Math.min(W, H) * this.BEZEL_FRACTION * 0.5,
-            R * 0.85,
+            R * 0.85
         );
 
         const canvas = document.createElement('canvas');
@@ -142,11 +142,11 @@ const GlassDistortion = {
                 const n = mag / maxMag;
                 d[idx] = Math.min(
                     255,
-                    Math.max(0, (128 + dxArr[i] * n * 127 + 0.5) | 0),
+                    Math.max(0, (128 + dxArr[i] * n * 127 + 0.5) | 0)
                 );
                 d[idx + 1] = Math.min(
                     255,
-                    Math.max(0, (128 + dyArr[i] * n * 127 + 0.5) | 0),
+                    Math.max(0, (128 + dyArr[i] * n * 127 + 0.5) | 0)
                 );
             } else {
                 d[idx] = 128;
