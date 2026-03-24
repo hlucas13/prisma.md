@@ -210,7 +210,8 @@ body {
         'Segoe UI',
         sans-serif;
     font-size: 14px;
-    height: 100vh;
+    height: 100vh; /* fallback for older browsers */
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     background: var(--bg-app);
@@ -268,7 +269,7 @@ header {
 /* ===== Floating Glass Dock ===== */
 .glass-dock {
     position: fixed;
-    bottom: 24px;
+    bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 12px));
     left: 50%;
     transform: translateX(-50%);
     border-radius: 100px;
@@ -777,7 +778,7 @@ main {
     /* Pad main only when preview is collapsed so the dock clears the
        insights bar / collapsed preview header at the bottom */
     main.main--preview-collapsed {
-        padding-bottom: 96px;
+        padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
     }
 }
 
