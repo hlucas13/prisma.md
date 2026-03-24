@@ -561,6 +561,18 @@ function animateLiquidToggle(el, toState) {
 // ── Sync Scroll ──
 let syncScrollEnabled = true;
 let scrolling = null; // tracks which element is currently scrolling
+let scrollingTimer = null; // cancelable timer to clear the lock
+
+// Use a 80 ms hold-off instead of rAF so that Safari/iOS async CodeMirror
+// scroll events (triggered by cm.scrollTo) are still guarded by the lock
+// after the initiating scroll event has finished — preventing the feedback
+// loop that caused the view to drift back to the top on iOS.
+function clearScrollingLock() {
+    clearTimeout(scrollingTimer);
+    scrollingTimer = setTimeout(() => {
+        scrolling = null;
+    }, 80);
+}
 
 function syncEditorToPreview() {
     if (!syncScrollEnabled || scrolling === 'preview') return;
@@ -568,9 +580,7 @@ function syncEditorToPreview() {
     const info = cm.getScrollInfo();
     const pct = info.top / Math.max(info.height - info.clientHeight, 1);
     preview.scrollTop = pct * (preview.scrollHeight - preview.clientHeight);
-    requestAnimationFrame(() => {
-        scrolling = null;
-    });
+    clearScrollingLock();
 }
 
 function syncPreviewToEditor() {
@@ -581,9 +591,7 @@ function syncPreviewToEditor() {
         Math.max(preview.scrollHeight - preview.clientHeight, 1);
     const info = cm.getScrollInfo();
     cm.scrollTo(null, pct * (info.height - info.clientHeight));
-    requestAnimationFrame(() => {
-        scrolling = null;
-    });
+    clearScrollingLock();
 }
 
 cm.on('scroll', syncEditorToPreview);

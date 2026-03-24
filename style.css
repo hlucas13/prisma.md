@@ -350,8 +350,6 @@ header {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    /* Physics-based edge refraction (cross-browser, applied to element render) */
-    filter: url(#glass-distortion-dock);
     overflow: hidden;
 }
 
@@ -915,6 +913,9 @@ main {
     overflow-y: auto;
     background: var(--bg-surface);
     transition: background 0.2s;
+    /* Prevent iOS rubber-band overscroll from feeding back into sync-scroll
+       and dragging the view back toward the top. */
+    overscroll-behavior: contain;
 }
 
 #preview .markdown-body {
@@ -1225,7 +1226,6 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion-panel);
     overflow: hidden;
 }
 
@@ -2179,7 +2179,6 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion-panel);
     overflow: hidden;
 }
 
@@ -2923,7 +2922,6 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion-panel);
     overflow: hidden;
 }
 
@@ -3301,7 +3299,6 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion-panel);
     overflow: hidden;
 }
 
