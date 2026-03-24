@@ -1,6 +1,6 @@
 # Prisma.md
 
-A beautiful, zero-install Markdown editor and live preview — built with a Liquid Glass aesthetic.
+A beautiful, zero-install Markdown editor with live preview — built with a Liquid Glass aesthetic.
 
 Write Markdown on the left, see the rendered result on the right. Your content is saved automatically in the browser.
 
@@ -10,23 +10,184 @@ Write Markdown on the left, see the rendered result on the right. Your content i
 
 ## Features
 
-- **Live preview** — renders as you type, with 120 ms debounce
-- **Syntax highlighting** — 25+ languages via CodeMirror + highlight.js
-- **Copy formatted** — copies rich HTML to clipboard; preserves bold, tables, and code blocks when pasting into Teams, Outlook, Word, Notion, Gmail, and more
-- **Print / Export PDF** — clean print stylesheet included
-- **Dark mode** — full light/dark theme toggle
-- **Draggable divider** — resize editor and preview panes freely
-- **Persistent content** — auto-saved to `localStorage`
-- **Zero dependencies to install** — pure HTML, CSS, and vanilla JS; all libraries loaded from CDN
+### Editor & Preview
+
+- **Live preview** — renders as you type, with a 120 ms debounce
+- **Syntax highlighting in the editor** — 25+ languages via CodeMirror 5 (JavaScript, TypeScript, Python, Rust, Go, SQL, YAML, Ruby, PHP, Swift, Dockerfile, PowerShell, and more)
+- **Fenced code block highlighting** — language identifiers in ` ```lang ` blocks are resolved to the correct CodeMirror mode, including aliases such as `ts`, `bash`, `cs`, `jsx`, `tsx`, `kotlin`, `postgres`
+- **Draggable divider** — resize editor and preview panes freely in landscape mode
+- **Portrait / mobile layout** — panes stack vertically; each pane header is tappable to collapse or expand it
+- **Persistent content** — auto-saved to `localStorage` on every change
+
+### Export & Copy
+
+- **Copy — Universal** — copies rich HTML to the clipboard; preserves headings, bold, tables, and code blocks when pasting into Word, Notion, and other apps
+- **Copy — Microsoft Teams** — inline-styled HTML with Segoe UI fonts; code blocks and formatting survive the Teams paste pipeline
+- **Copy — Outlook / Gmail** — conservative inline CSS that guarantees tables and bold text in email clients
+- **Copy — Slack** — converts Markdown to Slack's native `mrkdwn` format (bold, italic, code blocks, links, task-list checkboxes, and horizontal rules)
+- **Print / Export PDF** — opens the native print / save-as-PDF dialogue; the active preview theme's `@media print` rules are applied automatically
+
+### Import / Paste
+
+- **Drag & drop `.md` files** — drop a Markdown or `.markdown` file onto the editor pane to load it instantly
+- **Drag & drop images** — drop any image onto the editor pane to embed it as a Base64 `![alt](data:…)` inline image
+- **Paste HTML → Markdown** — pasting rich HTML (from a browser, Word, or any web page) automatically converts it to clean Markdown
+- **Paste TSV / spreadsheet data → table** — pasting tab-separated data (e.g. copied from Excel or Google Sheets) is automatically converted to a GFM Markdown table
+
+### Table Generator
+
+- **Visual table builder** — opens a modal where you can choose the number of rows (2–30) and columns (1–12), fill in the cells with Tab / Enter navigation, and insert the resulting GFM table at the cursor
+
+### Preview Themes
+
+Four built-in themes, each with full light and dark variants, applied instantly without a page reload:
+
+| Theme | Style |
+|-------|-------|
+| **GitHub** | Classic · blue/green · light & dark |
+| **Modern** | Indigo · Helvetica · light & dark |
+| **Academic** | Serif Georgia · sepia · light & dark |
+| **Minimal** | Neutral · distraction-free · light & dark |
+
+### Settings
+
+- **Sync scroll** — bidirectional scroll synchronisation between the editor and the preview pane (position-percentage based)
+- **Dark mode** — full light/dark toggle with animated Liquid Glass switch; follows the OS `prefers-color-scheme` setting when no preference has been saved
+- **Frosted glass** — toggles the frosted-glass backdrop-filter effect across the entire UI
+- **Language** — scrollable wheel picker to switch the interface language; available locales: **English (UK)**, **Portuguese (BR)**, **Portuguese (PT)**, **Spanish (ES)**, **French (FR)**
+
+### Insights Bar
+
+Always-visible bar at the bottom of the editor pane showing:
+
+- **Word count** and **character count**
+- **Estimated reading time** (based on 200 wpm)
+- **Lint / grammar warning count** — click to open the warnings panel
+
+### Markdown Linter & Grammar Checker
+
+Runs on every keystroke (debounced) and reports issues inline:
+
+| Rule | Type |
+|------|------|
+| Heading hierarchy skip (e.g. H1 → H3) | Lint |
+| Multiple H1 headings in one document | Lint |
+| Unclosed inline link — missing `)` | Lint |
+| Image without alt text | Lint |
+| Repeated consecutive word (≥ 3 characters) | Grammar |
+| Double space in the middle of a line | Grammar |
+
+Code content (fenced blocks and inline code) is masked before linting so rules never fire inside code.  
+Clicking a warning in the panel moves the cursor to the affected line.
+
+### Local History
+
+- Auto-saves a snapshot to `localStorage` every **30 seconds** and on editor blur
+- Keeps up to **25 versions**; each entry shows a timestamp and a text preview
+- Click any version in the History modal to restore it; a toast confirms the restore
+
+### Help & Wiki
+
+Built-in modal (accessible from the dock) with a full feature guide, a Markdown quick-reference table, and a keyboard shortcuts reference.
+
+---
+
+## Keyboard Shortcuts
+
+| Keys | Action |
+|------|--------|
+| `Tab` | Indent line / list item |
+| `Shift` + `Tab` | Unindent line / list item |
+| `Enter` | Continue list — auto-inserts the next bullet or number |
+| `Esc` | Close the open modal or menu |
+
+---
 
 ## Tech Stack
 
-| Library | Purpose |
-|---------|---------|
-| [Marked.js v4](https://marked.js.org/) | Markdown parsing (GFM + tables + breaks) |
-| [CodeMirror 5](https://codemirror.net/5/) | Editor with Markdown syntax highlighting |
-| [highlight.js 11](https://highlightjs.org/) | Code block syntax highlighting |
+| Library | Version | Purpose |
+|---------|---------|---------|
+| [Marked.js](https://marked.js.org/) | v4 | Markdown parsing — GFM, tables, line breaks |
+| [CodeMirror](https://codemirror.net/5/) | 5.65.16 | Editor with Markdown syntax highlighting and fenced code block language resolution |
+| [highlight.js](https://highlightjs.org/) | 11.9.0 | Code block syntax highlighting in the preview |
+| [GSAP](https://gsap.com/) | 3 | Animated Liquid Glass toggle transitions |
 
-## Usage
+All libraries are loaded from CDN — no local installation required.
 
-No build step required. Open `index.html` in a browser — or use the hosted version on GitHub Pages.
+---
+
+## Project Structure
+
+```
+prisma.md/
+├── index.html          # Single-page app shell; loads CDN libraries and app.bundle.js
+├── style.css           # All styles — layout, themes, Liquid Glass, animations
+├── app.bundle.js       # Bundled output (generated by build.js — do not edit manually)
+├── build.js            # Node.js bundler script; concatenates js/ modules into app.bundle.js
+│
+└── js/                 # Source modules (ES module syntax; bundled for production)
+    ├── i18n.js         # Translation strings and t() lookup for all supported locales
+    ├── samples.js      # Per-locale sample Markdown shown on first load
+    ├── lint.js         # Markdown linter and grammar checker (pure functions)
+    ├── converter.js    # HTML → Markdown, TSV → Markdown table, Markdown → Slack mrkdwn
+    ├── export-builder.js  # Inline-styled HTML builder for Teams and email copy targets
+    ├── preview-themes.js  # CSS override strings for each preview theme (light + dark)
+    ├── history-store.js   # localStorage read/write helpers for local history snapshots
+    └── main.js         # Application entry point — wires together all modules and the DOM
+```
+
+> **Note:** `app.bundle.js` is the file actually loaded by `index.html`. It is produced by `build.js`, which strips ES module syntax (`import`/`export`) and wraps all modules in a single IIFE. The individual files under `js/` are the authoritative source — edit those, then rebuild.
+
+---
+
+## Running Locally
+
+No build step is needed to run the app:
+
+```bash
+# Clone the repository
+git clone https://github.com/hlucas13/prisma.md.git
+cd prisma.md
+
+# Open directly in the browser — no server required
+open index.html          # macOS
+start index.html         # Windows
+xdg-open index.html      # Linux
+```
+
+Alternatively, serve it with any static file server to avoid browser `file://` restrictions on the Clipboard API:
+
+```bash
+# Python (no install needed on macOS / Linux)
+python3 -m http.server 8080
+
+# Node.js (npx, no install needed)
+npx serve .
+```
+
+Then open `http://localhost:8080` in the browser.
+
+---
+
+## Rebuilding `app.bundle.js`
+
+`app.bundle.js` must be regenerated whenever any file under `js/` changes.
+
+**Requirements:** Node.js (any recent LTS version — no `npm install` needed, the bundler uses only built-in `fs` and `path` modules).
+
+```bash
+node build.js
+```
+
+Expected output:
+
+```
+✅  app.bundle.js — XXXX lines, XX.X KB
+```
+
+The bundler:
+
+1. Reads each module in dependency order (`i18n` → `samples` → `lint` → `converter` → `export-builder` → `preview-themes` → `history-store` → `main`)
+2. Strips `import` and `export` declarations
+3. Wraps everything in a single IIFE (`(() => { 'use strict'; … })();`)
+4. Writes `app.bundle.js` to the repository root
