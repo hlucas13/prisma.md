@@ -59,8 +59,8 @@ export const PREVIEW_THEMES = {
         #preview .markdown-body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         #preview .markdown-body h1 { color: #6366f1; }
         #preview .markdown-body h2 { color: #4338ca; }
-        #preview .markdown-body code { color: #4f46e5; }
-        #preview .markdown-body pre code { color: #c7d2fe; }
+        #preview .markdown-body code { color: #4338ca; }
+        #preview .markdown-body pre code { color: #1e1b4b; }
         @media print {
             html, body { background: #f8fafc !important;
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }

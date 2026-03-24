@@ -20,6 +20,7 @@ const MODULE_ORDER = [
     'js/export-builder.js', // no deps
     'js/preview-themes.js', // no deps
     'js/history-store.js', // needs i18n
+    'js/glass-distortion.js', // no deps — runs after DOM is ready
     'js/main.js', // needs all above
 ];
 

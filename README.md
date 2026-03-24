@@ -1,6 +1,6 @@
 # Prisma.md
 
-A beautiful, zero-install Markdown editor with live preview — built with a Liquid Glass aesthetic.
+A beautiful, zero-install Markdown editor with live preview — built with a **Liquid Glass** aesthetic inspired by physics-based light refraction.
 
 Write Markdown on the left, see the rendered result on the right. Your content is saved automatically in the browser.
 
@@ -53,7 +53,7 @@ Four built-in themes, each with full light and dark variants, applied instantly 
 
 - **Sync scroll** — bidirectional scroll synchronisation between the editor and the preview pane (position-percentage based)
 - **Dark mode** — full light/dark toggle with animated Liquid Glass switch; follows the OS `prefers-color-scheme` setting when no preference has been saved
-- **Frosted glass** — toggles the frosted-glass backdrop-filter effect across the entire UI
+- **Frosted glass** — toggles the frosted-glass backdrop-filter effect across the entire UI; preference is persisted in `localStorage`
 - **Language** — scrollable wheel picker to switch the interface language; available locales: **English (UK)**, **Portuguese (BR)**, **Portuguese (PT)**, **Spanish (ES)**, **French (FR)**
 
 ### Insights Bar
@@ -106,13 +106,28 @@ Built-in modal (accessible from the dock) with a full feature guide, a Markdown 
 ## Tech Stack
 
 | Library | Version | Purpose |
-|---------|---------|---------|
+|---------|---------|----------|
 | [Marked.js](https://marked.js.org/) | v4 | Markdown parsing — GFM, tables, line breaks |
 | [CodeMirror](https://codemirror.net/5/) | 5.65.16 | Editor with Markdown syntax highlighting and fenced code block language resolution |
 | [highlight.js](https://highlightjs.org/) | 11.9.0 | Code block syntax highlighting in the preview |
 | [GSAP](https://gsap.com/) | 3 | Animated Liquid Glass toggle transitions |
 
 All libraries are loaded from CDN — no local installation required.
+
+---
+
+## Liquid Glass
+
+The UI chrome (dock, menus, modals, and toggles) is built around a physics-based Liquid Glass system, documented in the module `js/glass-distortion.js`.
+
+The implementation follows the refraction principles described in **[Liquid Glass — CSS & SVG](https://kube.io/blog/liquid-glass-css-svg/)** by Kube:
+
+- **Snell's law refraction** — each pixel of the glass surface displaces the background according to the angle of refraction derived from the surface normal, using an index of refraction of **1.45** (borosilicate glass).
+- **Convex height profile** — the surface height function `h(t) = √t` models a curved glass lens that is thicker at the centre and tapers toward the rim.
+- **SVG displacement maps** — a `<feImage>` + `<feDisplacementMap>` filter pipeline applies the computed per-pixel displacement at runtime, replacing the old turbulence-noise approach with deterministic, physics-consistent distortion.
+- **Two filter instances** — `#glass-distortion-dock` (resized dynamically via `ResizeObserver`, `userSpaceOnUse`) and `#glass-distortion-panel` (`objectBoundingBox`, scales to any modal or menu).
+- **Progressive enhancement** — a `@supports (backdrop-filter: url(#x))` check unlocks the `backdrop-filter` compositing path on Chromium; all other browsers fall back to the base blur and tint layers.
+- **Convex specular hierarchy** — glass surfaces carry a three-layer inset `box-shadow` stack: primary top-left arc highlight → full perimeter rim → counter-specular depth shadow, matching the light model expected from a convex glass element.
 
 ---
 
@@ -126,14 +141,15 @@ prisma.md/
 ├── build.js            # Node.js bundler script; concatenates js/ modules into app.bundle.js
 │
 └── js/                 # Source modules (ES module syntax; bundled for production)
-    ├── i18n.js         # Translation strings and t() lookup for all supported locales
-    ├── samples.js      # Per-locale sample Markdown shown on first load
-    ├── lint.js         # Markdown linter and grammar checker (pure functions)
-    ├── converter.js    # HTML → Markdown, TSV → Markdown table, Markdown → Slack mrkdwn
-    ├── export-builder.js  # Inline-styled HTML builder for Teams and email copy targets
-    ├── preview-themes.js  # CSS override strings for each preview theme (light + dark)
-    ├── history-store.js   # localStorage read/write helpers for local history snapshots
-    └── main.js         # Application entry point — wires together all modules and the DOM
+    ├── i18n.js             # Translation strings and t() lookup for all supported locales
+    ├── samples.js          # Per-locale sample Markdown shown on first load
+    ├── lint.js             # Markdown linter and grammar checker (pure functions)
+    ├── converter.js        # HTML → Markdown, TSV → Markdown table, Markdown → Slack mrkdwn
+    ├── export-builder.js   # Inline-styled HTML builder for Teams and email copy targets
+    ├── preview-themes.js   # CSS override strings for each preview theme (light + dark)
+    ├── history-store.js    # localStorage read/write helpers for local history snapshots
+    ├── glass-distortion.js # Physics-based SVG displacement map generator (Snell's law)
+    └── main.js             # Application entry point — wires together all modules and the DOM
 ```
 
 > **Note:** `app.bundle.js` is the file actually loaded by `index.html`. It is produced by `build.js`, which strips ES module syntax (`import`/`export`) and wraps all modules in a single IIFE. The individual files under `js/` are the authoritative source — edit those, then rebuild.
@@ -187,7 +203,7 @@ Expected output:
 
 The bundler:
 
-1. Reads each module in dependency order (`i18n` → `samples` → `lint` → `converter` → `export-builder` → `preview-themes` → `history-store` → `main`)
+1. Reads each module in dependency order (`i18n` → `samples` → `lint` → `converter` → `export-builder` → `preview-themes` → `history-store` → `glass-distortion` → `main`)
 2. Strips `import` and `export` declarations
 3. Wraps everything in a single IIFE (`(() => { 'use strict'; … })();`)
 4. Writes `app.bundle.js` to the repository root

@@ -1098,40 +1098,23 @@
                                 <path d="M1 1l4 4 4-4" />
                             </svg>
                         </button>
-                        <div class="lang-wheel-wrap">
-                            <div class="lang-wheel">
-                                <div
-                                    class="lang-wheel-mask lang-wheel-mask--top"
-                                ></div>
-                                <div class="lang-wheel-highlight"></div>
-                                <div
-                                    class="lang-wheel-mask lang-wheel-mask--bottom"
-                                ></div>
-                                <ul class="lang-wheel-list">
-                                    <li class="lang-wheel-item" data-lang="en">
-                                        EN — English
-                                    </li>
-                                    <li class="lang-wheel-item" data-lang="es">
-                                        ES — Español
-                                    </li>
-                                    <li class="lang-wheel-item" data-lang="fr">
-                                        FR — Français
-                                    </li>
-                                    <li
-                                        class="lang-wheel-item"
-                                        data-lang="pt-BR"
-                                    >
-                                        PT — Português (BR)
-                                    </li>
-                                    <li
-                                        class="lang-wheel-item"
-                                        data-lang="pt-PT"
-                                    >
-                                        PT — Português (PT)
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <ul class="lang-dropdown">
+                            <li class="lang-option" data-lang="en">
+                                EN — English
+                            </li>
+                            <li class="lang-option" data-lang="es">
+                                ES — Español
+                            </li>
+                            <li class="lang-option" data-lang="fr">
+                                FR — Français
+                            </li>
+                            <li class="lang-option" data-lang="pt-BR">
+                                PT — Português (BR)
+                            </li>
+                            <li class="lang-option" data-lang="pt-PT">
+                                PT — Português (PT)
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="settings-sep"></div>
@@ -1291,37 +1274,74 @@
             </div>
         </div>
 
-        <!-- Hidden SVG: Glass distortion filter (feTurbulence + feDisplacementMap) -->
+        <!-- Hidden SVG: Physics-based Liquid Glass distortion filters -->
+        <!-- Two filters: dock (pill) and panel (rounded-rect modals/menus).  -->
+        <!-- feImage href + feDisplacementMap scale are written by            -->
+        <!-- GlassDistortion in glass-distortion.js on load and resize.       -->
         <svg
             class="glass-filter-defs"
             aria-hidden="true"
             style="position: absolute; width: 0; height: 0; overflow: hidden"
         >
             <defs>
+                <!-- Dock pill filter — updated by ResizeObserver in JS.
+                     Uses userSpaceOnUse pixel coordinates; feImage width/height
+                     are set from JS to match the exact dock dimensions. -->
                 <filter
-                    id="glass-distortion"
-                    x="-5%"
-                    y="-5%"
-                    width="110%"
-                    height="110%"
+                    id="glass-distortion-dock"
+                    x="-2%"
+                    y="-2%"
+                    width="104%"
+                    height="104%"
                     color-interpolation-filters="sRGB"
                 >
-                    <feTurbulence
-                        type="fractalNoise"
-                        baseFrequency="0.008 0.008"
-                        numOctaves="2"
-                        seed="92"
-                        result="noise"
-                    />
-                    <feGaussianBlur
-                        in="noise"
-                        stdDeviation="2"
-                        result="blurred"
+                    <feImage
+                        id="glass-dock-map"
+                        href=""
+                        x="0"
+                        y="0"
+                        width="400"
+                        height="60"
+                        preserveAspectRatio="none"
+                        result="displacement_map"
                     />
                     <feDisplacementMap
                         in="SourceGraphic"
-                        in2="blurred"
-                        scale="55"
+                        in2="displacement_map"
+                        scale="0"
+                        xChannelSelector="R"
+                        yChannelSelector="G"
+                    />
+                </filter>
+
+                <!-- Panel filter — modals and platform menus.
+                     primitiveUnits="objectBoundingBox" + feImage width/height=1
+                     make the displacement map stretch to fill any element, so
+                     the same filter gives correct edge refraction at every size.
+                     scale is set as a bounding-box fraction by JS. -->
+                <filter
+                    id="glass-distortion-panel"
+                    x="0"
+                    y="0"
+                    width="1"
+                    height="1"
+                    primitiveUnits="objectBoundingBox"
+                    color-interpolation-filters="sRGB"
+                >
+                    <feImage
+                        id="glass-panel-map"
+                        href=""
+                        x="0"
+                        y="0"
+                        width="1"
+                        height="1"
+                        preserveAspectRatio="none"
+                        result="displacement_map"
+                    />
+                    <feDisplacementMap
+                        in="SourceGraphic"
+                        in2="displacement_map"
+                        scale="0"
                         xChannelSelector="R"
                         yChannelSelector="G"
                     />

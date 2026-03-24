@@ -119,9 +119,23 @@
 
 /* ===== Glass Style — Frosted override ===== */
 [data-glass='frosted'] {
-    --glass-blur: 10px;
-    --glass-saturation: 220%;
+    /* Strong blur for frosted look */
+    --glass-blur: 24px;
+    /* Normal/slightly-muted saturation — frosted glass is milky, not vibrant */
+    --glass-saturation: 110%;
     --glass-surface-bg: var(--glass-frozen-bg);
+}
+
+/* Light mode: near-opaque white tint — this is what gives the "milky" look.
+   The 20% that shows through is heavily blurred, perfect frosted glass balance. */
+:root[data-glass='frosted'] {
+    --glass-frozen-bg: rgba(255, 255, 255, 0.8);
+}
+
+/* Dark mode: use a dark tint matching --bg-app, NOT white.
+   White-over-dark only creates a grey veil, not a frosted dark panel. */
+[data-theme='dark'][data-glass='frosted'] {
+    --glass-frozen-bg: rgba(13, 17, 23, 0.82);
 }
 
 /* Frosted: make the white border edge more visible */
@@ -139,6 +153,19 @@
 [data-theme='dark'][data-glass='frosted'] .history-modal-panel,
 [data-theme='dark'][data-glass='frosted'] .help-modal-panel {
     outline-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Frosted: inset vignette to counter backdrop-filter edge bleed */
+[data-glass='frosted'] .glass-tint {
+    box-shadow:
+        inset 0 0 0 3px rgba(255, 255, 255, 0.35),
+        inset 0 0 18px 4px rgba(255, 255, 255, 0.25);
+}
+
+[data-theme='dark'][data-glass='frosted'] .glass-tint {
+    box-shadow:
+        inset 0 0 0 3px rgba(0, 0, 0, 0.28),
+        inset 0 0 18px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== Modal text contrast boost (glass surface) ===== */
@@ -322,8 +349,19 @@ header {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion);
+    /* Physics-based edge refraction (cross-browser, applied to element render) */
+    filter: url(#glass-distortion-dock);
     overflow: hidden;
+}
+
+/* Chromium: promote SVG filter into backdrop-filter so refraction is applied
+   to the pristine background *before* blurring — matching real glass optics. */
+@supports (backdrop-filter: url(#x)) {
+    .glass-dock .glass-effect {
+        backdrop-filter: url(#glass-distortion-dock) blur(var(--glass-blur))
+            saturate(var(--glass-saturation));
+        filter: none;
+    }
 }
 
 /* Layer 2: tint — adapts via --glass-surface-bg token */
@@ -345,16 +383,30 @@ header {
     border-radius: inherit;
     overflow: hidden;
     box-shadow:
-        inset 2px 2px 1px 0
+        /* Top-left arc specular — primary light source */
+        inset 2px 3px 2px -1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 70%),
                 transparent
             ),
-        inset -1px -1px 1px 1px
+        /* Top edge thin rim highlight */ inset 0 1px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 45%),
+                transparent
+            ),
+        /* Right / bottom edge counter-light (subtle) */ inset -1px -1px 1px 1px
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        /* Bottom inner shadow for convex curvature depth */ inset 0 -2px
+            3px -1px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 14%),
                 transparent
             );
     transition: box-shadow 0.4s cubic-bezier(1, 0, 0.4, 1);
@@ -387,8 +439,9 @@ header {
     font-family: inherit;
     line-height: 1;
     transition:
-        background 0.18s,
+        background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
         color 0.18s,
+        box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
         transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
     user-select: none;
     white-space: nowrap;
@@ -408,52 +461,51 @@ header {
 }
 
 .dock-btn:hover {
-    /* Inner pill with light/dark reflexes — matches switcher selected-tab style */
-    background: color-mix(in srgb, var(--glass-c-glass) 28%, transparent);
+    /* White-based translucent fill — glass is transparent white, not grey */
+    background: color-mix(in srgb, var(--glass-c-light) 15%, transparent);
     box-shadow:
-        inset 0 0 0 1px
+        /* 1. Primary convex specular — bright arc at top-left, the #1 glass cue */
+        inset 1.5px 2.5px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 92%),
                 transparent
             ),
-        inset 2px 1px 0px -1px
+        /* 2. Full-rim thin highlight — encircles the pill like a glass edge */
+        inset 0 0 0 0.8px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 32%),
                 transparent
             ),
-        inset -1.5px -1px 0px -1px
+        /* 3. Bottom-right counter specular — secondary light bounce */
+        inset -1px -1.5px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 20%),
                 transparent
             ),
-        inset -2px -6px 1px -5px
+        /* 4. Inner bottom depth shadow — shows convex curvature */ inset 0 -5px
+            6px -4px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 60%),
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 24%),
                 transparent
             ),
-        inset -1px 2px 3px -1px
+        /* 5. Outer elevation shadow — glass pill floats off the dock */ 0 4px
+            10px -2px
             color-mix(
                 in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 16%),
                 transparent
             ),
-        inset 0px -4px 1px -2px
+        0 1px 3px 0
             color-mix(
                 in srgb,
                 var(--glass-c-dark) calc(var(--glass-reflex-dark) * 10%),
                 transparent
-            ),
-        0px 3px 6px 0px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 8%),
-                transparent
             );
-    transform: translateY(-2px) scale(1.07);
+    transform: translateY(-2px) scale(1.06);
 }
 
 .dock-btn:focus {
@@ -542,12 +594,41 @@ header {
     font-weight: 500;
     font-family: inherit;
     line-height: 1;
-    transition: background 0.15s;
+    transition:
+        background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 2.2);
     white-space: nowrap;
 }
 
 .hamburger-item:hover {
-    background: var(--glass-btn-hover);
+    background: color-mix(in srgb, var(--glass-c-light) 14%, transparent);
+    box-shadow:
+        inset 1.5px 2px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
+                transparent
+            ),
+        inset 0 0 0 0.8px
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 28%),
+                transparent
+            ),
+        inset -1px -1px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        inset 0 -4px 5px -3px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 18%),
+                transparent
+            );
+    transform: scale(1.04);
 }
 
 /* ===== Sync toggle squeeze animation ===== */
@@ -1143,8 +1224,16 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion);
+    filter: url(#glass-distortion-panel);
     overflow: hidden;
+}
+
+@supports (backdrop-filter: url(#x)) {
+    .platform-menu > .glass-effect {
+        backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
+            saturate(var(--glass-saturation));
+        filter: none;
+    }
 }
 
 .platform-menu > .glass-tint {
@@ -1164,16 +1253,29 @@ main {
     border-radius: inherit;
     overflow: hidden;
     box-shadow:
-        inset 2px 2px 1px 0
+        /* Top-left arc specular — primary light */
+        inset 2px 3px 2px -1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 65%),
                 transparent
             ),
-        inset -1px -1px 1px 1px
+        /* Top rim edge */ inset 0 1px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 40%),
+                transparent
+            ),
+        /* Right / bottom counter-light */ inset -1px -1px 1px 1px
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        /* Bottom depth shadow */ inset 0 -2px 3px -1px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 12%),
                 transparent
             );
     transition: box-shadow 0.4s cubic-bezier(1, 0, 0.4, 1);
@@ -1210,35 +1312,38 @@ main {
     font-family: inherit;
     text-align: left;
     transition:
-        background 0.18s,
+        background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
         transform 0.18s;
 }
 
 .platform-btn:hover {
-    background: color-mix(in srgb, var(--glass-c-glass) 22%, transparent);
+    /* Inside a glass panel — subtler version of the convex specular */
+    background: color-mix(in srgb, var(--glass-c-light) 14%, transparent);
     box-shadow:
-        inset 0 0 0 1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
-                transparent
-            ),
-        inset 2px 1px 0px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
-                transparent
-            ),
-        inset -1.5px -1px 0px -1px
+        /* Primary top-left specular arc */
+        inset 1.5px 2px 0 0
             color-mix(
                 in srgb,
                 var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
                 transparent
             ),
-        inset -1px 2px 3px -1px
+        /* Full-rim thin edge */ inset 0 0 0 0.8px
             color-mix(
                 in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 28%),
+                transparent
+            ),
+        /* Bottom-right counter specular */ inset -1px -1px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        /* Bottom depth shadow */ inset 0 -4px 5px -3px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 18%),
                 transparent
             );
 }
@@ -1355,10 +1460,8 @@ main {
 
 .lang-selector {
     flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
+    position: relative;
     width: 148px;
-    gap: 0;
 }
 
 .lang-trigger {
@@ -1393,8 +1496,9 @@ main {
 .lang-selector.open .lang-trigger {
     border-color: var(--accent);
     color: var(--accent);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-color: transparent;
 }
 
 .lang-trigger svg {
@@ -1406,105 +1510,54 @@ main {
     transform: rotate(180deg);
 }
 
-.lang-wheel-wrap {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.lang-selector.open .lang-wheel-wrap {
-    max-height: 96px;
-}
-
-.lang-wheel {
-    flex-shrink: 0;
-    position: relative;
-    width: 100%;
-    height: 96px;
-    overflow: hidden;
-    border-radius: 0 0 8px 8px;
-    border: 1px solid var(--accent);
-    border-top: none;
-    cursor: grab;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.lang-wheel:active {
-    cursor: grabbing;
-}
-
-.lang-wheel-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.lang-dropdown {
+    display: none;
     position: absolute;
-    top: 0;
+    bottom: 100%;
     left: 0;
     right: 0;
-    will-change: transform;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    max-height: 104px; /* ~3 items */
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 200;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
 }
 
-.lang-wheel-item {
-    height: 32px;
+.lang-selector.open .lang-dropdown {
+    display: block;
+}
+
+.lang-option {
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 7px 12px;
     font-size: 0.72rem;
     font-weight: 600;
     color: var(--text-secondary);
+    cursor: pointer;
     white-space: nowrap;
     transition:
-        color 0.15s,
-        font-weight 0.15s;
-    padding: 0 8px;
+        background-color 0.1s,
+        color 0.1s;
 }
 
-.lang-wheel-item.selected {
+.lang-option:hover {
+    background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--text-primary);
+}
+
+.lang-option.selected {
     color: var(--accent);
     font-weight: 700;
-}
-
-/* top fade */
-.lang-wheel-mask--top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 32px;
-    background: linear-gradient(
-        to bottom,
-        var(--bg-surface) 0%,
-        transparent 100%
-    );
-    z-index: 2;
-    pointer-events: none;
-}
-
-/* bottom fade */
-.lang-wheel-mask--bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 32px;
-    background: linear-gradient(to top, var(--bg-surface) 0%, transparent 100%);
-    z-index: 2;
-    pointer-events: none;
-}
-
-/* centre highlight band */
-.lang-wheel-highlight {
-    position: absolute;
-    top: 32px;
-    left: 0;
-    right: 0;
-    height: 32px;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    border-top: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-    border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-    z-index: 1;
-    pointer-events: none;
 }
 
 /* ===== Liquid Toggle ===== */
@@ -1531,7 +1584,12 @@ main {
     background: transparent;
     flex-shrink: 0;
     outline-offset: 2px;
-    transition: outline 0.2s ease-out;
+    transition:
+        outline 0.2s ease-out,
+        box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.08),
+        0 1px 4px -1px rgba(0, 0, 0, 0.12);
 }
 
 [data-theme='dark'] .liquid-toggle {
@@ -1540,6 +1598,9 @@ main {
         calc((8 + (var(--complete) / 100 * 83)) * 1%),
         calc((20 + (var(--complete) / 100 * 53)) * 1%)
     );
+    box-shadow:
+        0 0 0 0.5px rgba(255, 255, 255, 0.08),
+        0 1px 6px -1px rgba(0, 0, 0, 0.35);
 }
 
 .liquid-toggle:focus-visible {
@@ -1662,11 +1723,15 @@ main {
     inset: 0;
     border-radius: 100px;
     box-shadow:
-        1px -1px 1px hsl(0 0% 100% / 0.5) inset,
-        -1px -1px 1px hsl(0 0% 100% / 0.5) inset,
-        1px 1px 1px hsl(0 0% 30% / 0.5) inset,
-        -4px 2px 6px -3px hsl(0 0% 30% / 0.35) inset,
-        2px 3px 8px -3px hsl(0 0% 30% / 0.4);
+        /* Primary top-left specular on the liquid blob */
+        inset 1px -1.5px 2px 0
+            color-mix(in srgb, var(--glass-c-light) 60%, transparent),
+        /* Rim edge */ inset 0 0 0 0.8px
+            color-mix(in srgb, var(--glass-c-light) 28%, transparent),
+        /* Bottom depth shadow */ inset -1px 1.5px 4px -1px
+            color-mix(in srgb, var(--glass-c-dark) 38%, transparent),
+        /* Blob elevation shadow */ 0 3px 10px -2px
+            color-mix(in srgb, var(--glass-c-dark) 32%, transparent);
     z-index: 20;
     transition: opacity 0.2s ease-out;
 }
@@ -1674,9 +1739,52 @@ main {
 .liquid-toggle .indicator__liquid .cover {
     position: absolute;
     inset: 0;
-    background: white;
+    background: #ffffff;
     border-radius: 100px;
     transition: opacity 0.2s ease-out;
+    box-shadow:
+        /* Top-left specular (invisible on white — adds edge definition) */
+        inset 1px -1.5px 0 0 rgba(255, 255, 255, 0.85),
+        /* Rim highlight */ inset 0 0 0 0.8px rgba(255, 255, 255, 0.45),
+        /* Bottom sphere curvature shadow */ inset 0 2.5px 5px -1.5px
+            rgba(0, 0, 0, 0.18),
+        /* Thumb elevation — floats above the track */ 0 2px 6px -1px
+            rgba(0, 0, 0, 0.22),
+        0 1px 2px rgba(0, 0, 0, 0.12),
+        /* Edge definition ring */ 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .liquid-toggle .indicator__liquid .cover {
+    background: #dde1e5;
+    box-shadow:
+        inset 1px -1.5px 0 0 rgba(255, 255, 255, 0.9),
+        inset 0 0 0 0.8px rgba(255, 255, 255, 0.5),
+        inset 0 2.5px 5px -1.5px rgba(0, 0, 0, 0.28),
+        0 2px 8px -1px rgba(0, 0, 0, 0.45),
+        0 1px 3px rgba(0, 0, 0, 0.28),
+        0 0 0 0.5px rgba(0, 0, 0, 0.22);
+}
+
+/* iOS OFF symbol ○ — fixed on the RIGHT of the track */
+.liquid-toggle::before {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 25;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.68);
+    background: transparent;
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
+
+.liquid-toggle[aria-checked='true']::before {
+    opacity: 0;
 }
 
 /* Active state (scale-up during press/drag) */
@@ -1700,6 +1808,27 @@ main {
 
 .liquid-toggle[data-active='true'] .indicator__liquid .cover {
     opacity: 0;
+}
+
+/* iOS ON symbol | — fixed on the LEFT of the track */
+.liquid-toggle::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 25;
+    width: 2px;
+    height: 10px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.68);
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+.liquid-toggle[aria-checked='true']::after {
+    opacity: 1;
 }
 
 .liquid-toggle[data-active='true'] .liquid__track {
@@ -1844,35 +1973,36 @@ main {
     font-family: inherit;
     text-align: left;
     transition:
-        background 0.18s,
+        background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1),
         transform 0.18s;
 }
 
 .pdf-theme-row:hover {
-    background: color-mix(in srgb, var(--glass-c-glass) 22%, transparent);
+    background: color-mix(in srgb, var(--glass-c-light) 14%, transparent);
     box-shadow:
-        inset 0 0 0 1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
-                transparent
-            ),
-        inset 2px 1px 0px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
-                transparent
-            ),
-        inset -1.5px -1px 0px -1px
+        inset 1.5px 2px 0 0
             color-mix(
                 in srgb,
                 var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
                 transparent
             ),
-        inset -1px 2px 3px -1px
+        inset 0 0 0 0.8px
             color-mix(
                 in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 28%),
+                transparent
+            ),
+        inset -1px -1px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        inset 0 -4px 5px -3px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 18%),
                 transparent
             );
 }
@@ -2048,8 +2178,16 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion);
+    filter: url(#glass-distortion-panel);
     overflow: hidden;
+}
+
+@supports (backdrop-filter: url(#x)) {
+    .table-modal-panel > .glass-effect {
+        backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
+            saturate(var(--glass-saturation));
+        filter: none;
+    }
 }
 
 .table-modal-panel > .glass-tint {
@@ -2068,16 +2206,28 @@ main {
     border-radius: inherit;
     overflow: hidden;
     box-shadow:
-        inset 2px 2px 1px 0
+        inset 2px 3px 2px -1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 65%),
+                transparent
+            ),
+        inset 0 1px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 40%),
                 transparent
             ),
         inset -1px -1px 1px 1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        inset 0 -2px 3px -1px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 12%),
                 transparent
             );
     transition: box-shadow 0.4s cubic-bezier(1, 0, 0.4, 1);
@@ -2178,45 +2328,26 @@ main {
 }
 
 .tbl-step-btn:hover {
-    /* Dock-style inset reflexes only — no outer shadow or transform,
-       as this button lives inside overflow:hidden and those would cause
-       visible clipping artifacts at the container edge. */
-    background: color-mix(in srgb, var(--glass-c-glass) 28%, transparent);
+    /* Inside overflow:hidden — no outer shadow/transform to avoid clipping */
+    background: color-mix(in srgb, var(--glass-c-light) 14%, transparent);
     box-shadow:
-        inset 0 0 0 1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
-                transparent
-            ),
-        inset 2px 1px 0px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
-                transparent
-            ),
-        inset -1.5px -1px 0px -1px
+        /* Primary top-left specular */
+        inset 1.5px 2px 0 0
             color-mix(
                 in srgb,
                 var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
                 transparent
             ),
-        inset -2px -6px 1px -5px
+        /* Full-rim edge */ inset 0 0 0 0.8px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 60%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 28%),
                 transparent
             ),
-        inset -1px 2px 3px -1px
+        /* Bottom depth shadow */ inset 0 -4px 5px -3px
             color-mix(
                 in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
-                transparent
-            ),
-        inset 0px -4px 1px -2px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 10%),
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 18%),
                 transparent
             );
 }
@@ -2356,49 +2487,37 @@ main {
 }
 
 .tbl-btn-close:hover {
-    background: color-mix(in srgb, var(--glass-c-glass) 28%, transparent);
+    background: color-mix(in srgb, var(--glass-c-light) 15%, transparent);
     color: var(--text-primary);
     box-shadow:
-        inset 0 0 0 1px
+        inset 1.5px 2.5px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 92%),
                 transparent
             ),
-        inset 2px 1px 0px -1px
+        inset 0 0 0 0.8px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 32%),
                 transparent
             ),
-        inset -1.5px -1px 0px -1px
+        inset -1px -1.5px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 20%),
                 transparent
             ),
-        inset -2px -6px 1px -5px
+        inset 0 -5px 6px -4px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 60%),
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 24%),
                 transparent
             ),
-        inset -1px 2px 3px -1px
+        0 4px 10px -2px
             color-mix(
                 in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
-                transparent
-            ),
-        inset 0px -4px 1px -2px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 10%),
-                transparent
-            ),
-        0px 3px 6px 0px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 8%),
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 16%),
                 transparent
             );
     transform: translateY(-2px) scale(1.07);
@@ -2430,50 +2549,18 @@ main {
 
 .tbl-btn-insert:hover {
     background: var(--accent-hover);
+    /* Solid accent button: specular on a coloured surface — white highlights only */
     box-shadow:
-        inset 0 0 0 1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
-                transparent
-            ),
-        inset 2px 1px 0px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
-                transparent
-            ),
-        inset -1.5px -1px 0px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
-                transparent
-            ),
-        inset -2px -6px 1px -5px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 60%),
-                transparent
-            ),
-        inset -1px 2px 3px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
-                transparent
-            ),
-        inset 0px -4px 1px -2px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 10%),
-                transparent
-            ),
-        0px 3px 6px 0px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 8%),
-                transparent
-            );
-    transform: translateY(-2px) scale(1.07);
+        /* Primary top-left arc specular */
+        inset 1.5px 2.5px 0 0 rgba(255, 255, 255, 0.55),
+        /* Full-rim thin edge */ inset 0 0 0 0.8px rgba(255, 255, 255, 0.22),
+        /* Bottom-right counter-light */ inset -1px -1.5px 0 0
+            rgba(255, 255, 255, 0.14),
+        /* Inner bottom depth shadow */ inset 0 -5px 6px -4px
+            rgba(0, 0, 0, 0.28),
+        /* Elevation */ 0 4px 12px -2px rgba(0, 0, 0, 0.22),
+        0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px) scale(1.06);
 }
 
 .tbl-btn-insert:active {
@@ -2835,8 +2922,16 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion);
+    filter: url(#glass-distortion-panel);
     overflow: hidden;
+}
+
+@supports (backdrop-filter: url(#x)) {
+    .history-modal-panel > .glass-effect {
+        backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
+            saturate(var(--glass-saturation));
+        filter: none;
+    }
 }
 
 .history-modal-panel > .glass-tint {
@@ -2855,16 +2950,28 @@ main {
     border-radius: inherit;
     overflow: hidden;
     box-shadow:
-        inset 2px 2px 1px 0
+        inset 2px 3px 2px -1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 65%),
+                transparent
+            ),
+        inset 0 1px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 40%),
                 transparent
             ),
         inset -1px -1px 1px 1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        inset 0 -2px 3px -1px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 12%),
                 transparent
             );
     transition: box-shadow 0.4s cubic-bezier(1, 0, 0.4, 1);
@@ -2930,48 +3037,11 @@ main {
     background: #dc2626;
     color: #fff;
     box-shadow:
-        inset 0 0 0 1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
-                transparent
-            ),
-        inset 2px 1px 0px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
-                transparent
-            ),
-        inset -1.5px -1px 0px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
-                transparent
-            ),
-        inset -2px -6px 1px -5px
-            color-mix(
-                in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 60%),
-                transparent
-            ),
-        inset -1px 2px 3px -1px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
-                transparent
-            ),
-        inset 0px -4px 1px -2px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 10%),
-                transparent
-            ),
-        0px 3px 6px 0px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 8%),
-                transparent
-            );
+        inset 1.5px 2.5px 0 0 rgba(255, 255, 255, 0.5),
+        inset 0 0 0 0.8px rgba(255, 255, 255, 0.2),
+        inset -1px -1.5px 0 0 rgba(255, 255, 255, 0.12),
+        inset 0 -4px 5px -3px rgba(0, 0, 0, 0.28),
+        0 4px 10px -2px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px) scale(1.07);
 }
 
@@ -2999,49 +3069,37 @@ main {
 }
 
 .history-modal-close:hover {
-    background: color-mix(in srgb, var(--glass-c-glass) 28%, transparent);
+    background: color-mix(in srgb, var(--glass-c-light) 15%, transparent);
     color: var(--text-primary);
     box-shadow:
-        inset 0 0 0 1px
+        inset 1.5px 2.5px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 10%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 92%),
                 transparent
             ),
-        inset 2px 1px 0px -1px
+        inset 0 0 0 0.8px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 90%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 32%),
                 transparent
             ),
-        inset -1.5px -1px 0px -1px
+        inset -1px -1.5px 0 0
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 80%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 20%),
                 transparent
             ),
-        inset -2px -6px 1px -5px
+        inset 0 -5px 6px -4px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 60%),
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 24%),
                 transparent
             ),
-        inset -1px 2px 3px -1px
+        0 4px 10px -2px
             color-mix(
                 in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 20%),
-                transparent
-            ),
-        inset 0px -4px 1px -2px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 10%),
-                transparent
-            ),
-        0px 3px 6px 0px
-            color-mix(
-                in srgb,
-                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 8%),
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 16%),
                 transparent
             );
     transform: translateY(-2px) scale(1.07);
@@ -3242,8 +3300,16 @@ main {
     backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
     -webkit-backdrop-filter: blur(var(--glass-blur))
         saturate(var(--glass-saturation));
-    filter: url(#glass-distortion);
+    filter: url(#glass-distortion-panel);
     overflow: hidden;
+}
+
+@supports (backdrop-filter: url(#x)) {
+    .help-modal-panel > .glass-effect {
+        backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
+            saturate(var(--glass-saturation));
+        filter: none;
+    }
 }
 
 .help-modal-panel > .glass-tint {
@@ -3262,16 +3328,28 @@ main {
     border-radius: inherit;
     overflow: hidden;
     box-shadow:
-        inset 2px 2px 1px 0
+        inset 2px 3px 2px -1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 65%),
+                transparent
+            ),
+        inset 0 1px 0 0
+            color-mix(
+                in srgb,
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 40%),
                 transparent
             ),
         inset -1px -1px 1px 1px
             color-mix(
                 in srgb,
-                var(--glass-c-light) calc(var(--glass-reflex-light) * 50%),
+                var(--glass-c-light) calc(var(--glass-reflex-light) * 18%),
+                transparent
+            ),
+        inset 0 -2px 3px -1px
+            color-mix(
+                in srgb,
+                var(--glass-c-dark) calc(var(--glass-reflex-dark) * 12%),
                 transparent
             );
     transition: box-shadow 0.4s cubic-bezier(1, 0, 0.4, 1);

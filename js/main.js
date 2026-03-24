@@ -44,15 +44,13 @@ function applyLanguage(lang) {
     }
     const langContainer = document.getElementById('lang-select');
     if (langContainer) {
-        const items = langContainer.querySelectorAll('.lang-wheel-item');
-        const idx = [...items].findIndex((el) => el.dataset.lang === lang);
-        if (idx !== -1) langWheelScrollTo(idx, false);
-        const triggerLabel = langContainer.querySelector('.lang-trigger-label');
-        if (triggerLabel && items[idx]) {
-            triggerLabel.textContent = langTriggerLabel(
-                items[idx].dataset.lang,
+        langContainer
+            .querySelectorAll('.lang-option')
+            .forEach((el) =>
+                el.classList.toggle('selected', el.dataset.lang === lang),
             );
-        }
+        const triggerLabel = langContainer.querySelector('.lang-trigger-label');
+        if (triggerLabel) triggerLabel.textContent = langTriggerLabel(lang);
     }
     localStorage.setItem('prisma-lang', lang);
     // If the editor still holds a sample, refresh it in the new language.
@@ -731,8 +729,8 @@ toggleGlass.addEventListener('click', () => {
 });
 
 const savedGlass = localStorage.getItem('prisma-glass');
-// Default to frosted when no preference has been saved yet
-applyGlassStyle(savedGlass !== 'clear', false);
+// Default is clear — frosted only when the user has explicitly saved it
+applyGlassStyle(savedGlass === 'frosted', false);
 
 // ── Drag & Drop ──
 const dropOverlay = document.getElementById('drop-overlay');
@@ -1134,9 +1132,7 @@ tblCols.addEventListener('change', buildTableGrid);
 // Restore preview theme
 applyPreviewTheme(localStorage.getItem('prisma-preview-theme') || 'github');
 
-// ── Language wheel picker ──
-const ITEM_H = 32; // px — must match CSS height of .lang-wheel-item
-let wheelIndex = 0;
+// ── Language dropdown picker ──
 const LANG_LABELS = {
     en: 'EN (UK)',
     'pt-BR': 'PT (BR)',
@@ -1148,132 +1144,37 @@ function langTriggerLabel(lang) {
     return LANG_LABELS[lang] || lang.toUpperCase();
 }
 
-function langWheelScrollTo(idx, animate) {
-    const selector = document.getElementById('lang-select');
-    if (!selector) return;
-    const wheel = selector.querySelector('.lang-wheel');
-    const list = wheel.querySelector('.lang-wheel-list');
-    const items = wheel.querySelectorAll('.lang-wheel-item');
-    wheelIndex = Math.max(0, Math.min(idx, items.length - 1));
-    const target = -wheelIndex * ITEM_H + ITEM_H; // centre slot = offset 32px
-    list.style.transition = animate
-        ? 'transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94)'
-        : 'none';
-    list.style.transform = `translateY(${target}px)`;
-    items.forEach((el, i) => el.classList.toggle('selected', i === wheelIndex));
-}
-
 {
     const selector = document.getElementById('lang-select');
     const trigger = selector.querySelector('.lang-trigger');
-    const wheel = selector.querySelector('.lang-wheel');
-    const list = wheel.querySelector('.lang-wheel-list');
-    const items = [...wheel.querySelectorAll('.lang-wheel-item')];
-    let startY = 0,
-        startOffset = 0,
-        dragging = false,
-        moved = false;
+    const options = [...selector.querySelectorAll('.lang-option')];
 
-    function openWheel() {
+    function openDropdown() {
         selector.classList.add('open');
         trigger.setAttribute('aria-expanded', 'true');
     }
 
-    function closeWheel() {
+    function closeDropdown() {
         selector.classList.remove('open');
         trigger.setAttribute('aria-expanded', 'false');
     }
 
     trigger.addEventListener('click', () => {
-        selector.classList.contains('open') ? closeWheel() : openWheel();
+        selector.classList.contains('open') ? closeDropdown() : openDropdown();
     });
 
     document.addEventListener('click', (e) => {
-        if (!selector.contains(e.target)) closeWheel();
+        if (!selector.contains(e.target)) closeDropdown();
     });
 
-    function currentOffset() {
-        const mat = new DOMMatrix(getComputedStyle(list).transform);
-        return mat.m42;
-    }
-
-    function commitNearest(offset) {
-        const frac = (ITEM_H - offset) / ITEM_H;
-        const idx = Math.round(frac);
-        const clamped = Math.max(0, Math.min(idx, items.length - 1));
-        const lang = items[clamped].dataset.lang;
-        langWheelScrollTo(clamped, true);
-        const triggerLabel = selector.querySelector('.lang-trigger-label');
-        if (triggerLabel)
-            triggerLabel.textContent = langTriggerLabel(
-                items[clamped].dataset.lang,
-            );
-        closeWheel();
-        applyLanguage(lang);
-        const text = cm.getValue();
-        updateStats(text);
-        renderIssues([...runMarkdownLint(text), ...runGrammar(text)]);
-    }
-
-    // ── Mouse ──
-    wheel.addEventListener('mousedown', (e) => {
-        dragging = true;
-        moved = false;
-        startY = e.clientY;
-        startOffset = currentOffset();
-        list.style.transition = 'none';
-        e.preventDefault();
-    });
-    document.addEventListener('mousemove', (e) => {
-        if (!dragging) return;
-        moved = true;
-        const dy = e.clientY - startY;
-        list.style.transform = `translateY(${startOffset + dy}px)`;
-    });
-    document.addEventListener('mouseup', () => {
-        if (!dragging) return;
-        dragging = false;
-        if (moved) commitNearest(currentOffset());
-    });
-
-    // ── Touch ──
-    wheel.addEventListener(
-        'touchstart',
-        (e) => {
-            dragging = true;
-            moved = false;
-            startY = e.touches[0].clientY;
-            startOffset = currentOffset();
-            list.style.transition = 'none';
-        },
-        { passive: true },
-    );
-    wheel.addEventListener(
-        'touchmove',
-        (e) => {
-            if (!dragging) return;
-            moved = true;
-            const dy = e.touches[0].clientY - startY;
-            list.style.transform = `translateY(${startOffset + dy}px)`;
-        },
-        { passive: true },
-    );
-    wheel.addEventListener('touchend', () => {
-        if (!dragging) return;
-        dragging = false;
-        commitNearest(currentOffset());
-    });
-
-    // ── Click on item ──
-    items.forEach((item, i) => {
-        item.addEventListener('click', () => {
-            if (moved) return;
-            langWheelScrollTo(i, true);
+    options.forEach((opt) => {
+        opt.addEventListener('click', () => {
+            const lang = opt.dataset.lang;
+            options.forEach((o) => o.classList.toggle('selected', o === opt));
             const triggerLabel = selector.querySelector('.lang-trigger-label');
-            if (triggerLabel)
-                triggerLabel.textContent = langTriggerLabel(item.dataset.lang);
-            closeWheel();
-            applyLanguage(item.dataset.lang);
+            if (triggerLabel) triggerLabel.textContent = langTriggerLabel(lang);
+            closeDropdown();
+            applyLanguage(lang);
             const text = cm.getValue();
             updateStats(text);
             renderIssues([...runMarkdownLint(text), ...runGrammar(text)]);
