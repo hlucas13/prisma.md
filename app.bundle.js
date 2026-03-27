@@ -1262,7 +1262,7 @@ ${text}
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* GitHub \xB7 dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #0d1117;
             --bg-surface-2: #161b22;
             --text-primary: #e6edf3;
@@ -1274,8 +1274,8 @@ ${text}
             --bg-code: #161b22;
             --bg-table-alt: #161b22;
         }
-        [data-theme='dark'] #preview .markdown-body code { color: #f9a8d4; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #e6edf3; }
+        #preview[data-theme='dark'] .markdown-body code { color: #f9a8d4; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #e6edf3; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #0d1117 !important;
@@ -1306,7 +1306,7 @@ ${text}
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* Moderno \xB7 dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #0f0c1e;
             --bg-surface-2: #1e1b4b;
             --text-primary: #e0e7ff;
@@ -1318,10 +1318,10 @@ ${text}
             --bg-code: #1e1b4b;
             --bg-table-alt: #1a1744;
         }
-        [data-theme='dark'] #preview .markdown-body h1 { color: #a5b4fc; }
-        [data-theme='dark'] #preview .markdown-body h2 { color: #818cf8; }
-        [data-theme='dark'] #preview .markdown-body code { color: #c7d2fe; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #e0e7ff; }
+        #preview[data-theme='dark'] .markdown-body h1 { color: #a5b4fc; }
+        #preview[data-theme='dark'] .markdown-body h2 { color: #818cf8; }
+        #preview[data-theme='dark'] .markdown-body code { color: #c7d2fe; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #e0e7ff; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #0f0c1e !important;
@@ -1352,7 +1352,7 @@ ${text}
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* Acad\xEAmico \xB7 dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #1c1612;
             --bg-surface-2: #2a2016;
             --text-primary: #e8dcc8;
@@ -1364,8 +1364,8 @@ ${text}
             --bg-code: #2a2016;
             --bg-table-alt: #241e14;
         }
-        [data-theme='dark'] #preview .markdown-body code { color: #fcd34d; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #e8dcc8; }
+        #preview[data-theme='dark'] .markdown-body code { color: #fcd34d; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #e8dcc8; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #1c1612 !important;
@@ -1394,7 +1394,7 @@ ${text}
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* Minimalista \xB7 dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #111111;
             --bg-surface-2: #1f1f1f;
             --text-primary: #eeeeee;
@@ -1406,9 +1406,9 @@ ${text}
             --bg-code: #1f1f1f;
             --bg-table-alt: #191919;
         }
-        [data-theme='dark'] #preview .markdown-body code { color: #d1d5db; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #eeeeee; }
-        [data-theme='dark'] #preview .markdown-body a { text-decoration: underline; }
+        #preview[data-theme='dark'] .markdown-body code { color: #d1d5db; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #eeeeee; }
+        #preview[data-theme='dark'] .markdown-body a { text-decoration: underline; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #111111 !important;
@@ -2132,19 +2132,28 @@ Images can be external URLs or Base64 via drag & drop:
         for (const el of document.querySelectorAll("[data-i18n]")) {
           el.textContent = t(el.dataset.i18n);
         }
-        for (const el of document.querySelectorAll("[data-i18n-title]")) {
+        for (const el of document.querySelectorAll(
+          "[data-i18n-title]"
+        )) {
           el.title = t(el.dataset.i18nTitle);
         }
-        for (const el of document.querySelectorAll("[data-i18n-aria-label]")) {
+        for (const el of document.querySelectorAll(
+          "[data-i18n-aria-label]"
+        )) {
           el.setAttribute("aria-label", t(el.dataset.i18nAriaLabel));
         }
-        for (const el of document.querySelectorAll("[data-i18n-placeholder]")) {
+        for (const el of document.querySelectorAll(
+          "[data-i18n-placeholder]"
+        )) {
           el.placeholder = t(el.dataset.i18nPlaceholder);
         }
         const langContainer = document.getElementById("lang-select");
         if (langContainer) {
           langContainer.querySelectorAll(".lang-option").forEach(
-            (el) => el.classList.toggle("selected", el.dataset.lang === lang)
+            (el) => el.classList.toggle(
+              "selected",
+              el.dataset.lang === lang
+            )
           );
           const triggerLabel = langContainer.querySelector(".lang-trigger-label");
           if (triggerLabel) triggerLabel.textContent = langTriggerLabel(lang);
@@ -2602,6 +2611,7 @@ Images can be external URLs or Base64 via drag & drop:
       updateSyncToggle();
       function applyTheme(dark, animate = false) {
         document.documentElement.dataset.theme = dark ? "dark" : "light";
+        preview.dataset.theme = dark ? "dark" : "light";
         iconTheme.innerHTML = dark ? SVG_SUN : SVG_MOON;
         if (animate) {
           animateLiquidToggle(toggleTheme, dark);
@@ -2783,7 +2793,9 @@ Images can be external URLs or Base64 via drag & drop:
           document.head.appendChild(el);
         }
         el.textContent = PREVIEW_THEMES[name] ?? PREVIEW_THEMES.github;
-        for (const row of document.querySelectorAll(".pdf-theme-row")) {
+        for (const row of document.querySelectorAll(
+          ".pdf-theme-row"
+        )) {
           row.classList.toggle("active", row.dataset.pdfTheme === name);
         }
         localStorage.setItem("prisma-preview-theme", name);
@@ -3001,7 +3013,9 @@ Images can be external URLs or Base64 via drag & drop:
         buildTableGrid();
       });
       document.getElementById("tbl-rows-inc").addEventListener("click", () => {
-        tblRows.value = String(Math.min(30, Number.parseInt(tblRows.value, 10) + 1));
+        tblRows.value = String(
+          Math.min(30, Number.parseInt(tblRows.value, 10) + 1)
+        );
         buildTableGrid();
       });
       document.getElementById("tbl-cols-dec").addEventListener("click", () => {
@@ -3009,7 +3023,9 @@ Images can be external URLs or Base64 via drag & drop:
         buildTableGrid();
       });
       document.getElementById("tbl-cols-inc").addEventListener("click", () => {
-        tblCols.value = String(Math.min(12, Number.parseInt(tblCols.value, 10) + 1));
+        tblCols.value = String(
+          Math.min(12, Number.parseInt(tblCols.value, 10) + 1)
+        );
         buildTableGrid();
       });
       tblRows.addEventListener("change", buildTableGrid);

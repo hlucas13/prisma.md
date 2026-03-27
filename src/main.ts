@@ -637,6 +637,7 @@ updateSyncToggle();
 // ── Dark Mode ──
 function applyTheme(dark, animate = false) {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    preview.dataset.theme = dark ? 'dark' : 'light';
     iconTheme.innerHTML = dark ? SVG_SUN : SVG_MOON;
     if (animate) {
         animateLiquidToggle(toggleTheme, dark);

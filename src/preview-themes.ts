@@ -22,7 +22,7 @@ export const PREVIEW_THEMES = {
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* GitHub · dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #0d1117;
             --bg-surface-2: #161b22;
             --text-primary: #e6edf3;
@@ -34,8 +34,8 @@ export const PREVIEW_THEMES = {
             --bg-code: #161b22;
             --bg-table-alt: #161b22;
         }
-        [data-theme='dark'] #preview .markdown-body code { color: #f9a8d4; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #e6edf3; }
+        #preview[data-theme='dark'] .markdown-body code { color: #f9a8d4; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #e6edf3; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #0d1117 !important;
@@ -66,7 +66,7 @@ export const PREVIEW_THEMES = {
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* Moderno · dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #0f0c1e;
             --bg-surface-2: #1e1b4b;
             --text-primary: #e0e7ff;
@@ -78,10 +78,10 @@ export const PREVIEW_THEMES = {
             --bg-code: #1e1b4b;
             --bg-table-alt: #1a1744;
         }
-        [data-theme='dark'] #preview .markdown-body h1 { color: #a5b4fc; }
-        [data-theme='dark'] #preview .markdown-body h2 { color: #818cf8; }
-        [data-theme='dark'] #preview .markdown-body code { color: #c7d2fe; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #e0e7ff; }
+        #preview[data-theme='dark'] .markdown-body h1 { color: #a5b4fc; }
+        #preview[data-theme='dark'] .markdown-body h2 { color: #818cf8; }
+        #preview[data-theme='dark'] .markdown-body code { color: #c7d2fe; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #e0e7ff; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #0f0c1e !important;
@@ -112,7 +112,7 @@ export const PREVIEW_THEMES = {
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* Acadêmico · dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #1c1612;
             --bg-surface-2: #2a2016;
             --text-primary: #e8dcc8;
@@ -124,8 +124,8 @@ export const PREVIEW_THEMES = {
             --bg-code: #2a2016;
             --bg-table-alt: #241e14;
         }
-        [data-theme='dark'] #preview .markdown-body code { color: #fcd34d; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #e8dcc8; }
+        #preview[data-theme='dark'] .markdown-body code { color: #fcd34d; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #e8dcc8; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #1c1612 !important;
@@ -154,7 +154,7 @@ export const PREVIEW_THEMES = {
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         /* Minimalista · dark */
-        [data-theme='dark'] #preview {
+        #preview[data-theme='dark'] {
             --bg-surface: #111111;
             --bg-surface-2: #1f1f1f;
             --text-primary: #eeeeee;
@@ -166,9 +166,9 @@ export const PREVIEW_THEMES = {
             --bg-code: #1f1f1f;
             --bg-table-alt: #191919;
         }
-        [data-theme='dark'] #preview .markdown-body code { color: #d1d5db; }
-        [data-theme='dark'] #preview .markdown-body pre code { color: #eeeeee; }
-        [data-theme='dark'] #preview .markdown-body a { text-decoration: underline; }
+        #preview[data-theme='dark'] .markdown-body code { color: #d1d5db; }
+        #preview[data-theme='dark'] .markdown-body pre code { color: #eeeeee; }
+        #preview[data-theme='dark'] .markdown-body a { text-decoration: underline; }
         @media print {
             html[data-theme='dark'], html[data-theme='dark'] body {
                 background: #111111 !important;

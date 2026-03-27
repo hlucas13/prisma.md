@@ -1339,6 +1339,7 @@ main {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
+  transition-delay: 20ms;
 }
 
 /* Glass layers — share token vars with dock */
@@ -1358,6 +1359,7 @@ main {
     backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
       saturate(var(--glass-saturation));
     filter: none;
+    will-change: backdrop-filter;
   }
 }
 
@@ -1636,7 +1638,9 @@ main {
 }
 
 .lang-dropdown {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   position: absolute;
   bottom: 100%;
   left: 0;
@@ -1658,17 +1662,24 @@ main {
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
   -webkit-backdrop-filter: blur(var(--glass-blur))
     saturate(var(--glass-saturation));
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease;
 }
 
 @supports (backdrop-filter: url(#x)) {
   .lang-dropdown {
     backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
       saturate(var(--glass-saturation));
+    will-change: backdrop-filter;
   }
 }
 
 .lang-selector.open .lang-dropdown {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 20ms;
 }
 
 .lang-option {
@@ -1718,10 +1729,9 @@ main {
   container-type: inline-size;
   background: transparent;
   flex-shrink: 0;
+  outline: none;
   outline-offset: 2px;
-  transition:
-    outline 0.2s ease-out,
-    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
     0 0 0 0.5px rgba(0, 0, 0, 0.08),
     0 1px 4px -1px rgba(0, 0, 0, 0.12);
@@ -2223,6 +2233,7 @@ main {
 .table-modal.visible {
   opacity: 1;
   pointer-events: auto;
+  transition-delay: 20ms;
 }
 
 .table-modal-backdrop {
@@ -2328,6 +2339,7 @@ main {
     backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
       saturate(var(--glass-saturation));
     filter: none;
+    will-change: backdrop-filter;
   }
 }
 
@@ -2965,6 +2977,7 @@ main {
 .history-modal.visible {
   opacity: 1;
   pointer-events: auto;
+  transition-delay: 20ms;
 }
 
 .history-modal-backdrop {
@@ -3070,6 +3083,7 @@ main {
     backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
       saturate(var(--glass-saturation));
     filter: none;
+    will-change: backdrop-filter;
   }
 }
 
@@ -3340,6 +3354,7 @@ main {
 .help-modal.visible {
   opacity: 1;
   pointer-events: auto;
+  transition-delay: 20ms;
 }
 
 .help-modal-backdrop {
@@ -3447,6 +3462,7 @@ main {
     backdrop-filter: url(#glass-distortion-panel) blur(var(--glass-blur))
       saturate(var(--glass-saturation));
     filter: none;
+    will-change: backdrop-filter;
   }
 }
 
