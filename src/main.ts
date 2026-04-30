@@ -1,6 +1,8 @@
 // ── Prisma.md — main application module ──
 import {
     convertToSlack,
+    convertToTelegram,
+    convertToWhatsApp,
     htmlToMarkdown,
     isTsvData,
     tsvToMarkdown,
@@ -85,6 +87,8 @@ const btnCopyUniversal = document.getElementById('btn-copy-universal');
 const btnCopyTeams = document.getElementById('btn-copy-teams');
 const btnCopyEmail = document.getElementById('btn-copy-email');
 const btnCopySlack = document.getElementById('btn-copy-slack');
+const btnCopyWhatsApp = document.getElementById('btn-copy-whatsapp');
+const btnCopyTelegram = document.getElementById('btn-copy-telegram');
 const btnPrintPdf = document.getElementById('btn-print-pdf');
 const toggleSync = document.getElementById('toggle-sync');
 const toggleTheme = document.getElementById('toggle-theme');
@@ -734,6 +738,28 @@ btnCopySlack.addEventListener('click', async () => {
     try {
         await navigator.clipboard.writeText(mrkdwn);
         showToast(t('toast.copiedSlack'));
+    } catch {
+        showToast(t('toast.copyError'));
+    }
+});
+
+btnCopyWhatsApp.addEventListener('click', async () => {
+    closeAllMenus();
+    const whatsappText = convertToWhatsApp(cm.getValue());
+    try {
+        await navigator.clipboard.writeText(whatsappText);
+        showToast(t('toast.copiedWhatsApp'));
+    } catch {
+        showToast(t('toast.copyError'));
+    }
+});
+
+btnCopyTelegram.addEventListener('click', async () => {
+    closeAllMenus();
+    const telegramText = convertToTelegram(cm.getValue());
+    try {
+        await navigator.clipboard.writeText(telegramText);
+        showToast(t('toast.copiedTelegram'));
     } catch {
         showToast(t('toast.copyError'));
     }

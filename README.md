@@ -27,6 +27,8 @@ Write Markdown on the left, see the rendered result on the right. Your content i
 - **Copy — Microsoft Teams** — inline-styled HTML with Segoe UI fonts; code blocks and formatting survive the Teams paste pipeline
 - **Copy — Outlook / Gmail** — conservative inline CSS that guarantees tables and bold text in email clients
 - **Copy — Slack** — converts Markdown to Slack's native `mrkdwn` format (bold, italic, code blocks, links, task-list checkboxes, and horizontal rules)
+- **Copy — WhatsApp** — text format with formatting support: bold (`*text*`), italic (`_text_`), strikethrough (`~text~`), code (` ```code``` `), and links
+- **Copy — Telegram** — HTML-like format with bold, italic, strikethrough, code blocks, inline code, and links
 - **Print / Export PDF** — opens the native print / save-as-PDF dialogue; the active preview theme's `@media print` rules are applied automatically
 
 ### Import / Paste

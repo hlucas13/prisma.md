@@ -31,6 +31,8 @@ export const LOCALES = {
         'export.emailDesc':
             'Conservative inline CSS \u00b7 tables and bold guaranteed',
         'export.slackDesc': 'mrkdwn text \u00b7 Slack native format',
+        'export.whatsappDesc': 'Text format \u00b7 bold, italic, strikethrough',
+        'export.telegramDesc': 'HTML format \u00b7 bold, italic, code, links',
         'export.printName': 'Print / PDF',
         'export.printDesc': 'Native preview \u00b7 uses active theme',
         'history.title': 'Local History',
@@ -74,6 +76,8 @@ export const LOCALES = {
         'toast.copiedTeams': 'Copied for Teams! Paste with Ctrl+V',
         'toast.copiedEmail': 'Copied for email! Paste with Ctrl+V',
         'toast.copiedSlack': 'Copied for Slack! Paste with Ctrl+V',
+        'toast.copiedWhatsApp': 'Copied for WhatsApp! Paste with Ctrl+V',
+        'toast.copiedTelegram': 'Copied for Telegram! Paste with Ctrl+V',
         'toast.fileLoaded': (name) => `"${name}" loaded`,
         'toast.imageInserted': (name) => `Image "${name}" inserted`,
         'toast.fileUnsupported': 'Unsupported file \u2014 use .md or image',
@@ -90,6 +94,10 @@ export const LOCALES = {
         'table.cellPlaceholder': (r, c) => `row ${r}, col ${c}`,
         'slack.image': (alt) => `[Image: ${alt}]`,
         'slack.imagePlain': '[Image]',
+        'whatsapp.image': (alt) => `[📷 Image: ${alt}]`,
+        'whatsapp.imagePlain': '[📷 Image]',
+        'telegram.image': (alt) => `[📷 Image: ${alt}]`,
+        'telegram.imagePlain': '[📷 Image]',
         'editor.placeholder': 'Write your Markdown here\u2026',
         'pane.markdown': 'Markdown',
         'pane.preview': 'Preview',
@@ -110,6 +118,8 @@ export const LOCALES = {
         'help.s2': 'Export',
         'help.s2intro':
             'Click <strong>Export</strong> in the dock to copy in one of these formats:',
+        'help.s2d1':
+            '<strong>Universal</strong> (HTML) for Word, Notion, etc. • <strong>Teams</strong> with Segoe UI styles • <strong>Email</strong> with safe inline CSS • <strong>Slack</strong> with mrkdwn format • <strong>WhatsApp</strong> with *bold*, _italic_, ~strikethrough~ • <strong>Telegram</strong> with HTML tags and links • <strong>PDF</strong> via print dialog.',
         'help.s3': 'Local History',
         'help.s3d1':
             'Auto-saves every 30\u202fs and on blur. Click any version in <strong>History</strong> to restore it.',
@@ -155,6 +165,10 @@ export const LOCALES = {
         'export.emailDesc':
             'CSS inline conservador \u00b7 tabelas e negritos garantidos',
         'export.slackDesc': 'Texto mrkdwn \u00b7 formato nativo do Slack',
+        'export.whatsappDesc':
+            'Formato de texto \u00b7 negrito, it\u00e1lico, riscado',
+        'export.telegramDesc':
+            'Formato HTML \u00b7 negrito, it\u00e1lico, c\u00f3digo, links',
         'export.printName': 'Imprimir / PDF',
         'export.printDesc': 'Preview nativo \u00b7 usa o tema ativo',
         'history.title': 'Hist\u00f3rico Local',
@@ -202,6 +216,8 @@ export const LOCALES = {
         'toast.copiedTeams': 'Copiado para Teams! Cole com Ctrl+V',
         'toast.copiedEmail': 'Copiado para e-mail! Cole com Ctrl+V',
         'toast.copiedSlack': 'Copiado para Slack! Cole com Ctrl+V',
+        'toast.copiedWhatsApp': 'Copiado para WhatsApp! Cole com Ctrl+V',
+        'toast.copiedTelegram': 'Copiado para Telegram! Cole com Ctrl+V',
         'toast.fileLoaded': (name) => `"${name}" carregado`,
         'toast.imageInserted': (name) => `Imagem "${name}" inserida`,
         'toast.fileUnsupported':
@@ -219,6 +235,10 @@ export const LOCALES = {
         'table.cellPlaceholder': (r, c) => `linha ${r}, col ${c}`,
         'slack.image': (alt) => `[Imagem: ${alt}]`,
         'slack.imagePlain': '[Imagem]',
+        'whatsapp.image': (alt) => `[📷 Imagem: ${alt}]`,
+        'whatsapp.imagePlain': '[📷 Imagem]',
+        'telegram.image': (alt) => `[📷 Imagem: ${alt}]`,
+        'telegram.imagePlain': '[📷 Imagem]',
         'editor.placeholder': 'Escreva seu Markdown aqui\u2026',
         'pane.markdown': 'Markdown',
         'pane.preview': 'Preview',
@@ -239,6 +259,8 @@ export const LOCALES = {
         'help.s2': 'Exportar',
         'help.s2intro':
             'Clique em <strong>Exportar</strong> no dock para copiar em um desses formatos:',
+        'help.s2d1':
+            '<strong>Universal</strong> (HTML) para Word, Notion, etc. • <strong>Teams</strong> com estilos Segoe UI • <strong>Email</strong> com CSS inline seguro • <strong>Slack</strong> com formato mrkdwn • <strong>WhatsApp</strong> com *negrito*, _itálico_, ~riscado~ • <strong>Telegram</strong> com tags HTML e links • <strong>PDF</strong> via diálogo de impressão.',
         'help.s3': 'Hist\u00f3rico Local',
         'help.s3d1':
             'Salva automaticamente a cada 30\u202fs e ao sair do campo. Clique em uma vers\u00e3o no <strong>Hist\u00f3rico</strong> para restaur\u00e1-la.',
@@ -285,6 +307,10 @@ export const LOCALES = {
         'export.emailDesc':
             'CSS inline conservador \u00b7 tablas y negritas garantizadas',
         'export.slackDesc': 'Texto mrkdwn \u00b7 formato nativo de Slack',
+        'export.whatsappDesc':
+            'Formato de texto \u00b7 negrita, it\u00e1lica, tachado',
+        'export.telegramDesc':
+            'Formato HTML \u00b7 negrita, it\u00e1lica, c\u00f3digo, enlaces',
         'export.printName': 'Imprimir / PDF',
         'export.printDesc': 'Vista previa nativa \u00b7 usa el tema activo',
         'history.title': 'Historial Local',
@@ -332,6 +358,8 @@ export const LOCALES = {
         'toast.copiedTeams': '\u00a1Copiado para Teams! Pega con Ctrl+V',
         'toast.copiedEmail': '\u00a1Copiado para email! Pega con Ctrl+V',
         'toast.copiedSlack': '\u00a1Copiado para Slack! Pega con Ctrl+V',
+        'toast.copiedWhatsApp': '\u00a1Copiado para WhatsApp! Pega con Ctrl+V',
+        'toast.copiedTelegram': '\u00a1Copiado para Telegram! Pega con Ctrl+V',
         'toast.fileLoaded': (name) => `"${name}" cargado`,
         'toast.imageInserted': (name) => `Imagen "${name}" insertada`,
         'toast.fileUnsupported': 'Archivo no soportado \u2014 usa .md o imagen',
@@ -348,6 +376,10 @@ export const LOCALES = {
         'table.cellPlaceholder': (r, c) => `fila ${r}, col ${c}`,
         'slack.image': (alt) => `[Imagen: ${alt}]`,
         'slack.imagePlain': '[Imagen]',
+        'whatsapp.image': (alt) => `[\ud83d\udcf7 Imagen: ${alt}]`,
+        'whatsapp.imagePlain': '[\ud83d\udcf7 Imagen]',
+        'telegram.image': (alt) => `[\ud83d\udcf7 Imagen: ${alt}]`,
+        'telegram.imagePlain': '[\ud83d\udcf7 Imagen]',
         'editor.placeholder': 'Escribe tu Markdown aqu\u00ed\u2026',
         'pane.markdown': 'Markdown',
         'pane.preview': 'Vista previa',
@@ -368,6 +400,8 @@ export const LOCALES = {
         'help.s2': 'Exportar',
         'help.s2intro':
             'Haz clic en <strong>Exportar</strong> en el dock para copiar en uno de estos formatos:',
+        'help.s2d1':
+            '<strong>Universal</strong> (HTML) para Word, Notion, etc. • <strong>Teams</strong> con estilos Segoe UI • <strong>Email</strong> con CSS inline seguro • <strong>Slack</strong> con formato mrkdwn • <strong>WhatsApp</strong> con *negrita*, _itálica_, ~tachado~ • <strong>Telegram</strong> con etiquetas HTML y enlaces • <strong>PDF</strong> a través del diálogo de impresión.',
         'help.s3': 'Historial Local',
         'help.s3d1':
             'Se guarda autom\u00e1ticamente cada 30\u202fs y al perder el foco. Haz clic en una versi\u00f3n en <strong>Historial</strong> para restaurarla.',
@@ -416,6 +450,8 @@ export const LOCALES = {
         'export.emailDesc':
             'CSS inline conservateur \u00b7 tableaux et gras garantis',
         'export.slackDesc': 'Texte mrkdwn \u00b7 format natif Slack',
+        'export.whatsappDesc': 'Format texte \u00b7 gras, italique, barr\u00e9',
+        'export.telegramDesc': 'Format HTML \u00b7 gras, italique, code, liens',
         'export.printName': 'Imprimer / PDF',
         'export.printDesc':
             'Aper\u00e7u natif \u00b7 utilise le th\u00e8me actif',
@@ -463,6 +499,10 @@ export const LOCALES = {
         'toast.copiedTeams': 'Copi\u00e9 pour Teams\u00a0! Collez avec Ctrl+V',
         'toast.copiedEmail': 'Copi\u00e9 pour e-mail\u00a0! Collez avec Ctrl+V',
         'toast.copiedSlack': 'Copi\u00e9 pour Slack\u00a0! Collez avec Ctrl+V',
+        'toast.copiedWhatsApp':
+            'Copi\u00e9 pour WhatsApp\u00a0! Collez avec Ctrl+V',
+        'toast.copiedTelegram':
+            'Copi\u00e9 pour Telegram\u00a0! Collez avec Ctrl+V',
         'toast.fileLoaded': (name) =>
             `\u00ab\u00a0${name}\u00a0\u00bb charg\u00e9`,
         'toast.imageInserted': (name) =>
@@ -482,6 +522,10 @@ export const LOCALES = {
         'table.cellPlaceholder': (r, c) => `ligne ${r}, col ${c}`,
         'slack.image': (alt) => `[Image\u00a0: ${alt}]`,
         'slack.imagePlain': '[Image]',
+        'whatsapp.image': (alt) => `[\ud83d\udcf7 Image\u00a0: ${alt}]`,
+        'whatsapp.imagePlain': '[\ud83d\udcf7 Image]',
+        'telegram.image': (alt) => `[\ud83d\udcf7 Image\u00a0: ${alt}]`,
+        'telegram.imagePlain': '[\ud83d\udcf7 Image]',
         'editor.placeholder': 'R\u00e9digez votre Markdown ici\u2026',
         'pane.markdown': 'Markdown',
         'pane.preview': 'Aper\u00e7u',
@@ -502,6 +546,8 @@ export const LOCALES = {
         'help.s2': 'Exporter',
         'help.s2intro':
             'Cliquez sur <strong>Exporter</strong> dans le dock pour copier dans l\u2019un de ces formats\u00a0:',
+        'help.s2d1':
+            "<strong>Universal</strong> (HTML) pour Word, Notion, etc. • <strong>Teams</strong> avec styles Segoe UI • <strong>Email</strong> avec CSS inline sécurisé • <strong>Slack</strong> avec format mrkdwn • <strong>WhatsApp</strong> avec *gras*, _italique_, ~barré~ • <strong>Telegram</strong> avec étiquettes HTML et liens • <strong>PDF</strong> via dialogue d'impression.",
         'help.s3': 'Historique local',
         'help.s3d1':
             'Sauvegarde automatiquement toutes les 30\u202fs et \u00e0 la perte du focus. Cliquez sur une version dans <strong>Historique</strong> pour la restaurer.',
@@ -549,6 +595,10 @@ export const LOCALES = {
         'export.emailDesc':
             'CSS inline conservador \u00b7 tabelas e negritos garantidos',
         'export.slackDesc': 'Texto mrkdwn \u00b7 formato nativo do Slack',
+        'export.whatsappDesc':
+            'Formato de texto \u00b7 negrito, it\u00e1lico, riscado',
+        'export.telegramDesc':
+            'Formato HTML \u00b7 negrito, it\u00e1lico, c\u00f3digo, liga\u00e7\u00f5es',
         'export.printName': 'Imprimir / PDF',
         'export.printDesc':
             'Pr\u00e9-visualiza\u00e7\u00e3o nativa \u00b7 usa o tema ativo',
@@ -597,6 +647,8 @@ export const LOCALES = {
         'toast.copiedTeams': 'Copiado para o Teams! Cole com Ctrl+V',
         'toast.copiedEmail': 'Copiado para e-mail! Cole com Ctrl+V',
         'toast.copiedSlack': 'Copiado para o Slack! Cole com Ctrl+V',
+        'toast.copiedWhatsApp': 'Copiado para o WhatsApp! Cole com Ctrl+V',
+        'toast.copiedTelegram': 'Copiado para o Telegram! Cole com Ctrl+V',
         'toast.fileLoaded': (name) => `\u201c${name}\u201d carregado`,
         'toast.imageInserted': (name) => `Imagem \u201c${name}\u201d inserida`,
         'toast.fileUnsupported':
@@ -614,6 +666,10 @@ export const LOCALES = {
         'table.cellPlaceholder': (r, c) => `linha ${r}, col ${c}`,
         'slack.image': (alt) => `[Imagem: ${alt}]`,
         'slack.imagePlain': '[Imagem]',
+        'whatsapp.image': (alt) => `[📷 Imagem: ${alt}]`,
+        'whatsapp.imagePlain': '[📷 Imagem]',
+        'telegram.image': (alt) => `[📷 Imagem: ${alt}]`,
+        'telegram.imagePlain': '[📷 Imagem]',
         'editor.placeholder': 'Escreva o seu Markdown aqui\u2026',
         'pane.markdown': 'Markdown',
         'pane.preview': 'Pr\u00e9-visualiza\u00e7\u00e3o',
@@ -634,6 +690,8 @@ export const LOCALES = {
         'help.s2': 'Exportar',
         'help.s2intro':
             'Clique em <strong>Exportar</strong> no dock para copiar num destes formatos:',
+        'help.s2d1':
+            '<strong>Universal</strong> (HTML) para Word, Notion, etc. • <strong>Teams</strong> com estilos Segoe UI • <strong>Email</strong> com CSS inline seguro • <strong>Slack</strong> com formato mrkdwn • <strong>WhatsApp</strong> com *negrito*, _itálico_, ~riscado~ • <strong>Telegram</strong> com tags HTML e links • <strong>PDF</strong> via diálogo de impressão.',
         'help.s3': 'Hist\u00f3rico Local',
         'help.s3d1':
             'Guarda automaticamente a cada 30\u202fs e ao sair do campo. Clique numa vers\u00e3o no <strong>Hist\u00f3rico</strong> para a restaurar.',

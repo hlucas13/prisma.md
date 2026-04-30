@@ -41,6 +41,94 @@ export function convertToSlack(md) {
     return out;
 }
 
+// ── Markdown → WhatsApp format ──
+export function convertToWhatsApp(md) {
+    let out = md;
+
+    // Images (must come before links)
+    out = out.replace(/!\[([^\]]*)\]\([^)]+\)/g, (_, alt) =>
+        alt ? t('whatsapp.image', alt) : t('whatsapp.imagePlain')
+    );
+
+    // Links → [text](url)
+    // Keep the original Markdown link format as WhatsApp will render it
+
+    // Headings → *heading text* (bold)
+    out = out.replace(/^#{1,6}\s+(.+)$/gm, '*$1*');
+
+    // Bold **text** or __text__ → *text*
+    out = out.replace(/\*\*([^*\n]+)\*\*/g, '*$1*');
+    out = out.replace(/__([^_\n]+)__/g, '*$1*');
+
+    // Italic *text* (single asterisk) → _text_
+    out = out.replace(/(?<![*_])\*([^*\n]+)\*(?![*_])/g, '_$1_');
+
+    // Strikethrough ~~text~~ → ~text~
+    out = out.replace(/~~([^~\n]+)~~/g, '~$1~');
+
+    // Code inline: `code` → ````code```` (monospace in WhatsApp)
+    out = out.replace(/`([^`\n]+)`/g, '```$1```');
+
+    // Code blocks: keep ``` with content
+    // Already have code blocks, just clean up language hints
+    out = out.replace(/^```[a-zA-Z0-9_+\-]*\n/gm, '```\n');
+
+    // Horizontal rules
+    out = out.replace(/^[-*_]{3,}$/gm, '─'.repeat(20));
+
+    // Task lists
+    out = out.replace(/^(\s*)-\s+\[x\]/gim, '$1✓');
+    out = out.replace(/^(\s*)-\s+\[ \]/gim, '$1☐');
+
+    return out;
+}
+
+// ── Markdown → Telegram format ──
+export function convertToTelegram(md) {
+    let out = md;
+
+    // Images (must come before links)
+    out = out.replace(/!\[([^\]]*)\]\([^)]+\)/g, (_, alt) =>
+        alt ? t('telegram.image', alt) : t('telegram.imagePlain')
+    );
+
+    // Links → [text](url)
+    // Keep the original Markdown link format as Telegram will render it
+
+    // Headings → *heading text* (bold) or use underscores
+    out = out.replace(/^# (.+)$/gm, '*$1*');
+    out = out.replace(/^## (.+)$/gm, '*$1*');
+    out = out.replace(/^### (.+)$/gm, '*$1*');
+    out = out.replace(/^#### (.+)$/gm, '_$1_');
+    out = out.replace(/^##### (.+)$/gm, '_$1_');
+    out = out.replace(/^###### (.+)$/gm, '_$1_');
+
+    // Bold **text** or __text__ → *text*
+    out = out.replace(/\*\*([^*\n]+)\*\*/g, '*$1*');
+    out = out.replace(/__([^_\n]+)__/g, '*$1*');
+
+    // Italic *text* (single asterisk) → _text_
+    out = out.replace(/(?<![*_])\*([^*\n]+)\*(?![*_])/g, '_$1_');
+
+    // Strikethrough ~~text~~ → ~text~
+    out = out.replace(/~~([^~\n]+)~~/g, '~$1~');
+
+    // Code inline: `code` → ````code```` (monospace in Telegram)
+    out = out.replace(/`([^`\n]+)`/g, '```$1```');
+
+    // Code blocks: wrap with ```
+    out = out.replace(/^```[a-zA-Z0-9_+\-]*\n/gm, '```\n');
+
+    // Horizontal rules
+    out = out.replace(/^[-*_]{3,}$/gm, '─'.repeat(20));
+
+    // Task lists
+    out = out.replace(/^(\s*)-\s+\[x\]/gim, '$1✓');
+    out = out.replace(/^(\s*)-\s+\[ \]/gim, '$1☐');
+
+    return out;
+}
+
 // ── HTML → Markdown conversion ──
 function walkNode(node) {
     if (node.nodeType === Node.TEXT_NODE) return node.textContent;

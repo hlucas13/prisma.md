@@ -68,6 +68,8 @@
           "export.teamsDesc": "Inline HTML with Segoe UI styles \xB7 code preserved",
           "export.emailDesc": "Conservative inline CSS \xB7 tables and bold guaranteed",
           "export.slackDesc": "mrkdwn text \xB7 Slack native format",
+          "export.whatsappDesc": "Text format \xB7 bold, italic, strikethrough",
+          "export.telegramDesc": "HTML format \xB7 bold, italic, code, links",
           "export.printName": "Print / PDF",
           "export.printDesc": "Native preview \xB7 uses active theme",
           "history.title": "Local History",
@@ -106,6 +108,8 @@
           "toast.copiedTeams": "Copied for Teams! Paste with Ctrl+V",
           "toast.copiedEmail": "Copied for email! Paste with Ctrl+V",
           "toast.copiedSlack": "Copied for Slack! Paste with Ctrl+V",
+          "toast.copiedWhatsApp": "Copied for WhatsApp! Paste with Ctrl+V",
+          "toast.copiedTelegram": "Copied for Telegram! Paste with Ctrl+V",
           "toast.fileLoaded": (name) => `"${name}" loaded`,
           "toast.imageInserted": (name) => `Image "${name}" inserted`,
           "toast.fileUnsupported": "Unsupported file \u2014 use .md or image",
@@ -121,6 +125,10 @@
           "table.cellPlaceholder": (r, c) => `row ${r}, col ${c}`,
           "slack.image": (alt) => `[Image: ${alt}]`,
           "slack.imagePlain": "[Image]",
+          "whatsapp.image": (alt) => `[\u{1F4F7} Image: ${alt}]`,
+          "whatsapp.imagePlain": "[\u{1F4F7} Image]",
+          "telegram.image": (alt) => `[\u{1F4F7} Image: ${alt}]`,
+          "telegram.imagePlain": "[\u{1F4F7} Image]",
           "editor.placeholder": "Write your Markdown here\u2026",
           "pane.markdown": "Markdown",
           "pane.preview": "Preview",
@@ -135,6 +143,7 @@
           "help.s1d5": "Paste <strong>HTML</strong> directly into the editor \u2014 it is automatically converted to Markdown.",
           "help.s2": "Export",
           "help.s2intro": "Click <strong>Export</strong> in the dock to copy in one of these formats:",
+          "help.s2d1": "<strong>Universal</strong> (HTML) for Word, Notion, etc. \u2022 <strong>Teams</strong> with Segoe UI styles \u2022 <strong>Email</strong> with safe inline CSS \u2022 <strong>Slack</strong> with mrkdwn format \u2022 <strong>WhatsApp</strong> with *bold*, _italic_, ~strikethrough~ \u2022 <strong>Telegram</strong> with HTML tags and links \u2022 <strong>PDF</strong> via print dialog.",
           "help.s3": "Local History",
           "help.s3d1": "Auto-saves every 30\u202Fs and on blur. Click any version in <strong>History</strong> to restore it.",
           "help.s4": "Table Generator",
@@ -174,6 +183,8 @@
           "export.teamsDesc": "HTML inline com estilos Segoe UI \xB7 c\xF3digo preservado",
           "export.emailDesc": "CSS inline conservador \xB7 tabelas e negritos garantidos",
           "export.slackDesc": "Texto mrkdwn \xB7 formato nativo do Slack",
+          "export.whatsappDesc": "Formato de texto \xB7 negrito, it\xE1lico, riscado",
+          "export.telegramDesc": "Formato HTML \xB7 negrito, it\xE1lico, c\xF3digo, links",
           "export.printName": "Imprimir / PDF",
           "export.printDesc": "Preview nativo \xB7 usa o tema ativo",
           "history.title": "Hist\xF3rico Local",
@@ -212,6 +223,8 @@
           "toast.copiedTeams": "Copiado para Teams! Cole com Ctrl+V",
           "toast.copiedEmail": "Copiado para e-mail! Cole com Ctrl+V",
           "toast.copiedSlack": "Copiado para Slack! Cole com Ctrl+V",
+          "toast.copiedWhatsApp": "Copiado para WhatsApp! Cole com Ctrl+V",
+          "toast.copiedTelegram": "Copiado para Telegram! Cole com Ctrl+V",
           "toast.fileLoaded": (name) => `"${name}" carregado`,
           "toast.imageInserted": (name) => `Imagem "${name}" inserida`,
           "toast.fileUnsupported": "Arquivo n\xE3o suportado \u2014 use .md ou imagem",
@@ -227,6 +240,10 @@
           "table.cellPlaceholder": (r, c) => `linha ${r}, col ${c}`,
           "slack.image": (alt) => `[Imagem: ${alt}]`,
           "slack.imagePlain": "[Imagem]",
+          "whatsapp.image": (alt) => `[\u{1F4F7} Imagem: ${alt}]`,
+          "whatsapp.imagePlain": "[\u{1F4F7} Imagem]",
+          "telegram.image": (alt) => `[\u{1F4F7} Imagem: ${alt}]`,
+          "telegram.imagePlain": "[\u{1F4F7} Imagem]",
           "editor.placeholder": "Escreva seu Markdown aqui\u2026",
           "pane.markdown": "Markdown",
           "pane.preview": "Preview",
@@ -241,6 +258,7 @@
           "help.s1d5": "Cole <strong>HTML</strong> diretamente no editor \u2014 convertido automaticamente para Markdown.",
           "help.s2": "Exportar",
           "help.s2intro": "Clique em <strong>Exportar</strong> no dock para copiar em um desses formatos:",
+          "help.s2d1": "<strong>Universal</strong> (HTML) para Word, Notion, etc. \u2022 <strong>Teams</strong> com estilos Segoe UI \u2022 <strong>Email</strong> com CSS inline seguro \u2022 <strong>Slack</strong> com formato mrkdwn \u2022 <strong>WhatsApp</strong> com *negrito*, _it\xE1lico_, ~riscado~ \u2022 <strong>Telegram</strong> com tags HTML e links \u2022 <strong>PDF</strong> via di\xE1logo de impress\xE3o.",
           "help.s3": "Hist\xF3rico Local",
           "help.s3d1": "Salva automaticamente a cada 30\u202Fs e ao sair do campo. Clique em uma vers\xE3o no <strong>Hist\xF3rico</strong> para restaur\xE1-la.",
           "help.s4": "Gerador de Tabela",
@@ -280,6 +298,8 @@
           "export.teamsDesc": "HTML inline con estilos Segoe UI \xB7 c\xF3digo preservado",
           "export.emailDesc": "CSS inline conservador \xB7 tablas y negritas garantizadas",
           "export.slackDesc": "Texto mrkdwn \xB7 formato nativo de Slack",
+          "export.whatsappDesc": "Formato de texto \xB7 negrita, it\xE1lica, tachado",
+          "export.telegramDesc": "Formato HTML \xB7 negrita, it\xE1lica, c\xF3digo, enlaces",
           "export.printName": "Imprimir / PDF",
           "export.printDesc": "Vista previa nativa \xB7 usa el tema activo",
           "history.title": "Historial Local",
@@ -318,6 +338,8 @@
           "toast.copiedTeams": "\xA1Copiado para Teams! Pega con Ctrl+V",
           "toast.copiedEmail": "\xA1Copiado para email! Pega con Ctrl+V",
           "toast.copiedSlack": "\xA1Copiado para Slack! Pega con Ctrl+V",
+          "toast.copiedWhatsApp": "\xA1Copiado para WhatsApp! Pega con Ctrl+V",
+          "toast.copiedTelegram": "\xA1Copiado para Telegram! Pega con Ctrl+V",
           "toast.fileLoaded": (name) => `"${name}" cargado`,
           "toast.imageInserted": (name) => `Imagen "${name}" insertada`,
           "toast.fileUnsupported": "Archivo no soportado \u2014 usa .md o imagen",
@@ -333,6 +355,10 @@
           "table.cellPlaceholder": (r, c) => `fila ${r}, col ${c}`,
           "slack.image": (alt) => `[Imagen: ${alt}]`,
           "slack.imagePlain": "[Imagen]",
+          "whatsapp.image": (alt) => `[\u{1F4F7} Imagen: ${alt}]`,
+          "whatsapp.imagePlain": "[\u{1F4F7} Imagen]",
+          "telegram.image": (alt) => `[\u{1F4F7} Imagen: ${alt}]`,
+          "telegram.imagePlain": "[\u{1F4F7} Imagen]",
           "editor.placeholder": "Escribe tu Markdown aqu\xED\u2026",
           "pane.markdown": "Markdown",
           "pane.preview": "Vista previa",
@@ -347,6 +373,7 @@
           "help.s1d5": "Pega <strong>HTML</strong> directamente en el editor \u2014 se convierte autom\xE1ticamente a Markdown.",
           "help.s2": "Exportar",
           "help.s2intro": "Haz clic en <strong>Exportar</strong> en el dock para copiar en uno de estos formatos:",
+          "help.s2d1": "<strong>Universal</strong> (HTML) para Word, Notion, etc. \u2022 <strong>Teams</strong> con estilos Segoe UI \u2022 <strong>Email</strong> con CSS inline seguro \u2022 <strong>Slack</strong> con formato mrkdwn \u2022 <strong>WhatsApp</strong> con *negrita*, _it\xE1lica_, ~tachado~ \u2022 <strong>Telegram</strong> con etiquetas HTML y enlaces \u2022 <strong>PDF</strong> a trav\xE9s del di\xE1logo de impresi\xF3n.",
           "help.s3": "Historial Local",
           "help.s3d1": "Se guarda autom\xE1ticamente cada 30\u202Fs y al perder el foco. Haz clic en una versi\xF3n en <strong>Historial</strong> para restaurarla.",
           "help.s4": "Generador de Tablas",
@@ -386,6 +413,8 @@
           "export.teamsDesc": "HTML inline avec styles Segoe UI \xB7 code pr\xE9serv\xE9",
           "export.emailDesc": "CSS inline conservateur \xB7 tableaux et gras garantis",
           "export.slackDesc": "Texte mrkdwn \xB7 format natif Slack",
+          "export.whatsappDesc": "Format texte \xB7 gras, italique, barr\xE9",
+          "export.telegramDesc": "Format HTML \xB7 gras, italique, code, liens",
           "export.printName": "Imprimer / PDF",
           "export.printDesc": "Aper\xE7u natif \xB7 utilise le th\xE8me actif",
           "history.title": "Historique local",
@@ -424,6 +453,8 @@
           "toast.copiedTeams": "Copi\xE9 pour Teams\xA0! Collez avec Ctrl+V",
           "toast.copiedEmail": "Copi\xE9 pour e-mail\xA0! Collez avec Ctrl+V",
           "toast.copiedSlack": "Copi\xE9 pour Slack\xA0! Collez avec Ctrl+V",
+          "toast.copiedWhatsApp": "Copi\xE9 pour WhatsApp\xA0! Collez avec Ctrl+V",
+          "toast.copiedTelegram": "Copi\xE9 pour Telegram\xA0! Collez avec Ctrl+V",
           "toast.fileLoaded": (name) => `\xAB\xA0${name}\xA0\xBB charg\xE9`,
           "toast.imageInserted": (name) => `Image \xAB\xA0${name}\xA0\xBB ins\xE9r\xE9e`,
           "toast.fileUnsupported": "Fichier non support\xE9 \u2014 utilisez .md ou une image",
@@ -439,6 +470,10 @@
           "table.cellPlaceholder": (r, c) => `ligne ${r}, col ${c}`,
           "slack.image": (alt) => `[Image\xA0: ${alt}]`,
           "slack.imagePlain": "[Image]",
+          "whatsapp.image": (alt) => `[\u{1F4F7} Image\xA0: ${alt}]`,
+          "whatsapp.imagePlain": "[\u{1F4F7} Image]",
+          "telegram.image": (alt) => `[\u{1F4F7} Image\xA0: ${alt}]`,
+          "telegram.imagePlain": "[\u{1F4F7} Image]",
           "editor.placeholder": "R\xE9digez votre Markdown ici\u2026",
           "pane.markdown": "Markdown",
           "pane.preview": "Aper\xE7u",
@@ -453,6 +488,7 @@
           "help.s1d5": "Collez du <strong>HTML</strong> directement dans l\u2019\xE9diteur \u2014 il est automatiquement converti en Markdown.",
           "help.s2": "Exporter",
           "help.s2intro": "Cliquez sur <strong>Exporter</strong> dans le dock pour copier dans l\u2019un de ces formats\xA0:",
+          "help.s2d1": "<strong>Universal</strong> (HTML) pour Word, Notion, etc. \u2022 <strong>Teams</strong> avec styles Segoe UI \u2022 <strong>Email</strong> avec CSS inline s\xE9curis\xE9 \u2022 <strong>Slack</strong> avec format mrkdwn \u2022 <strong>WhatsApp</strong> avec *gras*, _italique_, ~barr\xE9~ \u2022 <strong>Telegram</strong> avec \xE9tiquettes HTML et liens \u2022 <strong>PDF</strong> via dialogue d'impression.",
           "help.s3": "Historique local",
           "help.s3d1": "Sauvegarde automatiquement toutes les 30\u202Fs et \xE0 la perte du focus. Cliquez sur une version dans <strong>Historique</strong> pour la restaurer.",
           "help.s4": "G\xE9n\xE9rateur de tableaux",
@@ -492,6 +528,8 @@
           "export.teamsDesc": "HTML inline com estilos Segoe UI \xB7 c\xF3digo preservado",
           "export.emailDesc": "CSS inline conservador \xB7 tabelas e negritos garantidos",
           "export.slackDesc": "Texto mrkdwn \xB7 formato nativo do Slack",
+          "export.whatsappDesc": "Formato de texto \xB7 negrito, it\xE1lico, riscado",
+          "export.telegramDesc": "Formato HTML \xB7 negrito, it\xE1lico, c\xF3digo, liga\xE7\xF5es",
           "export.printName": "Imprimir / PDF",
           "export.printDesc": "Pr\xE9-visualiza\xE7\xE3o nativa \xB7 usa o tema ativo",
           "history.title": "Hist\xF3rico Local",
@@ -530,6 +568,8 @@
           "toast.copiedTeams": "Copiado para o Teams! Cole com Ctrl+V",
           "toast.copiedEmail": "Copiado para e-mail! Cole com Ctrl+V",
           "toast.copiedSlack": "Copiado para o Slack! Cole com Ctrl+V",
+          "toast.copiedWhatsApp": "Copiado para o WhatsApp! Cole com Ctrl+V",
+          "toast.copiedTelegram": "Copiado para o Telegram! Cole com Ctrl+V",
           "toast.fileLoaded": (name) => `\u201C${name}\u201D carregado`,
           "toast.imageInserted": (name) => `Imagem \u201C${name}\u201D inserida`,
           "toast.fileUnsupported": "Ficheiro n\xE3o suportado \u2014 utilize .md ou imagem",
@@ -545,6 +585,10 @@
           "table.cellPlaceholder": (r, c) => `linha ${r}, col ${c}`,
           "slack.image": (alt) => `[Imagem: ${alt}]`,
           "slack.imagePlain": "[Imagem]",
+          "whatsapp.image": (alt) => `[\u{1F4F7} Imagem: ${alt}]`,
+          "whatsapp.imagePlain": "[\u{1F4F7} Imagem]",
+          "telegram.image": (alt) => `[\u{1F4F7} Imagem: ${alt}]`,
+          "telegram.imagePlain": "[\u{1F4F7} Imagem]",
           "editor.placeholder": "Escreva o seu Markdown aqui\u2026",
           "pane.markdown": "Markdown",
           "pane.preview": "Pr\xE9-visualiza\xE7\xE3o",
@@ -559,6 +603,7 @@
           "help.s1d5": "Cole <strong>HTML</strong> diretamente no editor \u2014 convertido automaticamente para Markdown.",
           "help.s2": "Exportar",
           "help.s2intro": "Clique em <strong>Exportar</strong> no dock para copiar num destes formatos:",
+          "help.s2d1": "<strong>Universal</strong> (HTML) para Word, Notion, etc. \u2022 <strong>Teams</strong> com estilos Segoe UI \u2022 <strong>Email</strong> com CSS inline seguro \u2022 <strong>Slack</strong> com formato mrkdwn \u2022 <strong>WhatsApp</strong> com *negrito*, _it\xE1lico_, ~riscado~ \u2022 <strong>Telegram</strong> com tags HTML e links \u2022 <strong>PDF</strong> via di\xE1logo de impress\xE3o.",
           "help.s3": "Hist\xF3rico Local",
           "help.s3d1": "Guarda automaticamente a cada 30\u202Fs e ao sair do campo. Clique numa vers\xE3o no <strong>Hist\xF3rico</strong> para a restaurar.",
           "help.s4": "Gerador de Tabela",
@@ -595,6 +640,47 @@
     out = out.replace(/^(\s*)-\s+\[x\]/gim, "$1\u2705");
     out = out.replace(/^(\s*)-\s+\[ \]/gim, "$1\u2610");
     out = out.replace(/^```[a-zA-Z0-9_+\-]*$/gm, "```");
+    return out;
+  }
+  function convertToWhatsApp(md) {
+    let out = md;
+    out = out.replace(
+      /!\[([^\]]*)\]\([^)]+\)/g,
+      (_, alt) => alt ? t("whatsapp.image", alt) : t("whatsapp.imagePlain")
+    );
+    out = out.replace(/^#{1,6}\s+(.+)$/gm, "*$1*");
+    out = out.replace(/\*\*([^*\n]+)\*\*/g, "*$1*");
+    out = out.replace(/__([^_\n]+)__/g, "*$1*");
+    out = out.replace(/(?<![*_])\*([^*\n]+)\*(?![*_])/g, "_$1_");
+    out = out.replace(/~~([^~\n]+)~~/g, "~$1~");
+    out = out.replace(/`([^`\n]+)`/g, "```$1```");
+    out = out.replace(/^```[a-zA-Z0-9_+\-]*\n/gm, "```\n");
+    out = out.replace(/^[-*_]{3,}$/gm, "\u2500".repeat(20));
+    out = out.replace(/^(\s*)-\s+\[x\]/gim, "$1\u2713");
+    out = out.replace(/^(\s*)-\s+\[ \]/gim, "$1\u2610");
+    return out;
+  }
+  function convertToTelegram(md) {
+    let out = md;
+    out = out.replace(
+      /!\[([^\]]*)\]\([^)]+\)/g,
+      (_, alt) => alt ? t("telegram.image", alt) : t("telegram.imagePlain")
+    );
+    out = out.replace(/^# (.+)$/gm, "*$1*");
+    out = out.replace(/^## (.+)$/gm, "*$1*");
+    out = out.replace(/^### (.+)$/gm, "*$1*");
+    out = out.replace(/^#### (.+)$/gm, "_$1_");
+    out = out.replace(/^##### (.+)$/gm, "_$1_");
+    out = out.replace(/^###### (.+)$/gm, "_$1_");
+    out = out.replace(/\*\*([^*\n]+)\*\*/g, "*$1*");
+    out = out.replace(/__([^_\n]+)__/g, "*$1*");
+    out = out.replace(/(?<![*_])\*([^*\n]+)\*(?![*_])/g, "_$1_");
+    out = out.replace(/~~([^~\n]+)~~/g, "~$1~");
+    out = out.replace(/`([^`\n]+)`/g, "```$1```");
+    out = out.replace(/^```[a-zA-Z0-9_+\-]*\n/gm, "```\n");
+    out = out.replace(/^[-*_]{3,}$/gm, "\u2500".repeat(20));
+    out = out.replace(/^(\s*)-\s+\[x\]/gim, "$1\u2713");
+    out = out.replace(/^(\s*)-\s+\[ \]/gim, "$1\u2610");
     return out;
   }
   function walkNode(node) {
@@ -2178,6 +2264,8 @@ Images can be external URLs or Base64 via drag & drop:
       var btnCopyTeams = document.getElementById("btn-copy-teams");
       var btnCopyEmail = document.getElementById("btn-copy-email");
       var btnCopySlack = document.getElementById("btn-copy-slack");
+      var btnCopyWhatsApp = document.getElementById("btn-copy-whatsapp");
+      var btnCopyTelegram = document.getElementById("btn-copy-telegram");
       var btnPrintPdf = document.getElementById("btn-print-pdf");
       var toggleSync = document.getElementById("toggle-sync");
       var toggleTheme = document.getElementById("toggle-theme");
@@ -2693,6 +2781,26 @@ Images can be external URLs or Base64 via drag & drop:
         try {
           await navigator.clipboard.writeText(mrkdwn);
           showToast(t("toast.copiedSlack"));
+        } catch {
+          showToast(t("toast.copyError"));
+        }
+      });
+      btnCopyWhatsApp.addEventListener("click", async () => {
+        closeAllMenus();
+        const whatsappText = convertToWhatsApp(cm.getValue());
+        try {
+          await navigator.clipboard.writeText(whatsappText);
+          showToast(t("toast.copiedWhatsApp"));
+        } catch {
+          showToast(t("toast.copyError"));
+        }
+      });
+      btnCopyTelegram.addEventListener("click", async () => {
+        closeAllMenus();
+        const telegramText = convertToTelegram(cm.getValue());
+        try {
+          await navigator.clipboard.writeText(telegramText);
+          showToast(t("toast.copiedTelegram"));
         } catch {
           showToast(t("toast.copyError"));
         }
