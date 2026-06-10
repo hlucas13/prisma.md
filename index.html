@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Prisma.md</title>
     <link
       rel="icon"
@@ -202,9 +199,7 @@
           <!-- Lint Panel (slides up above insights bar when issues exist) -->
           <div id="lint-panel" class="lint-panel" aria-hidden="true">
             <div class="lint-panel-header">
-              <span class="lint-panel-title" data-i18n="lint.title"
-                >Warnings</span
-              >
+              <span class="lint-panel-title" data-i18n="lint.title">Warnings</span>
               <button
                 id="btn-lint-close"
                 class="lint-panel-close"
@@ -238,12 +233,7 @@
               <span class="insights-sep" aria-hidden="true">·</span>
               <span id="stat-chars">–</span>
             </div>
-            <button
-              id="btn-issues-toggle"
-              class="issues-toggle"
-              aria-expanded="false"
-              hidden
-            >
+            <button id="btn-issues-toggle" class="issues-toggle" aria-expanded="false" hidden>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -321,11 +311,7 @@
               </svg>
               <span data-i18n="history.title">Local History</span>
             </span>
-            <button
-              id="btn-close-history"
-              class="history-modal-close"
-              title="Fechar"
-            >
+            <button id="btn-close-history" class="history-modal-close" title="Fechar">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -343,15 +329,10 @@
             </button>
           </div>
           <p class="history-modal-hint" data-i18n="history.hint">
-            Auto-saved every 30 s and on editor blur. Click a version to
-            restore.
+            Auto-saved every 30 s and on editor blur. Click a version to restore.
           </p>
           <div id="history-list" class="history-list"></div>
-          <button
-            id="btn-clear-history"
-            class="history-clear-btn"
-            type="button"
-          >
+          <button id="btn-clear-history" class="history-clear-btn" type="button">
             <span data-i18n="history.clearBtn">Clear all</span>
           </button>
         </div>
@@ -387,12 +368,7 @@
               </svg>
               <span data-i18n="table.title">Insert Table</span>
             </span>
-            <button
-              id="btn-close-table"
-              class="tbl-btn-close"
-              type="button"
-              aria-label="Close"
-            >
+            <button id="btn-close-table" class="tbl-btn-close" type="button" aria-label="Close">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -413,25 +389,17 @@
             <div class="tbl-label">
               <span data-i18n="table.rows">Rows</span>
               <div class="tbl-stepper">
-                <button class="tbl-step-btn" id="tbl-rows-dec" type="button">
-                  −
-                </button>
+                <button class="tbl-step-btn" id="tbl-rows-dec" type="button">−</button>
                 <input type="number" id="tbl-rows" value="3" min="2" max="30" />
-                <button class="tbl-step-btn" id="tbl-rows-inc" type="button">
-                  +
-                </button>
+                <button class="tbl-step-btn" id="tbl-rows-inc" type="button">+</button>
               </div>
             </div>
             <div class="tbl-label">
               <span data-i18n="table.cols">Columns</span>
               <div class="tbl-stepper">
-                <button class="tbl-step-btn" id="tbl-cols-dec" type="button">
-                  −
-                </button>
+                <button class="tbl-step-btn" id="tbl-cols-dec" type="button">−</button>
                 <input type="number" id="tbl-cols" value="3" min="1" max="12" />
-                <button class="tbl-step-btn" id="tbl-cols-inc" type="button">
-                  +
-                </button>
+                <button class="tbl-step-btn" id="tbl-cols-inc" type="button">+</button>
               </div>
             </div>
           </div>
@@ -515,11 +483,7 @@
         </button>
 
         <!-- 2. Table — landscape-only -->
-        <button
-          id="btn-table"
-          class="dock-btn dock-landscape-btn"
-          title="Insert Table"
-        >
+        <button id="btn-table" class="dock-btn dock-landscape-btn" title="Insert Table">
           <svg
             class="dock-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -559,11 +523,7 @@
         </button>
 
         <!-- 4. History — landscape-only -->
-        <button
-          id="btn-history"
-          class="dock-btn dock-landscape-btn"
-          title="Local history"
-        >
+        <button id="btn-history" class="dock-btn dock-landscape-btn" title="Local history">
           <svg
             class="dock-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -674,10 +634,7 @@
           </svg>
           <span data-i18n="dock.history">History</span>
         </button>
-        <button
-          class="hamburger-item hamburger-item--danger"
-          data-delegates="btn-clear"
-        >
+        <button class="hamburger-item hamburger-item--danger" data-delegates="btn-clear">
           <svg
             class="dock-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -717,9 +674,7 @@
               stroke-linejoin="round"
             >
               <rect x="9" y="9" width="13" height="13" rx="2" />
-              <path
-                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-              />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
             </svg>
           </span>
           <span class="platform-btn-text">
@@ -788,9 +743,7 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path
-                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-              />
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
           </span>
           <span class="platform-btn-text">
@@ -811,9 +764,7 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path
-                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-              />
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               <path d="M9 10h.01" />
               <path d="M12 10h.01" />
               <path d="M15 10h.01" />
@@ -837,9 +788,7 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path
-                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-              />
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               <polyline points="9 10 12 13 15 10" />
             </svg>
           </span>
@@ -870,9 +819,7 @@
             </svg>
           </span>
           <span class="platform-btn-text">
-            <span class="platform-btn-name" data-i18n="export.printName"
-              >Print / PDF</span
-            >
+            <span class="platform-btn-name" data-i18n="export.printName">Print / PDF</span>
             <span class="platform-btn-desc" data-i18n="export.printDesc"
               >Native preview · uses active theme</span
             >
@@ -887,9 +834,7 @@
       <div class="glass-tint"></div>
       <div class="glass-shine"></div>
       <div class="platform-menu-content">
-        <div class="platform-menu-label" data-i18n="settings.label">
-          Settings
-        </div>
+        <div class="platform-menu-label" data-i18n="settings.label">Settings</div>
         <div class="settings-row">
           <span class="settings-row-icon">
             <svg
@@ -907,19 +852,12 @@
             </svg>
           </span>
           <span class="settings-row-text">
-            <span class="settings-row-name" data-i18n="settings.syncName"
-              >Sync scroll</span
-            >
+            <span class="settings-row-name" data-i18n="settings.syncName">Sync scroll</span>
             <span class="settings-row-desc" data-i18n="settings.syncDesc"
               >Syncs scroll between editor and preview</span
             >
           </span>
-          <button
-            class="liquid-toggle"
-            id="toggle-sync"
-            role="switch"
-            aria-checked="false"
-          >
+          <button class="liquid-toggle" id="toggle-sync" role="switch" aria-checked="false">
             <div class="knockout">
               <div class="indicator indicator--masked">
                 <div class="mask"></div>
@@ -954,19 +892,12 @@
             </svg>
           </span>
           <span class="settings-row-text">
-            <span class="settings-row-name" data-i18n="settings.themeName"
-              >Dark mode</span
-            >
+            <span class="settings-row-name" data-i18n="settings.themeName">Dark mode</span>
             <span class="settings-row-desc" data-i18n="settings.themeDesc"
               >Toggle between light and dark mode</span
             >
           </span>
-          <button
-            class="liquid-toggle"
-            id="toggle-theme"
-            role="switch"
-            aria-checked="false"
-          >
+          <button class="liquid-toggle" id="toggle-theme" role="switch" aria-checked="false">
             <div class="knockout">
               <div class="indicator indicator--masked">
                 <div class="mask"></div>
@@ -1000,19 +931,12 @@
             </svg>
           </span>
           <span class="settings-row-text">
-            <span class="settings-row-name" data-i18n="settings.glassName"
-              >Frosted glass</span
-            >
+            <span class="settings-row-name" data-i18n="settings.glassName">Frosted glass</span>
             <span class="settings-row-desc" data-i18n="settings.glassDesc"
               >Frosted glass effect across the UI</span
             >
           </span>
-          <button
-            class="liquid-toggle"
-            id="toggle-glass"
-            role="switch"
-            aria-checked="false"
-          >
+          <button class="liquid-toggle" id="toggle-glass" role="switch" aria-checked="false">
             <div class="knockout">
               <div class="indicator indicator--masked">
                 <div class="mask"></div>
@@ -1050,12 +974,8 @@
             </svg>
           </span>
           <span class="settings-row-text">
-            <span class="settings-row-name" data-i18n="settings.langName"
-              >Language</span
-            >
-            <span class="settings-row-desc" data-i18n="settings.langDesc"
-              >Interface language</span
-            >
+            <span class="settings-row-name" data-i18n="settings.langName">Language</span>
+            <span class="settings-row-desc" data-i18n="settings.langDesc">Interface language</span>
           </span>
           <div class="lang-selector" id="lang-select">
             <button class="lang-trigger" aria-expanded="false">
@@ -1101,9 +1021,7 @@
             </svg>
           </span>
           <span class="platform-btn-text">
-            <span class="platform-btn-name" data-i18n="help.btnName"
-              >Help & Wiki</span
-            >
+            <span class="platform-btn-name" data-i18n="help.btnName">Help & Wiki</span>
             <span class="platform-btn-desc" data-i18n="help.btnDesc"
               >Features, Markdown guide &amp; shortcuts</span
             >
@@ -1118,9 +1036,7 @@
       <div class="glass-tint"></div>
       <div class="glass-shine"></div>
       <div class="platform-menu-content">
-        <div class="platform-menu-label" data-i18n="themes.label">
-          Preview theme
-        </div>
+        <div class="platform-menu-label" data-i18n="themes.label">Preview theme</div>
         <button class="pdf-theme-row active" data-pdf-theme="github">
           <span class="pdf-theme-dot" style="background: #0969da"></span>
           <span class="platform-btn-text">
@@ -1145,9 +1061,7 @@
         <button class="pdf-theme-row" data-pdf-theme="modern">
           <span class="pdf-theme-dot" style="background: #6366f1"></span>
           <span class="platform-btn-text">
-            <span class="platform-btn-name" data-i18n="themes.modern"
-              >Modern</span
-            >
+            <span class="platform-btn-name" data-i18n="themes.modern">Modern</span>
             <span class="platform-btn-desc" data-i18n="themes.modernDesc"
               >Indigo · Helvetica · light &amp; dark</span
             >
@@ -1168,9 +1082,7 @@
         <button class="pdf-theme-row" data-pdf-theme="academic">
           <span class="pdf-theme-dot" style="background: #92400e"></span>
           <span class="platform-btn-text">
-            <span class="platform-btn-name" data-i18n="themes.academic"
-              >Academic</span
-            >
+            <span class="platform-btn-name" data-i18n="themes.academic">Academic</span>
             <span class="platform-btn-desc" data-i18n="themes.academicDesc"
               >Serif Georgia · sepia · light &amp; dark</span
             >
@@ -1191,9 +1103,7 @@
         <button class="pdf-theme-row" data-pdf-theme="minimal">
           <span class="pdf-theme-dot" style="background: #374151"></span>
           <span class="platform-btn-text">
-            <span class="platform-btn-name" data-i18n="themes.minimal"
-              >Minimal</span
-            >
+            <span class="platform-btn-name" data-i18n="themes.minimal">Minimal</span>
             <span class="platform-btn-desc" data-i18n="themes.minimalDesc"
               >Neutral · distraction-free · light &amp; dark</span
             >
@@ -1290,10 +1200,7 @@
     </svg>
 
     <!-- SVG filters for liquid toggles -->
-    <svg
-      aria-hidden="true"
-      style="position: absolute; width: 0; height: 0; overflow: hidden"
-    >
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden">
       <defs>
         <filter id="lt-goo" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="4" />
@@ -1314,12 +1221,7 @@
                                 -255 -255 -255 0 1"
             result="black-pixels"
           />
-          <feMorphology
-            in="black-pixels"
-            operator="dilate"
-            radius="0.5"
-            result="smoothed"
-          />
+          <feMorphology in="black-pixels" operator="dilate" radius="0.5" result="smoothed" />
           <feComposite in="SourceGraphic" in2="smoothed" operator="out" />
         </filter>
       </defs>
@@ -1354,11 +1256,7 @@
               </svg>
               <span data-i18n="help.title">Help & Wiki</span>
             </span>
-            <button
-              id="btn-close-help"
-              class="history-modal-close"
-              title="Close"
-            >
+            <button id="btn-close-help" class="history-modal-close" title="Close">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

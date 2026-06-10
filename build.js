@@ -12,20 +12,18 @@ const { buildSync } = require('esbuild');
 const { statSync } = require('fs');
 
 const result = buildSync({
-    entryPoints: ['src/main.ts'],
-    bundle: true,
-    outfile: 'app.bundle.js',
-    platform: 'browser',
-    target: 'es2020',
-    format: 'iife',
-    sourcemap: false,
-    minify: false,
-    logLevel: 'info',
+  entryPoints: ['src/main.ts'],
+  bundle: true,
+  outfile: 'app.bundle.js',
+  platform: 'browser',
+  target: 'es2020',
+  format: 'iife',
+  sourcemap: false,
+  minify: false,
+  logLevel: 'info',
 });
 
 const { size } = statSync('app.bundle.js');
 const kb = (size / 1024).toFixed(1);
-const lines = require('fs')
-    .readFileSync('app.bundle.js', 'utf8')
-    .split('\n').length;
+const lines = require('fs').readFileSync('app.bundle.js', 'utf8').split('\n').length;
 console.log(`✅  app.bundle.js — ${lines} lines, ${kb} KB`);

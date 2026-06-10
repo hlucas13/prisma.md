@@ -1,7 +1,7 @@
 // ── Preview theme CSS overrides (applied to #preview element) ──
 
 export const PREVIEW_THEMES = {
-    github: `
+  github: `
         /* GitHub · light */
         #preview {
             --bg-surface: #ffffff;
@@ -42,7 +42,7 @@ export const PREVIEW_THEMES = {
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     `,
-    modern: `
+  modern: `
         /* Moderno · light */
         #preview {
             --bg-surface: #f8fafc;
@@ -88,7 +88,7 @@ export const PREVIEW_THEMES = {
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     `,
-    academic: `
+  academic: `
         /* Acadêmico · light */
         #preview {
             --bg-surface: #fffdf7;
@@ -132,7 +132,7 @@ export const PREVIEW_THEMES = {
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     `,
-    minimal: `
+  minimal: `
         /* Minimalista · light */
         #preview {
             --bg-surface: #ffffff;

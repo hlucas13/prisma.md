@@ -2,8 +2,8 @@
 import { currentLang } from './i18n';
 
 export function getSampleMarkdown() {
-    if (currentLang === 'pt-PT') {
-        return `# Prisma.md ✨
+  if (currentLang === 'pt-PT') {
+    return `# Prisma.md ✨
 
 Bem-vindo! Escreva **Markdown** no editor e veja o resultado renderizado na pré-visualização.  
 Em ecrãs largos ficam **lado a lado**; em ecrãs verticais / pequenos ficam **em cima e em baixo**.  
@@ -138,9 +138,9 @@ As imagens podem ser URLs externas ou Base64 via arrastar e largar:
 
 *Mude o idioma, o tema e o modo escuro no painel inferior do ecrã.*
 `;
-    }
-    if (currentLang === 'pt-BR') {
-        return `# Prisma.md ✨
+  }
+  if (currentLang === 'pt-BR') {
+    return `# Prisma.md ✨
 
 Bem-vindo! Escreva **Markdown** no editor e veja o resultado renderizado no preview.  
 Em telas largas ficam **lado a lado**; em telas verticais / pequenas ficam **em cima e em baixo**.  
@@ -275,9 +275,9 @@ Imagens podem ser URLs externas ou Base64 via drag & drop:
 
 *Mude o idioma, o tema e o modo escuro no painel inferior da tela.*
 `;
-    }
-    if (currentLang === 'es') {
-        return `# Prisma.md ✨
+  }
+  if (currentLang === 'es') {
+    return `# Prisma.md ✨
 
 ¡Bienvenido! Escribe **Markdown** en el editor y ve el resultado renderizado en la vista previa.  
 En pantallas anchas van **lado a lado**; en pantallas verticales / pequeñas van **arriba y abajo**.  
@@ -412,9 +412,9 @@ Las imágenes pueden ser URLs externas o Base64 vía arrastrar y soltar:
 
 *Cambia el idioma, el tema y el modo oscuro desde el panel inferior de la pantalla.*
 `;
-    }
-    if (currentLang === 'fr') {
-        return `# Prisma.md ✨
+  }
+  if (currentLang === 'fr') {
+    return `# Prisma.md ✨
 
 Bienvenue ! Rédigez votre **Markdown** dans l'éditeur et visualisez le rendu dans l'aperçu.  
 Sur les écrans larges ils sont **côte à côte** ; sur les écrans verticaux / petits ils sont **l'un au-dessus de l'autre**.  
@@ -549,9 +549,9 @@ Les images peuvent être des URL externes ou du Base64 via glisser-déposer :
 
 *Changez la langue, le thème et le mode sombre depuis le panneau inférieur de l'écran.*
 `;
-    }
-    // Default: en
-    return `# Prisma.md ✨
+  }
+  // Default: en
+  return `# Prisma.md ✨
 
 Welcome! Write **Markdown** in the editor and see the rendered result in the preview.  
 On wide screens they sit **side by side**; on portrait / small screens they **stack top & bottom**.  
